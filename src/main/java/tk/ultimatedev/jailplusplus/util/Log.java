@@ -5,6 +5,9 @@ import tk.ultimatedev.jailplusplus.JailPlugin;
 
 import java.util.logging.Logger;
 
+/**
+ * A class used for accessing the Bukkit logger.
+ */
 public class Log {
     private static Logger log = Bukkit.getLogger();
     private static String pluginName = JailPlugin.getPlugin().getDescription().getName();
