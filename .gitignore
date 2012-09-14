@@ -14,3 +14,7 @@
 
 # Maven #
 /target
+
+# Sublime Text #
+*.sublime-project
+*.sublime-workspace
