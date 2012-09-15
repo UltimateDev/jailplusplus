@@ -9,16 +9,20 @@ import java.io.PrintWriter;
 public class Config {
     File confFile;
     PrintWriter scribe;
-//config and crap like that :O
+
     public Config() {
-        this.confFile = new File(JailPlugin.getPlugin().getDataFolder() + "config.yml");
+        this.confFile = new File(JailPlugin.getPlugin().getDataFolder() + "/config.yml");
     }
 
     public void saveDefault() {
         if (!this.confFile.exists()) {
             try {
-                if (this.confFile.createNewFile()) {
-                    this.writeConfig();
+                if (JailPlugin.getPlugin().getDataFolder().mkdirs()) {
+                    if (this.confFile.createNewFile()) {
+                        this.writeConfig();
+                    } else {
+                        Log.severe("I couldn't create the configuration file!");
+                    }
                 } else {
                     Log.severe("I couldn't create the configuration file!");
                 }
@@ -48,5 +52,7 @@ public class Config {
         scribe.println();
         scribe.println("# The configuration is done! Don't touch anything in the file or bad things may happen :'(");
         scribe.println("seriously-don't-touch-this: 1");
+
+        scribe.close();
     }
 }
