@@ -1,0 +1,24 @@
+# Hi, I'm the Jail++ configuration file.
+# And I'm a comment! I start with a \"#\", which means I can give you tips on how to configure Jail++.
+
+#Here you can configure your database. You can use H2 embedded or MySQL!");
+#If you don't have a MySQL database, I would stick with the default settings (H2), which uses an embedded database.");
+database:
+  # Choose 'h2' or 'mysql'
+  driver: h2
+  # Not used for H2. The hostname of the MySQL server.
+  host: localhost
+  # Not used for H2. If you don't know what your port is for mysql, it's probably 3306.
+  port: 3306
+  # Not used for H2. The user Jail++ will use to connect to the database.
+  user: jailplusplus
+  # Not used for H2. The password of the user set above.
+  password: example
+  # Not used for H2. The name of the mysql database to use.
+  database: minecraft
+  # Not used for H2. You can leave this as default if you don't know what it means.
+  prefix: jpp_
+  
+
+# The configuration is done! Don't touch anything in the file or bad things may happen :'(");
+seriously-don't-touch-this: 1
