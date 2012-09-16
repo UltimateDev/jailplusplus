@@ -1,10 +1,9 @@
 package tk.ultimatedev.jailplusplus.models;
 
+import java.sql.*;
 import org.bukkit.Bukkit;
 import tk.ultimatedev.jailplusplus.JailPlugin;
 import tk.ultimatedev.jailplusplus.util.Log;
-
-import java.sql.*;
 
 public class Migrant {
     DatabaseEngine engine;
