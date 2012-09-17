@@ -125,6 +125,33 @@ public class Migrant {
                         );
                     }
 
+                    /*
+                    * *** CELLS MIGRATION ***
+                    */
+                    this.meta = conn.getMetaData();
+                    rs = meta.getTables(null, null, null, new String[]{this.prefix + "cells"});
+
+                    if (rs.next()) {
+                        Log.info("[Database] Found cells table.....");
+                    } else {
+                        Log.info("[Database] Attempting to create table `" + this.prefix + "cells`.....");
+
+                        st = conn.createStatement();
+                        st.executeUpdate(
+                                "CREATE TABLE IF NOT EXISTS " + this.prefix + "cells" +
+                                        "(" +
+                                        "id INT NOT NULL AUTO_INCREMENT PRIMARY KEY," +
+                                        "jail INT NOT NULL," +
+                                        "x1 INT NOT NULL," +
+                                        "x2 INT NOT NULL," +
+                                        "y1 INT NOT NULL," +
+                                        "y2 INT NOT NULL," +
+                                        "z1 INT NOT NULL," +
+                                        "z2 INT NOT NULL," +
+                                        ")"
+                        );
+                    }
+
                     Log.info("[Database] Done!");
                 } catch (SQLException ex) {
                     exceptionHandler.logException(ex);
@@ -212,6 +239,33 @@ public class Migrant {
                         );
                     }
 
+                    /*
+                    * *** CELLS MIGRATION ***
+                    */
+                    this.meta = conn.getMetaData();
+                    rs = meta.getTables(null, null, null, new String[]{this.prefix + "cells"});
+
+                    if (rs.next()) {
+                        Log.info("[Database] Found cells table.....");
+                    } else {
+                        Log.info("[Database] Attempting to create table `" + this.prefix + "cells`.....");
+
+                        st = conn.createStatement();
+                        st.executeUpdate(
+                                "CREATE TABLE IF NOT EXISTS " + this.prefix + "cells" +
+                                        "(" +
+                                        "id INT NOT NULL AUTO_INCREMENT PRIMARY KEY," +
+                                        "jail INT NOT NULL," +
+                                        "x1 INT NOT NULL," +
+                                        "x2 INT NOT NULL," +
+                                        "y1 INT NOT NULL," +
+                                        "y2 INT NOT NULL," +
+                                        "z1 INT NOT NULL," +
+                                        "z2 INT NOT NULL," +
+                                        ")"
+                        );
+                    }
+
                     Log.info("[Database] Done!");
                 } catch (SQLException ex) {
                     exceptionHandler.logException(ex);
@@ -242,11 +296,15 @@ public class Migrant {
                 String folderpath = "plugins/JailPlusPlus/";
                 File folder = new File(folderpath + "jails/");
 
-                if (!folder.exists()) folder.mkdir();
+                if (!folder.exists()) {
+                    if (folder.mkdir()) {
+
+                    }
+                }
                 if (!folder.isDirectory()) {
                     return;
                 }
-                File f = new File(folderpath + "jails/Steve.yml");
+                // File f = new File(folderpath + "jails/Steve.yml");
 
 
                 break;
