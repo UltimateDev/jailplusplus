@@ -1,6 +1,10 @@
 package tk.ultimatedev.jailplusplus;
 
-import com.topcat.npclib.NPCManager;
+import org.bukkit.plugin.java.JavaPlugin;
+import tk.ultimatedev.jailplusplus.commands.CommandHandler;
+import tk.ultimatedev.jailplusplus.models.Migrant;
+import tk.ultimatedev.jailplusplus.util.Log;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -9,14 +13,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
-import org.bukkit.plugin.java.JavaPlugin;
-import tk.ultimatedev.jailplusplus.commands.CommandHandler;
-import tk.ultimatedev.jailplusplus.models.Migrant;
-import tk.ultimatedev.jailplusplus.util.Log;
 
 public class JailPlugin extends JavaPlugin {
     private static JailPlugin plugin;
-    public NPCManager manager = new NPCManager(this);
 
     @Override
     public void onEnable() {
