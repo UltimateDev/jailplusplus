@@ -76,6 +76,11 @@ public class Jail {
         this.file = null;
     }
 
+    @Override
+    public String toString() {
+        return "#" + this.name + ":" + this.x1 + ":" + this.x2 + ":" + this.y1 + ":" + this.y2 + ":" + this.z1 + ":" + this.z2 + ":" + this.world;
+    }
+
     public DBCommon.DBResponse save() throws NullPointerException {
         if (!this.saved) {
             if (this.name != null && this.x1 != 0 && this.x2 != 0 && this.y1 != 0 && this.y2 != 0 && this.z1 != 0 && this.z2 != 0) {
@@ -151,6 +156,7 @@ public class Jail {
                                 pst.setInt(5, this.y2);
                                 pst.setInt(6, this.z1);
                                 pst.setInt(7, this.z2);
+                                pst.setString(8, this.world);
 
                                 pst.executeUpdate();
                                 return DBCommon.DBResponse.SUCCESS;

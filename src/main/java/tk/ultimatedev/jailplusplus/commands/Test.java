@@ -7,6 +7,8 @@ import tk.ultimatedev.jailplusplus.models.Jail;
 import tk.ultimatedev.jailplusplus.util.Cuboid;
 import tk.ultimatedev.jailplusplus.util.Log;
 
+import java.util.List;
+
 public class Test implements SubCommand {
     public boolean onCommand(CommandSender player, String[] args) {
         if (args[0].equalsIgnoreCase("mkjail")) {
@@ -32,11 +34,14 @@ public class Test implements SubCommand {
         } else if (args[0].equalsIgnoreCase("deljail")) {
             Jail.removeJail("Test jail");
             Log.info("OK");
-        }
+        } else if (args[0].equalsIgnoreCase("getjail")) {
+            Jail gottenJail = Jail.getJail("Test jail");
+            Log.info(gottenJail.toString());
+        } else if (args[0].equalsIgnoreCase("getjails")) {
+            List<Jail> jails = Jail.getAllJails();
 
-        if (args[1].equalsIgnoreCase("delete")) {
-            if (args[2].equalsIgnoreCase("jail")) {
-                Jail.removeJail("Test jail");
+            for (Jail jail: jails) {
+                Log.info(jail.toString());
             }
         }
         return false;
