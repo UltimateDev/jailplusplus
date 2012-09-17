@@ -11,6 +11,7 @@ public class Test implements SubCommand {
     public boolean onCommand(CommandSender player, String[] args) {
         if (args[1].equalsIgnoreCase("new")) {
             if (args[2].equalsIgnoreCase("jail")) {
+                Log.info("debug");
                 Jail newJail = new Jail("Test jail", new Cuboid(new Location(Bukkit.getWorld("world"), 1, 64, 3), new Location(Bukkit.getWorld("world"), 3, 64, 5)));
 
                 switch (newJail.save()) {
