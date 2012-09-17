@@ -1,8 +1,9 @@
 package tk.ultimatedev.jailplusplus.util;
 
-import java.io.File;
 import org.bukkit.configuration.file.YamlConfiguration;
 import tk.ultimatedev.jailplusplus.JailPlugin;
+
+import java.io.File;
 
 /**
  * @author YoshiGenius
@@ -23,40 +24,33 @@ public class FilePaths {
     }
     
     public File getUserdataFolder() {
-        File folder = new File(getUserdataFolderPath());
-        return folder;
+        return new File(getUserdataFolderPath());
     }
     
     public File getJailsFolder() {
-        File folder = new File(getJailsFolderPath());
-        return folder;
+        return new File(getJailsFolderPath());
     }
     
     public File getUserYAMLFile(String playername) {
-        File file = new File(getUserdataFolderPath() + playername + ".yml");
-        return file;
+        return new File(getUserdataFolderPath() + playername + ".yml");
     }
     
     public File getJailYAMLFile(String jailname) {
-        File file = new File(getJailsFolderPath() + jailname + ".yml");
-        return file;
+        return new File(getJailsFolderPath() + jailname + ".yml");
     }
     
     public YamlConfiguration getUserYAMLConf(String playername) {
         File file = new File(getUserdataFolderPath() + playername + ".yml");
-        YamlConfiguration c = YamlConfiguration.loadConfiguration(file);
-        return c;
+        return YamlConfiguration.loadConfiguration(file);
     }
     
     public YamlConfiguration getJailYAMLConf(String jailname) {
         File file = new File(getJailsFolderPath() + jailname + ".yml");
-        YamlConfiguration c = YamlConfiguration.loadConfiguration(file);
-        return c;
+        return YamlConfiguration.loadConfiguration(file);
     }
     
     public YamlConfiguration loadConf(File f) {
-        YamlConfiguration c = YamlConfiguration.loadConfiguration(f);
-        return c;
+        return YamlConfiguration.loadConfiguration(f);
     }
     
     public static FilePaths getInstance() {
