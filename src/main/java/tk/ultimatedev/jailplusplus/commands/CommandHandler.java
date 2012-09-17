@@ -104,8 +104,18 @@ public class CommandHandler implements CommandExecutor {
     public void help(CommandSender cs) {
         Messenger.sendMessage(cs, "Jail++: Available Commands");
 
-        for (SubCommand command : commands.values()) {
-            Messenger.sendMessage(cs, ChatColor.GRAY + "    - " + command.help(cs));
+        if (cs instanceof Player) {
+            for (SubCommand command : commands.values()) {
+                if (cs.hasPermission(command.permission()) || cs.hasPermission(command.kitPermission()) || cs.hasPermission("jpp.*")) {
+                    Messenger.sendMessage(cs, ChatColor.GRAY + "    - " + command.help(cs));
+                }
+            }
+        } else {
+            for (SubCommand command : commands.values()) {
+                if (!command.playerOnly()) {
+                    Messenger.sendMessage(cs, ChatColor.GRAY + "    - " + command.help(cs));
+                }
+            }
         }
     }
 
