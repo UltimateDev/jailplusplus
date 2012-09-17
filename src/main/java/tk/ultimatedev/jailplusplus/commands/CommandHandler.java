@@ -40,7 +40,7 @@ public class CommandHandler implements CommandExecutor {
         String cmd = cmd1.getName();
         PluginDescriptionFile pdfFile = plugin.getDescription();
         if(cmd.equalsIgnoreCase("jail")){ 
-            if (!cs.hasPermission("jail.main")) {cs.sendMessage("You don't have permission!"); return true;}
+            if (!cs.hasPermission("jpp.main")) {cs.sendMessage("You don't have permission!"); return true;}
             if(args == null || args.length < 1){
                 cs.sendMessage(ChatColor.GOLD +""+ ChatColor.BOLD +"Jail++ "+ChatColor.RESET+  ChatColor.YELLOW +" Version: "+ pdfFile.getVersion() );
                 cs.sendMessage(ChatColor.GOLD +"Type /jail help for help" );
@@ -79,7 +79,7 @@ public class CommandHandler implements CommandExecutor {
                 }
             } else {
                 try {
-                    if (cs.hasPermission(commands.get(sub).permission()) || cs.hasPermission(commands.get(sub).kitPermission()) || cs.hasPermission("jail.*")) {
+                    if (cs.hasPermission(commands.get(sub).permission()) || cs.hasPermission(commands.get(sub).kitPermission()) || cs.hasPermission("jpp.*")) {
                         commands.get(sub).onCommand(cs, args);
                         return true;
                     } else {
