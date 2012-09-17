@@ -56,7 +56,7 @@ public class CommandHandler implements CommandExecutor {
                 return true;
             }
             String sub = args[0];
-            if (commands.containsKey(sub)) {
+            if (!commands.containsKey(sub)) {
                 Messenger.sendMessage(cs, "That's not a subcommand!", true);
                 return true;
             }
