@@ -24,17 +24,19 @@ public class Migrant {
     ExceptionHandler exceptionHandler = new ExceptionHandler(JailPlugin.getPlugin());
 
     public enum DatabaseEngine {
-        H2, MYSQL //, FILE
+        H2, MYSQL, FILE
     }
     
     public Migrant() {
         if (JailPlugin.getPlugin().getConfig().getString("database.driver").equalsIgnoreCase("h2")) {
-            engine = DatabaseEngine.H2;
+            this.engine = DatabaseEngine.H2;
         } else if (JailPlugin.getPlugin().getConfig().getString("database.driver").equalsIgnoreCase("mysql")) {
-            engine = DatabaseEngine.MYSQL;
+            this.engine = DatabaseEngine.MYSQL;
+        } else if (JailPlugin.getPlugin().getConfig().getString("database.driver").equalsIgnoreCase("file")) {
+            this.engine = DatabaseEngine.FILE;
         } else {
-            Log.severe("Invalid database driver type! Must be \"h2\" or \"mysql\"! Assuming h2...");
-            engine = DatabaseEngine.H2;
+            Log.severe("Invalid database driver type! Must be \"h2\", \"mysql\", or \"file\"! Assuming h2...");
+            this.engine = DatabaseEngine.H2;
         }
 
         this.host = JailPlugin.getPlugin().getConfig().getString("database.host");
@@ -43,6 +45,19 @@ public class Migrant {
         this.port = JailPlugin.getPlugin().getConfig().getInt("database.port");
         this.database = JailPlugin.getPlugin().getConfig().getString("database.database");
         this.prefix = JailPlugin.getPlugin().getConfig().getString("database.prefix");
+    }
+
+    public static DatabaseEngine getDatabaseEngine() {
+        if (JailPlugin.getPlugin().getConfig().getString("database.driver").equalsIgnoreCase("h2")) {
+            return DatabaseEngine.H2;
+        } else if (JailPlugin.getPlugin().getConfig().getString("database.driver").equalsIgnoreCase("mysql")) {
+            return DatabaseEngine.MYSQL;
+        } else if (JailPlugin.getPlugin().getConfig().getString("database.driver").equalsIgnoreCase("file")) {
+            return DatabaseEngine.FILE;
+        } else {
+            Log.severe("Invalid database driver type! Must be \"h2\", \"mysql\", or \"file\"! Assuming h2...");
+            return DatabaseEngine.H2;
+        }
     }
 
     public void migrate() {
@@ -222,7 +237,7 @@ public class Migrant {
 
                 break;
             default:
-                Log.severe("You specified the database engine2 '" + JailPlugin.getPlugin().getConfig().getString("database.driver") + "', but the only supported databases are 'h2' and 'mysql'! Disabling plugin...");
+                Log.severe("You specified the database engine '" + JailPlugin.getPlugin().getConfig().getString("database.driver") + "', but the only supported databases are 'h2', 'mysql', and 'file'! Disabling plugin...");
                 Bukkit.getPluginManager().disablePlugin(JailPlugin.getPlugin());
 
                 break;
@@ -254,7 +269,7 @@ public class Migrant {
                     return null;
                 }
             default:
-                Log.severe("You specified the database engine1 '" + JailPlugin.getPlugin().getConfig().getString("database.driver") + "', but the only supported databases are 'h2' and 'mysql'! Disabling plugin...");
+                Log.severe("You specified the database engine '" + JailPlugin.getPlugin().getConfig().getString("database.driver") + "', but the only supported databases are 'h2', 'mysql', and 'file'! Disabling plugin...");
                 Bukkit.getPluginManager().disablePlugin(JailPlugin.getPlugin());
                 return null;
         }
