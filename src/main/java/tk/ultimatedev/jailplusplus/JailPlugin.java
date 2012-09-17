@@ -28,13 +28,11 @@ public class JailPlugin extends JavaPlugin {
         getDependencies();
 
         // - Start UpdateChecker - \\
-<<<<<<< HEAD
 //        checkForUpdates();
         
         // - Load Listeners - \\
         this.loadListeners();
         
-=======
 //        String stringurl = "http://dev.bukkit.org/server-mods/jailplusplus.rss";
 //        UpdateChecker uc = new UpdateChecker(this, stringurl);
 //        if (uc.updateNeeded()) {
@@ -44,7 +42,6 @@ public class JailPlugin extends JavaPlugin {
 //            }
 //        }
 
->>>>>>> 440a1ace20d24a1a2f81fd91fcd765d0b99321d4
         // - Command - \\
         this.getCommand("jail").setExecutor(new CommandHandler(this));
 

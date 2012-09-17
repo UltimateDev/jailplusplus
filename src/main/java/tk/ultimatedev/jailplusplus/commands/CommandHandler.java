@@ -101,16 +101,7 @@ public class CommandHandler implements CommandExecutor {
         }
         return false;
     }
-<<<<<<< HEAD
     
-    public void help(CommandSender cs){
-        cs.sendMessage(ChatColor.GOLD + "Jail++ Help Menu");
-        cs.sendMessage(ChatColor.GOLD + "/jail <command> <args>");
-        for(SubCommand v: commands.values()){
-            if (cs.hasPermission(v.permission()) || cs.hasPermission(v.kitPermission()) || cs.hasPermission("jpp.*")) {
-                cs.sendMessage(ChatColor.AQUA + v.help(cs));
-=======
-
     public void help(CommandSender cs) {
         Messenger.sendMessage(cs, "Jail++: Available Commands");
 
@@ -125,7 +116,6 @@ public class CommandHandler implements CommandExecutor {
                 if (!command.playerOnly()) {
                     Messenger.sendMessage(cs, ChatColor.GRAY + "    - " + command.help(cs));
                 }
->>>>>>> 440a1ace20d24a1a2f81fd91fcd765d0b99321d4
             }
         }
     }

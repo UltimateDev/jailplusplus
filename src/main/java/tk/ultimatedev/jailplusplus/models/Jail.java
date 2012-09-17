@@ -12,12 +12,9 @@ import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-<<<<<<< HEAD
 import org.bukkit.configuration.file.YamlConfiguration;
 import tk.ultimatedev.jailplusplus.models.file.JailYAML;
 import tk.ultimatedev.jailplusplus.util.FilePaths;
-=======
->>>>>>> 440a1ace20d24a1a2f81fd91fcd765d0b99321d4
 
 public class Jail {
     DBCommon dbCommon;
@@ -190,14 +187,9 @@ public class Jail {
                         // break; Apparently this is unreachable
                     case FILE:
                         try {
-<<<<<<< HEAD
-                            YamlConfiguration ymlconf = YamlConfiguration.loadConfiguration(f);
-                            ymlconf.save(f);
-                            return DBCommon.DBResponse.SUCCESS;
-=======
                             YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(this.file);
                             yamlConfiguration.save(this.file);
->>>>>>> 440a1ace20d24a1a2f81fd91fcd765d0b99321d4
+                            return DBCommon.DBResponse.SUCCESS;
                         } catch (Exception e) {
                             exceptionHandler.logException(e);
                             return DBCommon.DBResponse.FAILURE;
@@ -294,7 +286,6 @@ public class Jail {
 
                 // break; Apparently this is unreachable
             case FILE:
-<<<<<<< HEAD
                 File folder = FilePaths.getInstance().getJailsFolder();
                 for (File f : folder.listFiles()) {
                     String name = f.getName();
@@ -309,12 +300,8 @@ public class Jail {
                     jails.add(jail);
                 }
                 return jails;
-                // break; Apparently this is unreachable
-=======
                 // TODO: YAML getting code
-                return null;
             // break; Apparently this is unreachable
->>>>>>> 440a1ace20d24a1a2f81fd91fcd765d0b99321d4
         }
         return null;
     }
@@ -502,19 +489,15 @@ public class Jail {
 
                 // break; Apparently this is unreachable
             case FILE:
-<<<<<<< HEAD
                 for (Jail jail : Jail.getAllJails()) {
                     JailYAML jailconf = new JailYAML(jail);
                     if (jailconf.getID() == id) {
                         return jail;
                     }
                 }
-                // break; Apparently this is unreachable
-=======
                 // TODO: YAML getting code
                 return null;
             // break; Apparently this is unreachable
->>>>>>> 440a1ace20d24a1a2f81fd91fcd765d0b99321d4
         }
         return null;
     }
