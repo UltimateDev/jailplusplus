@@ -7,6 +7,7 @@ import tk.ultimatedev.jailplusplus.ExceptionHandler;
 import tk.ultimatedev.jailplusplus.JailPlugin;
 
 import java.util.HashMap;
+import tk.ultimatedev.jailplusplus.models.file.UserdataYAML;
 
 /**
  * @author YoshiGenius
