@@ -56,7 +56,10 @@ public class CommandHandler implements CommandExecutor {
                 return true;
             }
             String sub = args[0];
-
+            if (commands.containsKey(sub)) {
+                Messenger.sendMessage(cs, "That's not a subcommand!", true);
+                return true;
+            }
             Vector<String> l  = new Vector<String>();
             l.addAll(Arrays.asList(args));
             l.remove(0);

@@ -1,5 +1,6 @@
 package tk.ultimatedev.jailplusplus;
 
+import com.topcat.npclib.NPCManager;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -15,6 +16,7 @@ import tk.ultimatedev.jailplusplus.util.Log;
 
 public class JailPlugin extends JavaPlugin {
     private static JailPlugin plugin;
+    public NPCManager manager = new NPCManager(this);
 
     @Override
     public void onEnable() {

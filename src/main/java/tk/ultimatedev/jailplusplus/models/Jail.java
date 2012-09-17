@@ -627,7 +627,16 @@ public class Jail {
 
                 // break; Apparently this is unreachable
             case FILE:
-                // TODO: YAML getting code
+                File folder = FilePaths.getInstance().getJailsFolder();
+                for (File f : folder.listFiles()) {
+                    YamlConfiguration c = YamlConfiguration.loadConfiguration(f);
+                    int jailid = c.getInt("id");
+                    if (jailid == id) {
+                        if (!f.delete()) {
+                            f.deleteOnExit();
+                        }
+                    }
+                }
                 return null;
             // break; Apparently this is unreachable
         }
