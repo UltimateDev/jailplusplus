@@ -1,28 +1,32 @@
 package tk.ultimatedev.jailplusplus.models;
 
-import java.io.File;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.configuration.file.YamlConfiguration;
 import tk.ultimatedev.jailplusplus.ExceptionHandler;
 import tk.ultimatedev.jailplusplus.JailPlugin;
 import tk.ultimatedev.jailplusplus.util.Cuboid;
+import tk.ultimatedev.jailplusplus.util.FilePaths;
 
+import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+<<<<<<< HEAD
 import org.bukkit.configuration.file.YamlConfiguration;
 import tk.ultimatedev.jailplusplus.models.file.JailYAML;
 import tk.ultimatedev.jailplusplus.util.FilePaths;
+=======
+>>>>>>> 440a1ace20d24a1a2f81fd91fcd765d0b99321d4
 
 public class Jail {
     DBCommon dbCommon;
     Migrant.DatabaseEngine engine;
     boolean saved;
     String tableName;
-    
+
     int id;
     String name;
-    File f = FilePaths.getInstance().getJailYAMLFile(name);
     int x1;
     int x2;
     int y1;
@@ -32,6 +36,7 @@ public class Jail {
     String world;
 
     ExceptionHandler exceptionHandler;
+    File file;
 
     public Jail(String name, int x1, int x2, int y1, int y2, int z1, int z2, String world) {
         this.dbCommon = new DBCommon();
@@ -49,6 +54,10 @@ public class Jail {
         this.world = world;
 
         this.exceptionHandler = new ExceptionHandler(JailPlugin.getPlugin());
+        // this.file = FilePaths.getInstance().getJailYAMLFile(this.name);
+
+        // Set to null to prevent NPE:
+        this.file = null;
     }
 
     public Jail(String name, Cuboid area) {
@@ -67,6 +76,15 @@ public class Jail {
         this.world = area.getWorld().getName();
 
         this.exceptionHandler = new ExceptionHandler(JailPlugin.getPlugin());
+        // this.file = FilePaths.getInstance().getJailYAMLFile(this.name);
+
+        // Set to null to prevent NPE:
+        this.file = null;
+    }
+
+    @Override
+    public String toString() {
+        return "#" + this.name + ":" + this.x1 + ":" + this.x2 + ":" + this.y1 + ":" + this.y2 + ":" + this.z1 + ":" + this.z2 + ":" + this.world;
     }
 
     public DBCommon.DBResponse save() throws NullPointerException {
@@ -98,6 +116,7 @@ public class Jail {
                                 pst.setInt(5, this.y2);
                                 pst.setInt(6, this.z1);
                                 pst.setInt(7, this.z2);
+                                pst.setString(8, this.world);
 
                                 pst.executeUpdate();
                                 return DBCommon.DBResponse.SUCCESS;
@@ -143,6 +162,7 @@ public class Jail {
                                 pst.setInt(5, this.y2);
                                 pst.setInt(6, this.z1);
                                 pst.setInt(7, this.z2);
+                                pst.setString(8, this.world);
 
                                 pst.executeUpdate();
                                 return DBCommon.DBResponse.SUCCESS;
@@ -170,9 +190,14 @@ public class Jail {
                         // break; Apparently this is unreachable
                     case FILE:
                         try {
+<<<<<<< HEAD
                             YamlConfiguration ymlconf = YamlConfiguration.loadConfiguration(f);
                             ymlconf.save(f);
                             return DBCommon.DBResponse.SUCCESS;
+=======
+                            YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(this.file);
+                            yamlConfiguration.save(this.file);
+>>>>>>> 440a1ace20d24a1a2f81fd91fcd765d0b99321d4
                         } catch (Exception e) {
                             exceptionHandler.logException(e);
                             return DBCommon.DBResponse.FAILURE;
@@ -269,6 +294,7 @@ public class Jail {
 
                 // break; Apparently this is unreachable
             case FILE:
+<<<<<<< HEAD
                 File folder = FilePaths.getInstance().getJailsFolder();
                 for (File f : folder.listFiles()) {
                     String name = f.getName();
@@ -284,6 +310,11 @@ public class Jail {
                 }
                 return jails;
                 // break; Apparently this is unreachable
+=======
+                // TODO: YAML getting code
+                return null;
+            // break; Apparently this is unreachable
+>>>>>>> 440a1ace20d24a1a2f81fd91fcd765d0b99321d4
         }
         return null;
     }
@@ -471,6 +502,7 @@ public class Jail {
 
                 // break; Apparently this is unreachable
             case FILE:
+<<<<<<< HEAD
                 for (Jail jail : Jail.getAllJails()) {
                     JailYAML jailconf = new JailYAML(jail);
                     if (jailconf.getID() == id) {
@@ -478,6 +510,11 @@ public class Jail {
                     }
                 }
                 // break; Apparently this is unreachable
+=======
+                // TODO: YAML getting code
+                return null;
+            // break; Apparently this is unreachable
+>>>>>>> 440a1ace20d24a1a2f81fd91fcd765d0b99321d4
         }
         return null;
     }

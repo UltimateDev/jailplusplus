@@ -20,7 +20,7 @@ public class List implements SubCommand {
     }
 
     public boolean onCommand(CommandSender cs, String[] args) {
-        
+
         return false;
     }
 

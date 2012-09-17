@@ -19,8 +19,8 @@ public class Messenger {
      * Send a message to a CommandSender (can be
      * either a console or a player).
      *
-     * @param sender The CommandSender to send the message to.
-     * @param message The message that is to be sent.
+     * @param sender   The CommandSender to send the message to.
+     * @param message  The message that is to be sent.
      * @param prefixed Whether the message should be prefixed
      *                 with a tag that is the name of your plugin
      *                 or not.
@@ -42,7 +42,7 @@ public class Messenger {
      * either a console or a player). This message is
      * automatically prefixed.
      *
-     * @param sender The CommandSender to send the message to.
+     * @param sender  The CommandSender to send the message to.
      * @param message The message that is to be sent.
      */
     public static void sendMessage(CommandSender sender, String message) {
@@ -52,7 +52,7 @@ public class Messenger {
     /**
      * Send a message to the console.
      *
-     * @param message The message that is to be sent.
+     * @param message  The message that is to be sent.
      * @param prefixed Whether the message should be prefixed
      *                 with a tag that is the name of your plugin
      *                 or not.
@@ -75,7 +75,7 @@ public class Messenger {
      * Send an error message to the console (the message
      * is red colored).
      *
-     * @param message The message that is to be sent.
+     * @param message  The message that is to be sent.
      * @param prefixed Whether the message should be prefixed
      *                 with a tag that is the name of your plugin
      *                 or not.
@@ -88,7 +88,7 @@ public class Messenger {
      * Send an error message to the console (the message
      * is red colored). This message is automatically
      * prefixed.
-
+     *
      * @param message The message that is to be sent.
      */
     public static void sendErrorToConsole(String message) {
@@ -99,8 +99,8 @@ public class Messenger {
      * Send an error (the message is red colored) message
      * to a CommandSender (can be a player or console).
      *
-     * @param sender The CommandSender to send the message to.
-     * @param message The message that is to be sent.
+     * @param sender   The CommandSender to send the message to.
+     * @param message  The message that is to be sent.
      * @param prefixed Whether the message should be prefixed
      *                 with a tag that is the name of your plugin
      *                 or not.
@@ -114,7 +114,7 @@ public class Messenger {
      * to a CommandSender (can be a player or console).
      * This message is automatically prefixed.
      *
-     * @param sender The CommandSender to send the message to.
+     * @param sender  The CommandSender to send the message to.
      * @param message The message that is to be sent.
      */
     public static void sendError(CommandSender sender, String message) {
@@ -138,14 +138,14 @@ public class Messenger {
     /**
      * Broadcast a message to all players on the server.
      *
-     * @param message The message that is to be sent.
+     * @param message  The message that is to be sent.
      * @param prefixed Whether the message should be prefixed
      *                 with a tag that is the name of your plugin
      *                 or not.
      */
     public static void broadcastMessage(String message, boolean prefixed) {
-        for (Player p: Bukkit.getServer().getOnlinePlayers()) {
-            sendMessage(p, message,  prefixed);
+        for (Player p : Bukkit.getServer().getOnlinePlayers()) {
+            sendMessage(p, message, prefixed);
         }
     }
 

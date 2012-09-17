@@ -2,6 +2,7 @@ package tk.ultimatedev.jailplusplus;
 /**
  * @author YoshiGenius
  */
+
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -14,50 +15,50 @@ import org.w3c.dom.NodeList;
 
 public class UpdateChecker {
 
-	private JailPlugin plugin;
-	private URL filesFeed;
+    private JailPlugin plugin;
+    private URL filesFeed;
 
-	private String version;
-	private String link;
+    private String version;
+    private String link;
 
-	public UpdateChecker(JailPlugin plugin, String url) {
-		this.plugin = plugin;
+    public UpdateChecker(JailPlugin plugin, String url) {
+        this.plugin = plugin;
 
-		try {
-			this.filesFeed = new URL(url);
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
-	}
+        try {
+            this.filesFeed = new URL(url);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
 
-	public boolean updateNeeded() {
+    public boolean updateNeeded() {
 
-		try {
-			InputStream input = this.filesFeed.openConnection().getInputStream();
-			Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(input);
+        try {
+            InputStream input = this.filesFeed.openConnection().getInputStream();
+            Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(input);
 
-			Node latestFile = document.getElementsByTagName("item").item(0);
-			NodeList children = latestFile.getChildNodes();
+            Node latestFile = document.getElementsByTagName("item").item(0);
+            NodeList children = latestFile.getChildNodes();
 
-			this.version = children.item(1).getTextContent().replaceAll("[-a-zA-Z ]", ""); 
-			this.link = children.item(3).getTextContent();
+            this.version = children.item(1).getTextContent().replaceAll("[-a-zA-Z ]", "");
+            this.link = children.item(3).getTextContent();
 
-			if (!plugin.getDescription().getVersion().equals(this.version)) {
-				return true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+            if (!plugin.getDescription().getVersion().equals(this.version)) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
-		return false;
-	}
+        return false;
+    }
 
-	public String getVersion() {
-		return this.version;
-	}
+    public String getVersion() {
+        return this.version;
+    }
 
-	public String getLink() {
-		return this.link;
-	}
+    public String getLink() {
+        return this.link;
+    }
 }

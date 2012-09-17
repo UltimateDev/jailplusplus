@@ -11,9 +11,10 @@ import tk.ultimatedev.jailplusplus.handlers.JailStickHandler;
  * @author YoshiGenius
  */
 public class JailStick implements Listener {
-    
+
     @EventHandler
     public void onClick(PlayerInteractEntityEvent evt) {
+<<<<<<< HEAD
         Player clicker = evt.getPlayer();
         Entity eclicked = evt.getRightClicked();
         if (eclicked instanceof Player) {
@@ -24,6 +25,10 @@ public class JailStick implements Listener {
                 }
             }
         }
+=======
+        Player p = evt.getPlayer();
+
+>>>>>>> 440a1ace20d24a1a2f81fd91fcd765d0b99321d4
     }
 
 }

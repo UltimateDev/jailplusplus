@@ -34,7 +34,7 @@ public class Wand implements SubCommand {
     public String kitPermission() {
         return "jpp.*";
     }
-    
+
     public boolean playerOnly() {
         return true;
     }

@@ -77,7 +77,7 @@ public class InventorySerializer {
                     itemStack.addEnchantment(Enchantment.getById(Integer.valueOf(attribute[1])), Integer.valueOf(attribute[2]));
                 }
             }
-            deSerializedInventory.setItem(stackPosition,  itemStack);
+            deSerializedInventory.setItem(stackPosition, itemStack);
         }
 
         return deSerializedInventory;
