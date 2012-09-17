@@ -24,7 +24,6 @@ public class CommandHandler implements CommandExecutor {
     {
         this.plugin = plugin;
         commands = new HashMap<String, SubCommand>();
-        commands.clear();
         loadCommands();
     }
 

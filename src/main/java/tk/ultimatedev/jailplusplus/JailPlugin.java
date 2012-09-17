@@ -105,13 +105,13 @@ public class JailPlugin extends JavaPlugin {
             if (this.getConfig().getString("update.stream").equalsIgnoreCase("release") && uc.getVersion().startsWith("r")) {
                 Log.info("A new version is available: " + uc.getVersion());
                 Log.info("Get it from: " + uc.getLink());
-            } else if (this.getConfig().getString("update.stream").equalsIgnoreCase("beta") && uc.getVersion().startsWith("b")) {
+            } else if (this.getConfig().getString("update.stream").equalsIgnoreCase("beta") && (uc.getVersion().startsWith("b") || uc.getVersion().startsWith("r"))) {
                 Log.info("A new version is available: " + uc.getVersion());
                 Log.info("Get it from: " + uc.getLink());
-            } else if (this.getConfig().getString("update.stream").equalsIgnoreCase("alpha") && uc.getVersion().startsWith("a")) {
+            } else if (this.getConfig().getString("update.stream").equalsIgnoreCase("alpha") && (uc.getVersion().startsWith("b") || uc.getVersion().startsWith("r") || uc.getVersion().startsWith("a"))) {
                 Log.info("A new version is available: " + uc.getVersion());
                 Log.info("Get it from: " + uc.getLink());
-            } else if (this.getConfig().getString("update.stream").equalsIgnoreCase("dev") && uc.getVersion().startsWith("d")) {
+            } else if (this.getConfig().getString("update.stream").equalsIgnoreCase("dev") && (uc.getVersion().startsWith("b") || uc.getVersion().startsWith("r") || uc.getVersion().startsWith("a") || uc.getVersion().startsWith("d"))) {
                 Log.info("A new version is available: " + uc.getVersion());
                 Log.info("Get it from: " + uc.getLink());
             } else {
