@@ -35,6 +35,14 @@ public class UserdataYAML {
         return FilePaths.getInstance().getUserYAMLConf(string);
     }
     
+    public void saveUserdataConf() {
+        try {
+            this.getUserdataConf().save(this.getUserdataFile());
+        } catch (Exception e) {
+            this.exception(e);
+        }
+    }
+    
     public boolean isJailed() {
         return getUserdataConf().getBoolean("jailed");
     }
@@ -69,15 +77,11 @@ public class UserdataYAML {
         int minx = Integer.valueOf(minloc[0]);
         int miny = Integer.valueOf(minloc[1]);
         int minz = Integer.valueOf(minloc[2]);
-        int minyaw = Integer.valueOf(minloc[3]);
-        int minp = Integer.valueOf(minloc[4]);
-        Location min = new Location(world, minx, miny, minz, minyaw, minp);
+        Location min = new Location(world, minx, miny, minz);
         int maxx = Integer.valueOf(maxloc[0]);
         int maxy = Integer.valueOf(maxloc[1]);
         int maxz = Integer.valueOf(maxloc[2]);
-        int maxyaw = Integer.valueOf(maxloc[3]);
-        int maxp = Integer.valueOf(maxloc[4]);
-        Location max = new Location(world, maxx, maxy, maxz, maxyaw, maxp);
+        Location max = new Location(world, maxx, maxy, maxz);
         Cuboid cuboid = new Cuboid(min, max);
         Jail jail = new Jail(name, cuboid);
         return jail;
@@ -97,6 +101,62 @@ public class UserdataYAML {
         int timeleft = this.getUserdataConf().getInt("time");
         return timeleft;
     }
+
+    public String getJailer() {
+        String jailer = this.getUserdataConf().getString("jailer");
+        return jailer;
+    }
+    
+//    public void setJailStickJail(Jail jail) {
+//        String name = this.getUserdataConf().getString("jailstick.jail.name");
+//        String worldname = this.getUserdataConf().getString("jailstick.jail.world");
+//        String[] minloc = this.getUserdataConf().getString("jailstick.jail.minloc").split(",");
+//        String[] maxloc = this.getUserdataConf().getString("jailstick.jail.maxloc").split(",");
+//        World world = Bukkit.getServer().getWorld(worldname);
+//        int minx = Integer.valueOf(minloc[0]);
+//        int miny = Integer.valueOf(minloc[1]);
+//        int minz = Integer.valueOf(minloc[2]);
+//        Location min = new Location(world, minx, miny, minz);
+//        int maxx = Integer.valueOf(maxloc[0]);
+//        int maxy = Integer.valueOf(maxloc[1]);
+//        int maxz = Integer.valueOf(maxloc[2]);
+//        Location max = new Location(world, maxx, maxy, maxz);
+//        Cuboid cuboid = new Cuboid(min, max);
+//    }
+    
+//    public void setJailStickJail(String name, Cuboid cuboid) {
+//        String name = this.getUserdataConf().getString("jailstick.jail.name");
+//        String worldname = this.getUserdataConf().getString("jailstick.jail.world");
+//        String[] minloc = this.getUserdataConf().getString("jailstick.jail.minloc").split(",");
+//        String[] maxloc = this.getUserdataConf().getString("jailstick.jail.maxloc").split(",");
+//        World world = Bukkit.getServer().getWorld(worldname);
+//        int minx = Integer.valueOf(minloc[0]);
+//        int miny = Integer.valueOf(minloc[1]);
+//        int minz = Integer.valueOf(minloc[2]);
+//        Location min = new Location(world, minx, miny, minz);
+//        int maxx = Integer.valueOf(maxloc[0]);
+//        int maxy = Integer.valueOf(maxloc[1]);
+//        int maxz = Integer.valueOf(maxloc[2]);
+//        Location max = new Location(world, maxx, maxy, maxz);
+//        Cuboid cuboid = new Cuboid(min, max);
+//        Jail jail = new Jail(name, cuboid);
+//    }
+    
+//    public void setJailStickJail(String name, Location max, Location min) {
+//        this.getUserdataConf().set("jailstick.jail.name", name);
+//        Cuboid cuboid = new Cuboid(max,min);
+//        this.getUserdataConf().set("jailstick.jail.maxloc", cuboid.getMaxX() + "," + cuboid.getMaxY() + "," + cuboid.getMaxZ());
+//        this.getUserdataConf().set("jailstick.jail.minloc", cuboid.getMinX() + "," + cuboid.getMinY() + "," + cuboid.getMinZ());
+//        this.saveUserdataConf();
+//    }
+    
+    public void setJailStickTime(String time) {
+        this.getUserdataConf().set("jailstick.time", time);
+    }
+    
+    public void setJailStickReason(String reason) {
+        this.getUserdataConf().set("jailstick.reason", reason);
+    }
     
     public void setJailTimeSeconds(int seconds) {
         try {
@@ -105,6 +165,10 @@ public class UserdataYAML {
         } catch (Exception e) {
             this.exception(e);
         }
+    }
+    
+    public void setJailer(String jailer) {
+        this.getUserdataConf().set("jailer", jailer);
     }
     
     public void exception(Exception e) {

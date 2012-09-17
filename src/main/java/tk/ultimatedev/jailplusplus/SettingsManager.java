@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 import tk.ultimatedev.jailplusplus.util.Config;
+import tk.ultimatedev.jailplusplus.util.FilePaths;
 
 /**
  * @author YoshiGenius
@@ -25,18 +26,29 @@ public class SettingsManager {
     }
 
     public File getJailsDir() {
-        File f = new File("plugins/" + plugin.getName() + "/jails/");
-        return f;
+        return FilePaths.getInstance().getJailsFolder();
     }
 
     public File getJailFile(String name) {
-        File f = new File(this.getJailsDir().getPath() + "/" + name + ".yml");
-        return f;
+        return FilePaths.getInstance().getJailYAMLFile(name);
+    }
+    
+    public File getUserdataDir() {
+        return FilePaths.getInstance().getUserdataFolder();
+    }
+
+    public File getUserdataFile(String name) {
+        return FilePaths.getInstance().getUserYAMLFile(name);
     }
 
     public void firstRun() {
-        Config c = new Config();
-        c.saveDefault();
+        JailPlugin.getPlugin().saveDefaultConfig();
+        if (!this.getJailsDir().exists()) {
+            this.getJailsDir().mkdir();
+        }
+        if (!this.getUserdataDir().exists()) {
+            this.getUserdataDir().mkdir();
+        }
     }
 
     public YamlConfiguration getConfig() {
