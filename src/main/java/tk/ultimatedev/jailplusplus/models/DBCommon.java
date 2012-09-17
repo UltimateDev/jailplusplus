@@ -32,7 +32,7 @@ public class DBCommon {
     }
 
     public enum DBResponse {
-        ALREADY_EXISTS, SUCCESS, ALREADY_SAVED, FAILURE, NOT_IMPLEMENTED, NULL_POINTERS
+        ALREADY_EXISTS, SUCCESS, ALREADY_SAVED, FAILURE
     }
 
     public String getPrefix() {
