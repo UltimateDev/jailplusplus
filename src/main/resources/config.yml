@@ -1,8 +1,8 @@
 # Hi, I'm the Jail++ configuration file.
-# And I'm a comment! I start with a \"#\", which means I can give you tips on how to configure Jail++.
+# And I'm a comment! I start with a "#", which means I can give you tips on how to configure Jail++.
 
-#Here you can configure your database. You can use H2 embedded or MySQL!");
-#If you don't have a MySQL database, I would stick with the default settings (H2), which uses an embedded database.");
+# Here you can configure your database. You can use H2 embedded or MySQL!
+# If you don't have a MySQL database, I would stick with the default settings (H2), which uses an embedded database.
 database:
   # Choose 'h2' or 'mysql'
   driver: h2
@@ -18,7 +18,10 @@ database:
   database: minecraft
   # Not used for H2. You can leave this as default if you don't know what it means.
   prefix: jpp_
+
+# Choose the item ID that you want the wand to be (blaze rod by default)
+wand-id: 369
   
 
-# The configuration is done! Don't touch anything in the file or bad things may happen :'(");
+# The configuration is done! Don't touch anything in the file or bad things may happen :'(
 seriously-don't-touch-this: 1

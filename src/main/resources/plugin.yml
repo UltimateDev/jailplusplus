@@ -3,3 +3,12 @@ version: 1.0a b1
 description: An advanced Jail plugin for Bukkit servers.
 authors: [goldblattster, tyzoid]
 main: tk.ultimatedev.jailplusplus.JailPlugin
+
+permissions:
+  jpp.*:
+    description: Gives access to all JailPlusPlus abilities
+    default: op
+    children:
+      jpp.wand: true
+  jpp.wand:
+    description: Use the JailPlusPlus wand

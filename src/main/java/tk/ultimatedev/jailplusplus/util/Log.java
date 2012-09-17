@@ -7,6 +7,8 @@ import java.util.logging.Logger;
 
 /**
  * A class used for accessing the Bukkit logger.
+ *
+ * @author Sushi
  */
 public class Log {
     private static Logger log = Bukkit.getLogger();

@@ -8,6 +8,9 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.Map;
 
+/**
+ * @author Sushi
+ */
 public class InventorySerializer {
     public static String getString(Inventory toSerialize) {
         String serialization = toSerialize.getSize() + ";";
