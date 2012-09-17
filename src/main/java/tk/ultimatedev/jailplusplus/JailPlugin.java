@@ -12,6 +12,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
+import tk.ultimatedev.jailplusplus.commands.CommandHandler;
 
 public class JailPlugin extends JavaPlugin {
     private static JailPlugin plugin;
@@ -21,6 +22,8 @@ public class JailPlugin extends JavaPlugin {
         JailPlugin.plugin = this;
 
         getDependencies();
+        
+        this.getCommand("jail").setExecutor(new CommandHandler(this));
 
         File f = new File(this.getDataFolder(), "config.yml");
         if (!f.exists()) {

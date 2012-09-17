@@ -1,6 +1,6 @@
 package tk.ultimatedev.jailplusplus.commands;
 
-import org.bukkit.entity.Player;
+import org.bukkit.command.CommandSender;
 import tk.ultimatedev.jailplusplus.JailPlugin;
 import tk.ultimatedev.jailplusplus.util.Messenger;
 
@@ -8,7 +8,7 @@ import tk.ultimatedev.jailplusplus.util.Messenger;
  * @author Sushi
  */
 public class About implements SubCommand {
-    public boolean onCommand(Player player, String[] args) {
+    public boolean onCommand(CommandSender player, String[] args) {
         String delimiter = "";
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -24,7 +24,7 @@ public class About implements SubCommand {
         return false;
     }
 
-    public String help(Player player) {
+    public String help(CommandSender player) {
         return "/jail about - See information about the plugin.";
     }
 
@@ -34,5 +34,9 @@ public class About implements SubCommand {
 
     public String kitPermission() {
         return "jpp.default";
+    }
+
+    public boolean playerOnly() {
+        return false;
     }
 }

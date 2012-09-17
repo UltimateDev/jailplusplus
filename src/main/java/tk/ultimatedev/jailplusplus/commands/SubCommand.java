@@ -1,5 +1,6 @@
 package tk.ultimatedev.jailplusplus.commands;
 
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import tk.ultimatedev.jailplusplus.JailPlugin;
 
@@ -12,12 +13,12 @@ public interface SubCommand {
     
     /**
      * Executes a command.
-     * @param player The player who sent the command.
+     * @param cs The person who sent the command.
      * @param args The arguments that were involved in the command.
      * @return boolean Whether execution was successful or not.
      */
 
-    public boolean onCommand(Player player, String[] args);
+    public boolean onCommand(CommandSender cs, String[] args);
     
     /**
      * The message to send to the player with the help content.
@@ -25,7 +26,7 @@ public interface SubCommand {
      * @return String The help text.
      */
 
-    public String help(Player player);
+    public String help(CommandSender cs);
     
     /**
      * The permission required to use the subcommand.
@@ -40,5 +41,12 @@ public interface SubCommand {
      */
     
     public String kitPermission();
+    
+    /**
+     * True for player only, false for console too.
+     * @return boolean Can only a player use the command?
+     */
+    
+    public boolean playerOnly();
 
 }
