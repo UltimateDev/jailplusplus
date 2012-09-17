@@ -6,7 +6,6 @@ import org.bukkit.entity.Player;
  * @author YoshiGenius
  */
 public class List implements SubCommand {
-
     public boolean onCommand(Player player, String[] args) {
         
         return false;
@@ -17,11 +16,10 @@ public class List implements SubCommand {
     }
 
     public String permission() {
-        return "jail.list";
+        return "jpp.list";
     }
 
     public String kitPermission() {
-        return "jail.default";
+        return "jpp.default";
     }
-
 }
