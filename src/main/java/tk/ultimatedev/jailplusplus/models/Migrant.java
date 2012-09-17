@@ -132,6 +132,8 @@ public class Migrant {
                         Bukkit.getPluginManager().disablePlugin(JailPlugin.getPlugin());
                     }
                 }
+
+                break;
             case MYSQL:
                 Log.info("Running MySQL migrations...");
 
@@ -217,9 +219,13 @@ public class Migrant {
                         Bukkit.getPluginManager().disablePlugin(JailPlugin.getPlugin());
                     }
                 }
+
+                break;
             default:
                 Log.severe("You specified the database engine2 '" + JailPlugin.getPlugin().getConfig().getString("database.driver") + "', but the only supported databases are 'h2' and 'mysql'! Disabling plugin...");
                 Bukkit.getPluginManager().disablePlugin(JailPlugin.getPlugin());
+
+                break;
         }
     }
 
