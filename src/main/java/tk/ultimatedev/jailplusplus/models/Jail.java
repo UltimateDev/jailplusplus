@@ -11,7 +11,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import org.bukkit.configuration.file.YamlConfiguration;
-import tk.ultimatedev.jailplusplus.util.file.FilePaths;
+import tk.ultimatedev.jailplusplus.util.FilePaths;
 
 public class Jail {
     DBCommon dbCommon;

@@ -1,4 +1,4 @@
-package tk.ultimatedev.jailplusplus.util.file;
+package tk.ultimatedev.jailplusplus.util;
 
 import java.io.File;
 import org.bukkit.configuration.file.YamlConfiguration;
