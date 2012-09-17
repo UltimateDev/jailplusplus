@@ -1,5 +1,6 @@
 package tk.ultimatedev.jailplusplus.models;
 
+import java.io.File;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import tk.ultimatedev.jailplusplus.ExceptionHandler;
@@ -9,15 +10,18 @@ import tk.ultimatedev.jailplusplus.util.Cuboid;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import org.bukkit.configuration.file.YamlConfiguration;
+import tk.ultimatedev.jailplusplus.util.file.FilePaths;
 
 public class Jail {
     DBCommon dbCommon;
     Migrant.DatabaseEngine engine;
     boolean saved;
     String tableName;
-
+    
     int id;
     String name;
+    File f = FilePaths.getInstance().getJailYAMLFile(name);
     int x1;
     int x2;
     int y1;
@@ -164,7 +168,12 @@ public class Jail {
 
                         // break; Apparently this is unreachable
                     case FILE:
-                        // TODO: YAML saving code
+                        try {
+                            YamlConfiguration ymlconf = YamlConfiguration.loadConfiguration(f);
+                            ymlconf.save(f);
+                        } catch (Exception e) {
+                            exceptionHandler.logException(e);
+                        }
                         // break; Apparently this is unreachable
                 }
             } else {
