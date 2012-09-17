@@ -1,41 +1,58 @@
 package tk.ultimatedev.jailplusplus.util;
 
-import tk.ultimatedev.jailplusplus.JailPlugin;
-
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
-
+import java.util.Map;
 import org.bukkit.configuration.file.YamlConfiguration;
+import tk.ultimatedev.jailplusplus.JailPlugin;
 
 public class Config {
-    File confFile;
-    PrintWriter scribe;
-
-    public Config() {
-        this.confFile = new File(JailPlugin.getPlugin().getDataFolder() + "/config.yml");
-    }
-
-    public void saveDefault() {
-        if (!this.confFile.exists()) {
-            try {
-                if (JailPlugin.getPlugin().getDataFolder().mkdirs()) {
-                    if (this.confFile.createNewFile()) {
-                        this.writeConfig();
-                    } else {
-                        Log.severe("I couldn't create the configuration file!");
-                    }
-                } else {
-                    Log.severe("I couldn't create the configuration file!");
-                }
-            } catch (IOException e) {
-                Log.severe("I couldn't create the configuration file! Create a bug report with the data below:");
-                e.printStackTrace();
+    
+    File f = new File(JailPlugin.getPlugin().getDataFolder(), "config.yml");
+    
+    public boolean updateConfig(int newversion, Map<String, Object> updates) throws IOException {
+        YamlConfiguration c = YamlConfiguration.loadConfiguration(this.f);
+        int oldversion = c.getInt("seriously-don't-touch-this");
+        if (oldversion == newversion) {
+            return false;
+        } else {
+            for (String s : updates.keySet()) {
+                Object obj = updates.get(s);
+                c.set(s, obj);
             }
+            c.set("seriously-don't-touch-this", newversion);
+            return true;
         }
     }
-
-    private void writeConfig() throws IOException {
+    
+    
+//    File confFile;
+//    PrintWriter scribe;
+//
+//    public Config() {
+//        this.confFile = new File(JailPlugin.getPlugin().getDataFolder() + "/config.yml");
+//    }
+//
+//    public void saveDefault() {
+//        if (!this.confFile.exists()) {
+//            try {
+//                if (JailPlugin.getPlugin().getDataFolder().mkdirs()) {
+//                    if (this.confFile.createNewFile()) {
+//                        this.writeConfig();
+//                    } else {
+//                        Log.severe("I couldn't create the configuration file!");
+//                    }
+//                } else {
+//                    Log.severe("I couldn't create the configuration file!");
+//                }
+//            } catch (IOException e) {
+//                Log.severe("I couldn't create the configuration file! Create a bug report with the data below:");
+//                e.printStackTrace();
+//            }
+//        }
+//    }
+//
+//    private void writeConfig() throws IOException {
 
 //        scribe = new PrintWriter(this.confFile);
 
@@ -57,5 +74,5 @@ public class Config {
 //        scribe.println("seriously-don't-touch-this: 1");
 //
 //        scribe.close();
-    }
+//    }
 }
