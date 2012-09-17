@@ -21,7 +21,7 @@ public class Migrant {
     DatabaseMetaData meta;
 
     public enum DatabaseEngine {
-        H2, MYSQL
+        H2, MYSQL, FILE
     }
     
     public Migrant() {
@@ -101,7 +101,7 @@ public class Migrant {
                                         "served BIGINT," +
                                         "reason VARCHAR(150)," +
                                         "jailer VARCHAR(20)," +
-                                        "inv TEXT" +
+                                        "inv CLOB" +
                                         ")"
                         );
                     }
