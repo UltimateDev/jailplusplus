@@ -1,21 +1,62 @@
 package tk.ultimatedev.jailplusplus.models;
 
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import tk.ultimatedev.jailplusplus.models.file.UserdataYAML;
-import tk.ultimatedev.jailplusplus.util.FilePaths;
-
-import java.io.File;
+import tk.ultimatedev.jailplusplus.ExceptionHandler;
+import tk.ultimatedev.jailplusplus.JailPlugin;
 
 public class Prisoner {
+    DBCommon dbCommon;
     Migrant.DatabaseEngine engine;
-    static Player player;
+    boolean saved;
+    String tableName;
 
-    public Prisoner(Player player) {
-        Prisoner.player = player;
+    String player;
+    int cell;
+    String sentence;
+    String served;
+    String reason;
+    String jailer;
+
+    ExceptionHandler exceptionHandler;
+
+    public Prisoner(String player, int cell, String sentence, String served, String reason, String jailer) {
+        this.dbCommon = new DBCommon();
         this.engine = Migrant.getDatabaseEngine();
+        this.tableName = this.dbCommon.getPrefix() + "jails";
+        this.saved = false;
+
+        this.player = player;
+        this.cell = cell;
+        this.sentence = sentence;
+        this.served = served;
+        this.reason = reason;
+        this.jailer = jailer;
+
+        this.exceptionHandler = new ExceptionHandler(JailPlugin.getPlugin());
     }
-    
+
+    public Prisoner(String player, String sentence, String served, String reason, String jailer) {
+        this.dbCommon = new DBCommon();
+        this.engine = Migrant.getDatabaseEngine();
+        this.tableName = this.dbCommon.getPrefix() + "jails";
+        this.saved = false;
+
+        this.player = player;
+        this.sentence = sentence;
+        this.served = served;
+        this.reason = reason;
+        this.jailer = jailer;
+
+        this.exceptionHandler = new ExceptionHandler(JailPlugin.getPlugin());
+    }
+
+    @Override
+    public String toString() {
+        return "#" + this.player + ":" + this.sentence + ":" + this.served + ":" + this.reason + ":" + this.jailer;
+    }
+
+    /*
+    Commented because the player variable cannot be a static member!
+
     public static void matchPrisoner(String name) {
         Player matched = Bukkit.getServer().getPlayer(name);
         if (matched == null) {
@@ -37,5 +78,7 @@ public class Prisoner {
     public UserdataYAML getPrisonerYAML() {
         return new UserdataYAML(player);
     }
+
+    */
 
 }
