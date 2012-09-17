@@ -101,7 +101,7 @@ public class CommandHandler implements CommandExecutor {
         }
         return false;
     }
-    
+
     public void help(CommandSender cs) {
         Messenger.sendMessage(cs, "Jail++: Available Commands");
 

@@ -5,6 +5,7 @@ import org.bukkit.Location;
 import org.bukkit.configuration.file.YamlConfiguration;
 import tk.ultimatedev.jailplusplus.ExceptionHandler;
 import tk.ultimatedev.jailplusplus.JailPlugin;
+import tk.ultimatedev.jailplusplus.models.file.JailYAML;
 import tk.ultimatedev.jailplusplus.util.Cuboid;
 import tk.ultimatedev.jailplusplus.util.FilePaths;
 
@@ -12,9 +13,6 @@ import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import org.bukkit.configuration.file.YamlConfiguration;
-import tk.ultimatedev.jailplusplus.models.file.JailYAML;
-import tk.ultimatedev.jailplusplus.util.FilePaths;
 
 public class Jail {
     DBCommon dbCommon;
@@ -300,7 +298,7 @@ public class Jail {
                     jails.add(jail);
                 }
                 return jails;
-                // TODO: YAML getting code
+            // TODO: YAML getting code
             // break; Apparently this is unreachable
         }
         return null;
@@ -309,7 +307,6 @@ public class Jail {
     public static Jail getJail(String name) {
 
         ExceptionHandler exceptionHandler = new ExceptionHandler(JailPlugin.getPlugin());
-        List<Jail> jails = new ArrayList<Jail>();
         Migrant.DatabaseEngine engine = Migrant.getDatabaseEngine();
 
         Connection conn = null;
@@ -406,7 +403,6 @@ public class Jail {
 
     public static Jail getJail(int id) {
         ExceptionHandler exceptionHandler = new ExceptionHandler(JailPlugin.getPlugin());
-        List<Jail> jails = new ArrayList<Jail>();
         Migrant.DatabaseEngine engine = Migrant.getDatabaseEngine();
 
         Connection conn = null;
@@ -582,7 +578,7 @@ public class Jail {
 
                 // break; Apparently this is unreachable
             case FILE:
-                
+
                 return null;
             // break; Apparently this is unreachable
         }
@@ -591,7 +587,6 @@ public class Jail {
 
     public static Jail removeJail(int id) {
         ExceptionHandler exceptionHandler = new ExceptionHandler(JailPlugin.getPlugin());
-        List<Jail> jails = new ArrayList<Jail>();
         Migrant.DatabaseEngine engine = Migrant.getDatabaseEngine();
 
         Connection conn = null;
@@ -721,23 +716,24 @@ public class Jail {
     public Cuboid getCuboid() {
         return new Cuboid(new Location(Bukkit.getWorld(this.world), this.x1, this.y1, this.z1), new Location(Bukkit.getWorld(this.world), this.x2, this.y2, this.z2));
     }
-    
+
     public JailYAML getYamlConf() {
         return new JailYAML(this);
     }
-    
-    
+
+
     public static Jail matchJailYAML(String name) {
         File folder = FilePaths.getInstance().getJailsFolder();
+
+        // TODO: Don't dereference this
         for (File f : folder.listFiles()) {
             YamlConfiguration c = YamlConfiguration.loadConfiguration(f);
             if (c.getString("name").equalsIgnoreCase(name)) {
                 JailYAML jy = new JailYAML(f);
-                Jail xjail = new Jail(name, jy.getCuboid());
-                return xjail;
+                return new Jail(name, jy.getCuboid());
             }
         }
         return null;
     }
-    
+
 }
