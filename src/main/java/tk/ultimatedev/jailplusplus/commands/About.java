@@ -21,7 +21,7 @@ public class About implements SubCommand {
         Messenger.sendMessage(player, "Created with <3 by " + stringBuilder.toString() + "!");
         Messenger.sendMessage(player, "", false);
         Messenger.sendMessage(player, "For help using this plugin, type /jail help", false);
-        return false;
+        return true;
     }
 
     public String help(CommandSender player) {
