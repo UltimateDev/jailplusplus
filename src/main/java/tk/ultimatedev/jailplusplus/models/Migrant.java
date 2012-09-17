@@ -218,7 +218,7 @@ public class Migrant {
                     }
                 }
             default:
-                Log.severe("You specified the database engine '" + JailPlugin.getPlugin().getConfig().getString("database.driver") + "', but the only supported databases are 'h2' and 'mysql'! Disabling plugin...");
+                Log.severe("You specified the database engine2 '" + JailPlugin.getPlugin().getConfig().getString("database.driver") + "', but the only supported databases are 'h2' and 'mysql'! Disabling plugin...");
                 Bukkit.getPluginManager().disablePlugin(JailPlugin.getPlugin());
         }
     }
@@ -229,7 +229,7 @@ public class Migrant {
                 try {
                     Class.forName("org.h2.Driver");
 
-                    return DriverManager.getConnection("jdbc:h2:" + JailPlugin.getPlugin().getDataFolder().getAbsolutePath() + "data.h2", "jpp", "");
+                    return DriverManager.getConnection("jdbc:h2:" + JailPlugin.getPlugin().getDataFolder().getAbsolutePath() + "jpp_data", "jpp", "");
                 } catch (ClassNotFoundException ex) {
                     exceptionHandler.logException(ex);
                     Log.severe("You specified the database engine 'h2', but I couldn't find the driver \"org.h2.Driver\"! Disabling plugin...");
@@ -248,7 +248,7 @@ public class Migrant {
                     return null;
                 }
             default:
-                Log.severe("You specified the database engine '" + JailPlugin.getPlugin().getConfig().getString("database.driver") + "', but the only supported databases are 'h2' and 'mysql'! Disabling plugin...");
+                Log.severe("You specified the database engine1 '" + JailPlugin.getPlugin().getConfig().getString("database.driver") + "', but the only supported databases are 'h2' and 'mysql'! Disabling plugin...");
                 Bukkit.getPluginManager().disablePlugin(JailPlugin.getPlugin());
                 return null;
         }
