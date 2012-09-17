@@ -19,7 +19,7 @@ import tk.ultimatedev.jailplusplus.models.file.UserdataYAML;
 public class Time {
     
     private int id;
-    private HashMap<Player, Integer> remainingtime = new HashMap<Player, Integer>();
+    private HashMap<Player, Integer> countdowntask = new HashMap<Player, Integer>();
     
     public int toTicks(String time) {
         try {
@@ -96,12 +96,17 @@ public class Time {
         }
     }
     
-    public void startCountdownToEndJailTime(int time, final String playername) {
-        this.id = Bukkit.getServer().getScheduler().scheduleAsyncRepeatingTask(JailPlugin.getPlugin(), new Runnable() {
+    public void startCountdownToEndJailTime(final String playername) {
+        UserdataYAML data = new UserdataYAML(playername);
+        data.getJailStickTime();
+        Player p = Bukkit.getServer().getPlayer(playername);
+        if (p == null) return;
+        this.countdowntask.put(p, id);
+        Bukkit.getServer().getScheduler().scheduleAsyncRepeatingTask(JailPlugin.getPlugin(), new Runnable() {
             public void run() {
-                Messenger.broadcastMessage(ChatColor.GOLD + playername + " has finished their sentence in jail!", true);
+                
             }
-        }, (time*20), 20);
+        }, 200, 20);
     }
     
     @EventHandler
@@ -113,9 +118,9 @@ public class Time {
         if (!data.isJailed()) {
             return;
         }
-        if (bs.isCurrentlyRunning(this.id)) {
-            bs.cancelTask(this.id);
+        if (bs.isCurrentlyRunning(this.countdowntask.get(p))) {
             
+            bs.cancelTask(this.id);
         }
     }
     

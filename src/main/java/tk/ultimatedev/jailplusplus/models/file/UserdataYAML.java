@@ -17,18 +17,22 @@ import tk.ultimatedev.jailplusplus.util.FilePaths;
  */
 public class UserdataYAML {
     
-    private static Player player;
+    private static String string;
     
     public UserdataYAML(Player player) {
-        UserdataYAML.player = player;
+        UserdataYAML.string = player.getName();
+    }
+    
+    public UserdataYAML(String string) {
+        UserdataYAML.string = string;
     }
     
     public File getUserdataFile() {
-        return FilePaths.getInstance().getUserYAMLFile(player.getName());
+        return FilePaths.getInstance().getUserYAMLFile(string);
     }
     
     public YamlConfiguration getUserdataConf() {
-        return FilePaths.getInstance().getUserYAMLConf(player.getName());
+        return FilePaths.getInstance().getUserYAMLConf(string);
     }
     
     public boolean isJailed() {
@@ -40,8 +44,7 @@ public class UserdataYAML {
             this.getUserdataConf().set("jailed", jailed);
             this.getUserdataConf().save(this.getUserdataFile());
         } catch (Exception e) {
-            ExceptionHandler eh = new ExceptionHandler(JailPlugin.getPlugin());
-            eh.logException(e);
+            this.exception(e);
         }
     }
     
@@ -58,10 +61,10 @@ public class UserdataYAML {
     }
     
     public Jail getJailStickJail() {
-        String name = getUserdataConf().getString("jailstick.jail.name");
-        String worldname = getUserdataConf().getString("jailstick.jail.world");
-        String[] minloc = getUserdataConf().getString("jailstick.jail.minloc").split(",");
-        String[] maxloc = getUserdataConf().getString("jailstick.jail.maxloc").split(",");
+        String name = this.getUserdataConf().getString("jailstick.jail.name");
+        String worldname = this.getUserdataConf().getString("jailstick.jail.world");
+        String[] minloc = this.getUserdataConf().getString("jailstick.jail.minloc").split(",");
+        String[] maxloc = this.getUserdataConf().getString("jailstick.jail.maxloc").split(",");
         World world = Bukkit.getServer().getWorld(worldname);
         int minx = Integer.valueOf(minloc[0]);
         int miny = Integer.valueOf(minloc[1]);
@@ -81,18 +84,32 @@ public class UserdataYAML {
     }
     
     public String getJailStickTime() {
-        String time = getUserdataConf().getString("jailstick.time");
+        String time = this.getUserdataConf().getString("jailstick.time");
         return time;
     }
     
     public String getJailStickReason() {
-        String reason = getUserdataConf().getString("jailstick.reason");
+        String reason = this.getUserdataConf().getString("jailstick.reason");
         return reason;
     }
     
     public int getJailTimeSeconds() {
-        int timeleft = getUserdataConf().getInt("time");
+        int timeleft = this.getUserdataConf().getInt("time");
         return timeleft;
+    }
+    
+    public void setJailTimeSeconds(int seconds) {
+        try {
+            this.getUserdataConf().set("time", seconds);
+            this.getUserdataConf().save(this.getUserdataFile());
+        } catch (Exception e) {
+            this.exception(e);
+        }
+    }
+    
+    public void exception(Exception e) {
+        ExceptionHandler eh = new ExceptionHandler(JailPlugin.getPlugin());
+        eh.logException(e);
     }
 
 }
