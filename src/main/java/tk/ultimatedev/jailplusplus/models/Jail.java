@@ -498,7 +498,7 @@ public class Jail {
         return null;
     }
 
-    public static Jail removeJail(String name) {
+    public static boolean removeJail(String name) {
         ExceptionHandler exceptionHandler = new ExceptionHandler(JailPlugin.getPlugin());
         Migrant.DatabaseEngine engine = Migrant.getDatabaseEngine();
 
@@ -521,9 +521,11 @@ public class Jail {
                     while (rs.next()) {
                         rs.deleteRow();
                     }
+
+                    return true;
                 } catch (SQLException ex) {
                     exceptionHandler.logException(ex);
-                    return null;
+                    return false;
                 } finally {
                     try {
                         if (rs != null) {
@@ -555,9 +557,11 @@ public class Jail {
                     while (rs.next()) {
                         rs.deleteRow();
                     }
+
+                    return true;
                 } catch (SQLException ex) {
                     exceptionHandler.logException(ex);
-                    return null;
+                    return false;
                 } finally {
                     try {
                         if (rs != null) {
@@ -579,13 +583,13 @@ public class Jail {
                 // break; Apparently this is unreachable
             case FILE:
 
-                return null;
+                return false;
             // break; Apparently this is unreachable
         }
-        return null;
+        return true;
     }
 
-    public static Jail removeJail(int id) {
+    public static boolean removeJail(int id) {
         ExceptionHandler exceptionHandler = new ExceptionHandler(JailPlugin.getPlugin());
         Migrant.DatabaseEngine engine = Migrant.getDatabaseEngine();
 
@@ -608,9 +612,11 @@ public class Jail {
                     while (rs.next()) {
                         rs.deleteRow();
                     }
+
+                    return true;
                 } catch (SQLException ex) {
                     exceptionHandler.logException(ex);
-                    return null;
+                    return false;
                 } finally {
                     try {
                         if (rs != null) {
@@ -642,9 +648,11 @@ public class Jail {
                     while (rs.next()) {
                         rs.deleteRow();
                     }
+
+                    return true;
                 } catch (SQLException ex) {
                     exceptionHandler.logException(ex);
-                    return null;
+                    return false;
                 } finally {
                     try {
                         if (rs != null) {
@@ -675,10 +683,10 @@ public class Jail {
                         }
                     }
                 }
-                return null;
+                return false;
             // break; Apparently this is unreachable
         }
-        return null;
+        return true;
     }
 
     public int getId() {

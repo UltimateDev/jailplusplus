@@ -27,5 +27,5 @@ update:
   # Update Stream can be: Release, Beta, Alpha, Dev
   stream: release
 
-# The configuration is done! Don't touch anything in the file or bad things may happen :'(
+# The configuration is done! Don't touch anything further in the file or bad things may happen :'(
 seriously-don't-touch-this: 1

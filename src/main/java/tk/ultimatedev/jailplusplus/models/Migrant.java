@@ -116,8 +116,8 @@ public class Migrant {
                                         "id INT NOT NULL AUTO_INCREMENT PRIMARY KEY," +
                                         "name VARCHAR(32) NOT NULL UNIQUE," +
                                         "cell INT NOT NULL," +
-                                        "sentence BIGINT," +
-                                        "served BIGINT," +
+                                        "created BIGINT," +
+                                        "expires BIGINT," +
                                         "reason VARCHAR(150)," +
                                         "jailer VARCHAR(20)," +
                                         "inv CLOB" +
@@ -203,8 +203,8 @@ public class Migrant {
                                         "id INT NOT NULL AUTO_INCREMENT PRIMARY KEY," +
                                         "name VARCHAR(32) NOT NULL UNIQUE," +
                                         "cell INT NOT NULL," +
-                                        "sentence BIGINT," +
-                                        "served BIGINT," +
+                                        "created BIGINT," +
+                                        "expires BIGINT," +
                                         "reason VARCHAR(150)," +
                                         "jailer VARCHAR(20)," +
                                         "inv TEXT" +
