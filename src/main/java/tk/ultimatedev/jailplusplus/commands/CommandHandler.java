@@ -57,13 +57,13 @@ public class CommandHandler implements CommandExecutor {
             }
             String sub = args[0];
             if (!commands.containsKey(sub)) {
-                Messenger.sendMessage(cs, "That's not a subcommand!", true);
+                Messenger.sendMessage(cs, "That's not a valid command!", true);
                 return true;
             }
             Vector<String> l  = new Vector<String>();
             l.addAll(Arrays.asList(args));
             l.remove(0);
-            args = (String[]) l.toArray(new String[0]);
+            args = l.toArray(new String[l.size()]);
             if (commands.get(sub).playerOnly()) {
                 if (!(cs instanceof Player)) {
                     Messenger.sendError(cs, "This command is only allowed for players!", true);

@@ -1,7 +1,6 @@
 package tk.ultimatedev.jailplusplus.commands;
 
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import tk.ultimatedev.jailplusplus.JailPlugin;
 
 /**
@@ -22,7 +21,7 @@ public interface SubCommand {
     
     /**
      * The message to send to the player with the help content.
-     * @param player Player to send the message to.
+     * @param cs CommandSender to send the message to.
      * @return String The help text.
      */
 
