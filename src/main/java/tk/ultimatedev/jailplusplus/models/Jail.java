@@ -48,7 +48,7 @@ public class Jail {
         this.world = world;
 
         this.exceptionHandler = new ExceptionHandler(JailPlugin.getPlugin());
-        this.file = FilePaths.getInstance().getJailYAMLFile(name);
+        this.file = FilePaths.getInstance().getJailYAMLFile(this.name);
     }
 
     public Jail(String name, Cuboid area) {
@@ -67,7 +67,7 @@ public class Jail {
         this.world = area.getWorld().getName();
 
         this.exceptionHandler = new ExceptionHandler(JailPlugin.getPlugin());
-        this.file = FilePaths.getInstance().getJailYAMLFile(name);
+        this.file = FilePaths.getInstance().getJailYAMLFile(this.name);
     }
 
     public DBCommon.DBResponse save() throws NullPointerException {
