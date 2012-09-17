@@ -5,6 +5,7 @@ import org.bukkit.Location;
 import org.bukkit.configuration.file.YamlConfiguration;
 import tk.ultimatedev.jailplusplus.ExceptionHandler;
 import tk.ultimatedev.jailplusplus.JailPlugin;
+import tk.ultimatedev.jailplusplus.models.file.JailYAML;
 import tk.ultimatedev.jailplusplus.util.Cuboid;
 import tk.ultimatedev.jailplusplus.util.FilePaths;
 
@@ -12,12 +13,6 @@ import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-<<<<<<< HEAD
-=======
-import org.bukkit.configuration.file.YamlConfiguration;
-import tk.ultimatedev.jailplusplus.models.file.JailYAML;
-import tk.ultimatedev.jailplusplus.util.FilePaths;
->>>>>>> origin/master
 
 public class Jail {
     DBCommon dbCommon;
@@ -192,10 +187,7 @@ public class Jail {
                         try {
                             YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(this.file);
                             yamlConfiguration.save(this.file);
-<<<<<<< HEAD
-=======
                             return DBCommon.DBResponse.SUCCESS;
->>>>>>> origin/master
                         } catch (Exception e) {
                             exceptionHandler.logException(e);
                             return DBCommon.DBResponse.FAILURE;
@@ -306,11 +298,7 @@ public class Jail {
                     jails.add(jail);
                 }
                 return jails;
-                // TODO: YAML getting code
-<<<<<<< HEAD
-                return null;
-=======
->>>>>>> origin/master
+            // TODO: YAML getting code
             // break; Apparently this is unreachable
         }
         return null;
@@ -592,7 +580,7 @@ public class Jail {
 
                 // break; Apparently this is unreachable
             case FILE:
-                
+
                 return null;
             // break; Apparently this is unreachable
         }
@@ -731,12 +719,12 @@ public class Jail {
     public Cuboid getCuboid() {
         return new Cuboid(new Location(Bukkit.getWorld(this.world), this.x1, this.y1, this.z1), new Location(Bukkit.getWorld(this.world), this.x2, this.y2, this.z2));
     }
-    
+
     public JailYAML getYamlConf() {
         return new JailYAML(this);
     }
-    
-    
+
+
     public static Jail matchJailYAML(String name) {
         File folder = FilePaths.getInstance().getJailsFolder();
         for (File f : folder.listFiles()) {
@@ -749,5 +737,5 @@ public class Jail {
         }
         return null;
     }
-    
+
 }

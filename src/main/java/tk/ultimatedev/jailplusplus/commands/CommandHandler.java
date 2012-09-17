@@ -101,11 +101,7 @@ public class CommandHandler implements CommandExecutor {
         }
         return false;
     }
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> origin/master
     public void help(CommandSender cs) {
         Messenger.sendMessage(cs, "Jail++: Available Commands");
 
