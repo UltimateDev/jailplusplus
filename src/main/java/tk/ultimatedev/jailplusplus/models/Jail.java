@@ -33,12 +33,13 @@ public class Jail {
     ExceptionHandler exceptionHandler;
     File file;
 
-    public Jail(String name, int x1, int x2, int y1, int y2, int z1, int z2, String world) {
+    private Jail(int id, String name, int x1, int x2, int y1, int y2, int z1, int z2, String world) {
         this.dbCommon = new DBCommon();
         this.engine = Migrant.getDatabaseEngine();
         this.tableName = this.dbCommon.getPrefix() + "jails";
         this.saved = false;
 
+        this.id = id;
         this.name = name;
         this.x1 = x1;
         this.x2 = x2;
@@ -55,12 +56,59 @@ public class Jail {
         this.file = null;
     }
 
+    public Jail(String name, int x1, int x2, int y1, int y2, int z1, int z2, String world) {
+        this.dbCommon = new DBCommon();
+        this.engine = Migrant.getDatabaseEngine();
+        this.tableName = this.dbCommon.getPrefix() + "jails";
+        this.saved = false;
+
+        this.id = -1;
+        this.name = name;
+        this.x1 = x1;
+        this.x2 = x2;
+        this.y1 = y1;
+        this.y2 = y2;
+        this.z1 = z1;
+        this.z2 = z2;
+        this.world = world;
+
+        this.exceptionHandler = new ExceptionHandler(JailPlugin.getPlugin());
+        // this.file = FilePaths.getInstance().getJailYAMLFile(this.name);
+
+        // Set to null to prevent NPE:
+        this.file = null;
+    }
+
+    private Jail(int id, String name, Cuboid area) {
+        this.dbCommon = new DBCommon();
+        this.engine = Migrant.getDatabaseEngine();
+        this.tableName = dbCommon.getPrefix() + "jails";
+        this.saved = false;
+
+        this.id = id;
+        this.name = name;
+        this.x1 = area.getMinX();
+        this.x2 = area.getMaxX();
+        this.y1 = area.getMinY();
+        this.y2 = area.getMaxY();
+        this.z1 = area.getMinZ();
+        this.z2 = area.getMaxZ();
+        this.world = area.getWorld().getName();
+
+        this.exceptionHandler = new ExceptionHandler(JailPlugin.getPlugin());
+        // this.file = FilePaths.getInstance().getJailYAMLFile(this.name);
+
+        // Set to null to prevent NPE:
+        this.file = null;
+    }
+
     public Jail(String name, Cuboid area) {
         this.dbCommon = new DBCommon();
         this.engine = Migrant.getDatabaseEngine();
         this.tableName = dbCommon.getPrefix() + "jails";
         this.saved = false;
 
+        this.id = -1;
         this.name = name;
         this.x1 = area.getMinX();
         this.x2 = area.getMaxX();
@@ -114,6 +162,8 @@ public class Jail {
                                 pst.setString(8, this.world);
 
                                 pst.executeUpdate();
+
+                                this.saved = true;
                                 return DBCommon.DBResponse.SUCCESS;
                             }
                         } catch (SQLException ex) {
@@ -160,6 +210,8 @@ public class Jail {
                                 pst.setString(8, this.world);
 
                                 pst.executeUpdate();
+
+                                this.saved = true;
                                 return DBCommon.DBResponse.SUCCESS;
                             }
                         } catch (SQLException ex) {
@@ -223,7 +275,7 @@ public class Jail {
                     rs = st.executeQuery("SELECT * FROM " + tableName);
 
                     while (rs.next()) {
-                        jails.add(new Jail(rs.getString("name"), rs.getInt("x1"), rs.getInt("x2"), rs.getInt("y1"), rs.getInt("y2"), rs.getInt("z1"), rs.getInt("z2"), rs.getString("world")));
+                        jails.add(new Jail(rs.getInt("id"), rs.getString("name"), rs.getInt("x1"), rs.getInt("x2"), rs.getInt("y1"), rs.getInt("y2"), rs.getInt("z1"), rs.getInt("z2"), rs.getString("world")));
                     }
 
                     return jails;
@@ -257,7 +309,7 @@ public class Jail {
                     rs = st.executeQuery("SELECT * FROM " + tableName);
 
                     while (rs.next()) {
-                        jails.add(new Jail(rs.getString("name"), rs.getInt("x1"), rs.getInt("x2"), rs.getInt("y1"), rs.getInt("y2"), rs.getInt("z1"), rs.getInt("z2"), rs.getString("world")));
+                        jails.add(new Jail(rs.getInt("id"), rs.getString("name"), rs.getInt("x1"), rs.getInt("x2"), rs.getInt("y1"), rs.getInt("y2"), rs.getInt("z1"), rs.getInt("z2"), rs.getString("world")));
                     }
 
                     return jails;
@@ -326,7 +378,7 @@ public class Jail {
                     rs = pst.executeQuery();
 
                     if (rs.next()) {
-                        return new Jail(rs.getString("name"), rs.getInt("x1"), rs.getInt("x2"), rs.getInt("y1"), rs.getInt("y2"), rs.getInt("z1"), rs.getInt("z2"), rs.getString("world"));
+                        return new Jail(rs.getInt("id"), rs.getString("name"), rs.getInt("x1"), rs.getInt("x2"), rs.getInt("y1"), rs.getInt("y2"), rs.getInt("z1"), rs.getInt("z2"), rs.getString("world"));
                     } else {
                         return null;
                     }
@@ -362,7 +414,7 @@ public class Jail {
                     rs = pst.executeQuery();
 
                     if (rs.next()) {
-                        return new Jail(rs.getString("name"), rs.getInt("x1"), rs.getInt("x2"), rs.getInt("y1"), rs.getInt("y2"), rs.getInt("z1"), rs.getInt("z2"), rs.getString("world"));
+                        return new Jail(rs.getInt("id"), rs.getString("name"), rs.getInt("x1"), rs.getInt("x2"), rs.getInt("y1"), rs.getInt("y2"), rs.getInt("z1"), rs.getInt("z2"), rs.getString("world"));
                     } else {
                         return null;
                     }
@@ -422,7 +474,7 @@ public class Jail {
                     rs = pst.executeQuery();
 
                     if (rs.next()) {
-                        return new Jail(rs.getString("name"), rs.getInt("x1"), rs.getInt("x2"), rs.getInt("y1"), rs.getInt("y2"), rs.getInt("z1"), rs.getInt("z2"), rs.getString("world"));
+                        return new Jail(rs.getInt("id"), rs.getString("name"), rs.getInt("x1"), rs.getInt("x2"), rs.getInt("y1"), rs.getInt("y2"), rs.getInt("z1"), rs.getInt("z2"), rs.getString("world"));
                     } else {
                         return null;
                     }
@@ -458,7 +510,7 @@ public class Jail {
                     rs = pst.executeQuery();
 
                     if (rs.next()) {
-                        return new Jail(rs.getString("name"), rs.getInt("x1"), rs.getInt("x2"), rs.getInt("y1"), rs.getInt("y2"), rs.getInt("z1"), rs.getInt("z2"), rs.getString("world"));
+                        return new Jail(rs.getInt("id"), rs.getString("name"), rs.getInt("x1"), rs.getInt("x2"), rs.getInt("y1"), rs.getInt("y2"), rs.getInt("z1"), rs.getInt("z2"), rs.getString("world"));
                     } else {
                         return null;
                     }
