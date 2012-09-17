@@ -1,5 +1,6 @@
 package tk.ultimatedev.jailplusplus.models;
 
+import java.io.File;
 import org.bukkit.Bukkit;
 import tk.ultimatedev.jailplusplus.ExceptionHandler;
 import tk.ultimatedev.jailplusplus.JailPlugin;
@@ -235,6 +236,19 @@ public class Migrant {
                     }
                 }
 
+                break;
+            case FILE:
+                    Log.info("So you chose FlatFile, eh? Very well then.");
+                    String folderpath = "plugins/JailPlusPlus/";
+                    File folder = new File(folderpath + "jails/");
+                    
+                    if (!folder.exists()) folder.mkdir();
+                    if (!folder.isDirectory()) {
+                        return;
+                    }
+                    File f = new File(folderpath + "jails/Steve.yml");
+                    
+                    
                 break;
             default:
                 Log.severe("You specified the database engine '" + JailPlugin.getPlugin().getConfig().getString("database.driver") + "', but the only supported databases are 'h2', 'mysql', and 'file'! Disabling plugin...");

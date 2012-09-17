@@ -1,9 +1,5 @@
 package tk.ultimatedev.jailplusplus;
 
-import org.bukkit.plugin.java.JavaPlugin;
-import tk.ultimatedev.jailplusplus.models.Migrant;
-import tk.ultimatedev.jailplusplus.util.Log;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -12,28 +8,48 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
+import org.bukkit.plugin.java.JavaPlugin;
 import tk.ultimatedev.jailplusplus.commands.CommandHandler;
+import tk.ultimatedev.jailplusplus.models.Migrant;
+import tk.ultimatedev.jailplusplus.util.Log;
 
 public class JailPlugin extends JavaPlugin {
     private static JailPlugin plugin;
 
     @Override
     public void onEnable() {
+        // - Assign plugin - \\
         JailPlugin.plugin = this;
 
+        // - Download H2 - \\
         getDependencies();
         
+        // - Start UpdateChecker - \\
+        String stringurl = "http://dev.bukkit.org/server-mods/jailplusplus.rss";
+        UpdateChecker uc = new UpdateChecker(this, stringurl);
+        if (uc.updateNeeded()) {
+            if (this.getConfig().getString("update.stream").equalsIgnoreCase("")) {
+                Log.info("A new version is available: " + uc.getVersion());
+                Log.info("Get it from: " + uc.getLink());
+            }
+        }
+        
+        // - Command - \\
         this.getCommand("jail").setExecutor(new CommandHandler(this));
 
+        // - Setting up config - \\
         File f = new File(this.getDataFolder(), "config.yml");
         if (!f.exists()) {
             this.saveDefaultConfig();
         }
         this.reloadConfig();
 
+        
+        // - Databases - \\
         Migrant migrant = new Migrant();
         migrant.migrate();
 
+        // - Enabled! - \\
         Log.info("Successfully enabled version " + this.getDescription().getVersion() + "!");
     }
 
@@ -72,11 +88,37 @@ public class JailPlugin extends JavaPlugin {
                 exceptionHandler.logException(ex);
             } catch (IOException ex) {
                 exceptionHandler.logException(ex);
+            } catch (Exception ex) {
+                exceptionHandler.logException(ex);
             }
         }
     }
 
     public static JailPlugin getPlugin() {
         return plugin;
+    }
+    
+    public void checkForUpdates() {
+        String stringurl = "http://dev.bukkit.org/server-mods/jailplusplus.rss";
+        UpdateChecker uc = new UpdateChecker(this, stringurl);
+        if (uc.updateNeeded()) {
+            if (this.getConfig().getString("update.stream").equalsIgnoreCase("release") && uc.getVersion().startsWith("r")) {
+                Log.info("A new version is available: " + uc.getVersion());
+                Log.info("Get it from: " + uc.getLink());
+            } else if (this.getConfig().getString("update.stream").equalsIgnoreCase("beta") && uc.getVersion().startsWith("b")) {
+                Log.info("A new version is available: " + uc.getVersion());
+                Log.info("Get it from: " + uc.getLink());
+            } else if (this.getConfig().getString("update.stream").equalsIgnoreCase("alpha") && uc.getVersion().startsWith("a")) {
+                Log.info("A new version is available: " + uc.getVersion());
+                Log.info("Get it from: " + uc.getLink());
+            } else if (this.getConfig().getString("update.stream").equalsIgnoreCase("dev") && uc.getVersion().startsWith("d")) {
+                Log.info("A new version is available: " + uc.getVersion());
+                Log.info("Get it from: " + uc.getLink());
+            } else {
+                Log.info("Not a valid stream. Telling you anyway.");
+                Log.info("A new version is available: " + uc.getVersion());
+                Log.info("Get it from: " + uc.getLink());
+            }
+        }
     }
 }
