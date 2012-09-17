@@ -1,17 +1,12 @@
 package tk.ultimatedev.jailplusplus.util;
 
-import java.util.HashMap;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.scheduler.BukkitScheduler;
 import tk.ultimatedev.jailplusplus.ExceptionHandler;
 import tk.ultimatedev.jailplusplus.JailPlugin;
-import tk.ultimatedev.jailplusplus.models.Prisoner;
-import tk.ultimatedev.jailplusplus.models.file.UserdataYAML;
+
+import java.util.HashMap;
 
 /**
  * @author YoshiGenius
@@ -103,7 +98,7 @@ public class Time {
             }
         }, (time*20), 20);
     }
-    
+    /*
     @EventHandler
     public void onQuit(PlayerQuitEvent evt) {
         Player p = evt.getPlayer();
@@ -130,5 +125,6 @@ public class Time {
         int time = data.getJailTimeSeconds();
         this.startCountdownToEndJailTime(time, p.getName());
     }
+    */
 
 }
