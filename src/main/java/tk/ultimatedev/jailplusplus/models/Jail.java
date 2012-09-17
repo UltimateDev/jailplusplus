@@ -105,6 +105,7 @@ public class Jail {
                                 pst.setInt(5, this.y2);
                                 pst.setInt(6, this.z1);
                                 pst.setInt(7, this.z2);
+                                pst.setString(8, this.world);
 
                                 pst.executeUpdate();
                                 return DBCommon.DBResponse.SUCCESS;
