@@ -1,7 +1,9 @@
 package tk.ultimatedev.jailplusplus;
 
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import tk.ultimatedev.jailplusplus.commands.CommandHandler;
+import tk.ultimatedev.jailplusplus.handlers.JailStickHandler;
 import tk.ultimatedev.jailplusplus.models.Migrant;
 import tk.ultimatedev.jailplusplus.util.Log;
 
@@ -13,8 +15,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
-import org.bukkit.plugin.PluginManager;
-import tk.ultimatedev.jailplusplus.handlers.JailStickHandler;
 
 public class JailPlugin extends JavaPlugin {
     private static JailPlugin plugin;
@@ -56,6 +56,14 @@ public class JailPlugin extends JavaPlugin {
         // - Databases - \\
         Migrant migrant = new Migrant();
         migrant.migrate();
+
+        // - MCSTATS - \\
+        try {
+            Metrics metrics = new Metrics(this);
+            metrics.start();
+        } catch (IOException e) {
+            Log.severe("I was unable to submit plugin metrics info! :(");
+        }
 
         // - Enabled! - \\
         Log.info("Successfully enabled version " + this.getDescription().getVersion() + "!");
