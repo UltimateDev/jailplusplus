@@ -107,7 +107,9 @@ public class CommandHandler implements CommandExecutor {
     public void help(CommandSender cs){
         cs.sendMessage("/jail <command> <args>");
         for(SubCommand v: commands.values()){
-            cs.sendMessage(ChatColor.AQUA + v.help(cs));
+            if (cs.hasPermission(v.permission()) || cs.hasPermission(v.kitPermission()) || cs.hasPermission("jpp.*")) {
+                cs.sendMessage(ChatColor.AQUA + v.help(cs));
+            }
         }
     }
 
