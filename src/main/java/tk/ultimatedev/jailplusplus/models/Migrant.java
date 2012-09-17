@@ -72,10 +72,10 @@ public class Migrant {
                                         "name VARCHAR(32) NOT NULL UNIQUE," +
                                         "x1 INT NOT NULL," +
                                         "x2 INT NOT NULL," +
-                                        "x1 INT NOT NULL," +
-                                        "x2 INT NOT NULL," +
-                                        "x1 INT NOT NULL," +
-                                        "x2 INT NOT NULL," +
+                                        "y1 INT NOT NULL," +
+                                        "y2 INT NOT NULL," +
+                                        "z1 INT NOT NULL," +
+                                        "z2 INT NOT NULL," +
                                         "world VARCHAR(50)" +
                                         ")"
                         );
@@ -157,10 +157,10 @@ public class Migrant {
                                         "name VARCHAR(32) NOT NULL UNIQUE," +
                                         "x1 INT NOT NULL," +
                                         "x2 INT NOT NULL," +
-                                        "x1 INT NOT NULL," +
-                                        "x2 INT NOT NULL," +
-                                        "x1 INT NOT NULL," +
-                                        "x2 INT NOT NULL," +
+                                        "y1 INT NOT NULL," +
+                                        "y2 INT NOT NULL," +
+                                        "z1 INT NOT NULL," +
+                                        "z2 INT NOT NULL," +
                                         "world VARCHAR(50)" +
                                 ")"
                         );
