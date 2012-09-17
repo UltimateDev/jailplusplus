@@ -229,7 +229,7 @@ public class Migrant {
                 try {
                     Class.forName("org.h2.Driver");
 
-                    return DriverManager.getConnection("jdbc:h2:" + JailPlugin.getPlugin().getDataFolder().getAbsolutePath() + "jpp_data", "jpp", "");
+                    return DriverManager.getConnection("jdbc:h2:" + JailPlugin.getPlugin().getDataFolder().getAbsolutePath() + "/jpp_data", "jpp", "");
                 } catch (ClassNotFoundException ex) {
                     exceptionHandler.logException(ex);
                     Log.severe("You specified the database engine 'h2', but I couldn't find the driver \"org.h2.Driver\"! Disabling plugin...");
