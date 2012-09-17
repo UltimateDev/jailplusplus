@@ -5,6 +5,7 @@ import tk.ultimatedev.jailplusplus.JailPlugin;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import org.bukkit.configuration.file.YamlConfiguration;
 
 public class Config {
@@ -35,9 +36,9 @@ public class Config {
     }
 
     private void writeConfig() throws IOException {
-        
+
 //        scribe = new PrintWriter(this.confFile);
-        
+
 //        scribe.println("# Hi, I'm the Jail++ configuration file.");
 //        scribe.println("# And I'm a comment! I start with a \"#\", which means I can give you tips on how to configure Jail++.");
 //        scribe.println();

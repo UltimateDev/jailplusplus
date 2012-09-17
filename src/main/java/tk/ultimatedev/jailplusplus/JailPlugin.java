@@ -24,7 +24,7 @@ public class JailPlugin extends JavaPlugin {
 
         // - Download H2 - \\
         getDependencies();
-        
+
         // - Start UpdateChecker - \\
 //        String stringurl = "http://dev.bukkit.org/server-mods/jailplusplus.rss";
 //        UpdateChecker uc = new UpdateChecker(this, stringurl);
@@ -34,7 +34,7 @@ public class JailPlugin extends JavaPlugin {
 //                Log.info("Get it from: " + uc.getLink());
 //            }
 //        }
-        
+
         // - Command - \\
         this.getCommand("jail").setExecutor(new CommandHandler(this));
 
@@ -45,7 +45,7 @@ public class JailPlugin extends JavaPlugin {
         }
         this.reloadConfig();
 
-        
+
         // - Databases - \\
         Migrant migrant = new Migrant();
         migrant.migrate();
@@ -98,7 +98,7 @@ public class JailPlugin extends JavaPlugin {
     public static JailPlugin getPlugin() {
         return plugin;
     }
-    
+
     public void checkForUpdates() {
         String stringurl = "http://dev.bukkit.org/server-mods/jailplusplus.rss";
         UpdateChecker uc = new UpdateChecker(this, stringurl);

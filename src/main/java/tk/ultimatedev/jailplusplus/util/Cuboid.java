@@ -153,8 +153,8 @@ public class Cuboid {
      *                 checked for being inside of
      *                 the cuboid.
      * @return A boolean that is true if the location
-     * is inside the cuboid or false if the location
-     * is not inside the cuboid.
+     *         is inside the cuboid or false if the location
+     *         is not inside the cuboid.
      */
     public boolean isInCuboid(Location location) {
         return location.getWorld() == this.getWorld()
@@ -172,8 +172,8 @@ public class Cuboid {
      * @param player The player that is to be checked
      *               for being inside of the cuboid.
      * @return A boolean that is true if the player
-     * is inside the cuboid or false if the player
-     * is not inside the cuboid.
+     *         is inside the cuboid or false if the player
+     *         is not inside the cuboid.
      */
     public boolean isInCuboid(Player player) {
         return player.getWorld() == this.getWorld()
@@ -191,8 +191,8 @@ public class Cuboid {
      * @param entity The entity that is to be checked
      *               for being inside of the cuboid.
      * @return A boolean that is true if the entity
-     * is inside the cuboid or false if the entity
-     * is not inside the cuboid.
+     *         is inside the cuboid or false if the entity
+     *         is not inside the cuboid.
      */
     public boolean isInCuboid(Entity entity) {
         return entity.getWorld() == this.getWorld()
@@ -210,8 +210,8 @@ public class Cuboid {
      * @param block The block that is to be checked
      *              for being inside of the cuboid.
      * @return A boolean that is true if the block
-     * is inside the cuboid or false if the block
-     * is not inside the cuboid.
+     *         is inside the cuboid or false if the block
+     *         is not inside the cuboid.
      */
     public boolean isInCuboid(Block block) {
         return block.getWorld() == this.getWorld()

@@ -1,24 +1,24 @@
 package tk.ultimatedev.jailplusplus.models;
 
-import java.io.File;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.configuration.file.YamlConfiguration;
 import tk.ultimatedev.jailplusplus.ExceptionHandler;
 import tk.ultimatedev.jailplusplus.JailPlugin;
 import tk.ultimatedev.jailplusplus.util.Cuboid;
+import tk.ultimatedev.jailplusplus.util.FilePaths;
 
+import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import org.bukkit.configuration.file.YamlConfiguration;
-import tk.ultimatedev.jailplusplus.util.FilePaths;
 
 public class Jail {
     DBCommon dbCommon;
     Migrant.DatabaseEngine engine;
     boolean saved;
     String tableName;
-    
+
     int id;
     String name;
     File f = FilePaths.getInstance().getJailYAMLFile(name);
@@ -268,7 +268,7 @@ public class Jail {
             case FILE:
                 // TODO: YAML getting code
                 return null;
-                // break; Apparently this is unreachable
+            // break; Apparently this is unreachable
         }
         return null;
     }
@@ -453,7 +453,7 @@ public class Jail {
             case FILE:
                 // TODO: YAML getting code
                 return null;
-                // break; Apparently this is unreachable
+            // break; Apparently this is unreachable
         }
         return null;
     }

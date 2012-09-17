@@ -1,11 +1,11 @@
 package tk.ultimatedev.jailplusplus.models;
 
-import java.io.File;
 import org.bukkit.Bukkit;
 import tk.ultimatedev.jailplusplus.ExceptionHandler;
 import tk.ultimatedev.jailplusplus.JailPlugin;
 import tk.ultimatedev.jailplusplus.util.Log;
 
+import java.io.File;
 import java.sql.*;
 
 public class Migrant {
@@ -27,7 +27,7 @@ public class Migrant {
     public enum DatabaseEngine {
         H2, MYSQL, FILE
     }
-    
+
     public Migrant() {
         if (JailPlugin.getPlugin().getConfig().getString("database.driver").equalsIgnoreCase("h2")) {
             this.engine = DatabaseEngine.H2;
@@ -73,7 +73,7 @@ public class Migrant {
                     * *** JAIL MIGRATION ***
                     */
                     this.meta = conn.getMetaData();
-                    rs = meta.getTables(null, null, null, new String[] {this.prefix + "jails"});
+                    rs = meta.getTables(null, null, null, new String[]{this.prefix + "jails"});
 
                     if (rs.next()) {
                         Log.info("[Database] Found jails table.....");
@@ -102,7 +102,7 @@ public class Migrant {
                     * *** PRISONER MIGRATION ***
                     */
                     this.meta = conn.getMetaData();
-                    rs = meta.getTables(null, null, null, new String[] {this.prefix + "prisoners"});
+                    rs = meta.getTables(null, null, null, new String[]{this.prefix + "prisoners"});
 
                     if (rs.next()) {
                         Log.info("[Database] Found prisoners table.....");
@@ -160,7 +160,7 @@ public class Migrant {
                     * *** JAIL MIGRATION ***
                     */
                     this.meta = conn.getMetaData();
-                    rs = meta.getTables(null, null, null, new String[] {this.prefix + "jails"});
+                    rs = meta.getTables(null, null, null, new String[]{this.prefix + "jails"});
 
                     if (rs.next()) {
                         Log.info("[Database] Found jails table.....");
@@ -170,7 +170,7 @@ public class Migrant {
                         st = conn.createStatement();
                         st.executeUpdate(
                                 "CREATE TABLE IF NOT EXISTS " + this.prefix + "jails" +
-                                "(" +
+                                        "(" +
                                         "id INT NOT NULL AUTO_INCREMENT PRIMARY KEY," +
                                         "name VARCHAR(32) NOT NULL UNIQUE," +
                                         "x1 INT NOT NULL," +
@@ -180,7 +180,7 @@ public class Migrant {
                                         "z1 INT NOT NULL," +
                                         "z2 INT NOT NULL," +
                                         "world VARCHAR(50)" +
-                                ")"
+                                        ")"
                         );
 
                     }
@@ -189,7 +189,7 @@ public class Migrant {
                     * *** PRISONER MIGRATION ***
                     */
                     this.meta = conn.getMetaData();
-                    rs = meta.getTables(null, null, null, new String[] {this.prefix + "prisoners"});
+                    rs = meta.getTables(null, null, null, new String[]{this.prefix + "prisoners"});
 
                     if (rs.next()) {
                         Log.info("[Database] Found prisoners table.....");
@@ -238,17 +238,17 @@ public class Migrant {
 
                 break;
             case FILE:
-                    Log.info("So you chose FlatFile, eh? Very well then.");
-                    String folderpath = "plugins/JailPlusPlus/";
-                    File folder = new File(folderpath + "jails/");
-                    
-                    if (!folder.exists()) folder.mkdir();
-                    if (!folder.isDirectory()) {
-                        return;
-                    }
-                    File f = new File(folderpath + "jails/Steve.yml");
-                    
-                    
+                Log.info("So you chose FlatFile, eh? Very well then.");
+                String folderpath = "plugins/JailPlusPlus/";
+                File folder = new File(folderpath + "jails/");
+
+                if (!folder.exists()) folder.mkdir();
+                if (!folder.isDirectory()) {
+                    return;
+                }
+                File f = new File(folderpath + "jails/Steve.yml");
+
+
                 break;
             default:
                 Log.severe("You specified the database engine '" + JailPlugin.getPlugin().getConfig().getString("database.driver") + "', but the only supported databases are 'h2', 'mysql', and 'file'! Disabling plugin...");

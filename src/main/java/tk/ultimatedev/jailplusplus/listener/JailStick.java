@@ -9,11 +9,11 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
  * @author YoshiGenius
  */
 public class JailStick implements Listener {
-    
+
     @EventHandler
     public void onClick(PlayerInteractEntityEvent evt) {
         Player p = evt.getPlayer();
-        
+
     }
 
 }
