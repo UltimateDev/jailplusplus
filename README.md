@@ -1,8 +1,9 @@
-jail++
+Jail++
 ======
 
 An advanced Jail plugin for Bukkit servers.
 
 Features:
-- Jailing via command
-- Jailing via JailStick
+- All things a Jail plugin should have!
+
+WIKI FOR PLUGIN: http://github.com/UltimateDev/jailplusplus/wiki

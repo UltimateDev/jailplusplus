@@ -4,7 +4,7 @@
 
     <groupId>tk.ultimatedev</groupId>
     <artifactId>JailPlusPlus</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.1-DEV</version>
     <packaging>jar</packaging>
 
     <name>Jail++</name>

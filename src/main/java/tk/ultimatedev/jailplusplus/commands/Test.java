@@ -11,6 +11,7 @@ import java.util.List;
 
 public class Test implements SubCommand {
     public boolean onCommand(CommandSender player, String[] args) {
+<<<<<<< HEAD
         if (args[0].equalsIgnoreCase("mkjail")) {
             Jail newJail = new Jail("Test jail", new Cuboid(new Location(Bukkit.getWorld("world"), 1, 64, 3), new Location(Bukkit.getWorld("world"), 3, 64, 5)));
 
@@ -38,6 +39,56 @@ public class Test implements SubCommand {
             Jail gottenJail = Jail.getJail("Test jail");
             Log.info(gottenJail.toString());
         } else if (args[0].equalsIgnoreCase("getjails")) {
+=======
+        if (args[1].equalsIgnoreCase("new")) {
+            if (args[2].equalsIgnoreCase("jail")) {
+                Log.info("debug");
+                Jail newJail = new Jail("Test jail", new Cuboid(new Location(Bukkit.getWorld("world"), 1, 64, 3), new Location(Bukkit.getWorld("world"), 3, 64, 5)));
+                switch (newJail.save()) {
+                    case ALREADY_EXISTS:
+                        Log.info("Already exists");
+                        break;
+                    case ALREADY_SAVED:
+                        Log.info("Already saved");
+                        break;
+                    case SUCCESS:
+                        Log.info("Success");
+                        break;
+                    case FAILURE:
+                        Log.info("Failure");
+                        break;
+                    default:
+                        Log.info("Default");
+                        break;
+                }
+            }
+        } else if (args[1].equalsIgnoreCase("mkjail")) {
+            Jail newJail = new Jail("Test jail", new Cuboid(new Location(Bukkit.getWorld("world"), 1, 64, 3), new Location(Bukkit.getWorld("world"), 3, 64, 5)));
+            switch (newJail.save()) {
+                case ALREADY_EXISTS:
+                    Log.info("Already exists");
+                    break;
+                case ALREADY_SAVED:
+                    Log.info("Already saved");
+                    break;
+                case SUCCESS:
+                    Log.info("Success");
+                    break;
+                case FAILURE:
+                    Log.info("Failure");
+                    break;
+                default:
+                    Log.info("Default");
+                    break;
+            }
+        } else if (args[1].equalsIgnoreCase("deljail")) {
+            Jail.removeJail("Test jail");
+            Log.info("OK");
+        } else if (args[1].equalsIgnoreCase("getjail")) {
+            Jail gottenJail = Jail.getJail("Test jail");
+            Log.info(gottenJail.toString());
+        } else if (args[1].equalsIgnoreCase("getjails")) {
+>>>>>>> origin/master
             List<Jail> jails = Jail.getAllJails();
 
             for (Jail jail: jails) {

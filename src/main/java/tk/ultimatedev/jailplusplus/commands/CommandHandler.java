@@ -34,6 +34,7 @@ public class CommandHandler implements CommandExecutor {
         // commands.put("list", new JailList());
         commands.put("wand", new Wand());
         commands.put("about", new About());
+        commands.put("jailstick", new JailStick());
 
         /* COMMENT THE FOLLOWING LINE OUT DURING RELEASE VERSIONS: */
         commands.put("test", new Test());
@@ -100,7 +101,11 @@ public class CommandHandler implements CommandExecutor {
         }
         return false;
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> origin/master
     public void help(CommandSender cs) {
         Messenger.sendMessage(cs, "Jail++: Available Commands");
 
