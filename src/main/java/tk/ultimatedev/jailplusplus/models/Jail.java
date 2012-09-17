@@ -21,7 +21,6 @@ public class Jail {
 
     int id;
     String name;
-    File f = FilePaths.getInstance().getJailYAMLFile(name);
     int x1;
     int x2;
     int y1;
@@ -31,6 +30,7 @@ public class Jail {
     String world;
 
     ExceptionHandler exceptionHandler;
+    File file;
 
     public Jail(String name, int x1, int x2, int y1, int y2, int z1, int z2, String world) {
         this.dbCommon = new DBCommon();
@@ -48,6 +48,7 @@ public class Jail {
         this.world = world;
 
         this.exceptionHandler = new ExceptionHandler(JailPlugin.getPlugin());
+        this.file = FilePaths.getInstance().getJailYAMLFile(name);
     }
 
     public Jail(String name, Cuboid area) {
@@ -66,6 +67,7 @@ public class Jail {
         this.world = area.getWorld().getName();
 
         this.exceptionHandler = new ExceptionHandler(JailPlugin.getPlugin());
+        this.file = FilePaths.getInstance().getJailYAMLFile(name);
     }
 
     public DBCommon.DBResponse save() throws NullPointerException {
@@ -169,8 +171,8 @@ public class Jail {
                         // break; Apparently this is unreachable
                     case FILE:
                         try {
-                            YamlConfiguration ymlconf = YamlConfiguration.loadConfiguration(f);
-                            ymlconf.save(f);
+                            YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(this.file);
+                            yamlConfiguration.save(this.file);
                         } catch (Exception e) {
                             exceptionHandler.logException(e);
                         }
