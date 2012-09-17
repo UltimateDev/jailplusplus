@@ -10,7 +10,6 @@ import tk.ultimatedev.jailplusplus.util.Log;
 public class Test implements SubCommand {
     public boolean onCommand(CommandSender player, String[] args) {
         if (args[0].equalsIgnoreCase("mkjail")) {
-            Log.info("debug");
             Jail newJail = new Jail("Test jail", new Cuboid(new Location(Bukkit.getWorld("world"), 1, 64, 3), new Location(Bukkit.getWorld("world"), 3, 64, 5)));
 
             switch (newJail.save()) {
@@ -30,8 +29,9 @@ public class Test implements SubCommand {
                     Log.info("Default");
                     break;
             }
-        } else {
-            Log.info(args[1]);
+        } else if (args[0].equalsIgnoreCase("deljail")) {
+            Jail.removeJail("Test jail");
+            Log.info("OK");
         }
 
         if (args[1].equalsIgnoreCase("delete")) {
