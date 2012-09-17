@@ -11,6 +11,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import org.bukkit.configuration.file.YamlConfiguration;
+import tk.ultimatedev.jailplusplus.models.file.JailYAML;
 import tk.ultimatedev.jailplusplus.util.FilePaths;
 
 public class Jail {
@@ -171,8 +172,10 @@ public class Jail {
                         try {
                             YamlConfiguration ymlconf = YamlConfiguration.loadConfiguration(f);
                             ymlconf.save(f);
+                            return DBCommon.DBResponse.SUCCESS;
                         } catch (Exception e) {
                             exceptionHandler.logException(e);
+                            return DBCommon.DBResponse.FAILURE;
                         }
                         // break; Apparently this is unreachable
                 }
@@ -266,8 +269,20 @@ public class Jail {
 
                 // break; Apparently this is unreachable
             case FILE:
-                // TODO: YAML getting code
-                return null;
+                File folder = FilePaths.getInstance().getJailsFolder();
+                for (File f : folder.listFiles()) {
+                    String name = f.getName();
+                    if (name.endsWith(".yml")) {
+                        name = name.replace(".yml", "");
+                    }
+                    JailYAML jailconf = new JailYAML(name);
+                    Location min = new Location(jailconf.getWorld(), jailconf.getMinX(), jailconf.getMinY(), jailconf.getMinZ());
+                    Location max = new Location(jailconf.getWorld(), jailconf.getMaxX(), jailconf.getMaxY(), jailconf.getMaxZ());
+                    Cuboid cuboid = new Cuboid(min, max);
+                    Jail jail = new Jail(name, cuboid);
+                    jails.add(jail);
+                }
+                return jails;
                 // break; Apparently this is unreachable
         }
         return null;
@@ -359,7 +374,12 @@ public class Jail {
 
                 // break; Apparently this is unreachable
             case FILE:
-                // TODO: YAML getting code
+                for (Jail jail : Jail.getAllJails()) {
+                    JailYAML jailconf = new JailYAML(jail);
+                    if (jailconf.getName().equalsIgnoreCase(name)) {
+                        return jail;
+                    }
+                }
                 return null;
             // break; Apparently this is unreachable
         }
@@ -451,8 +471,12 @@ public class Jail {
 
                 // break; Apparently this is unreachable
             case FILE:
-                // TODO: YAML getting code
-                return null;
+                for (Jail jail : Jail.getAllJails()) {
+                    JailYAML jailconf = new JailYAML(jail);
+                    if (jailconf.getID() == id) {
+                        return jail;
+                    }
+                }
                 // break; Apparently this is unreachable
         }
         return null;
@@ -460,7 +484,6 @@ public class Jail {
 
     public static Jail removeJail(String name) {
         ExceptionHandler exceptionHandler = new ExceptionHandler(JailPlugin.getPlugin());
-        List<Jail> jails = new ArrayList<Jail>();
         Migrant.DatabaseEngine engine = Migrant.getDatabaseEngine();
 
         Connection conn = null;
@@ -539,7 +562,7 @@ public class Jail {
 
                 // break; Apparently this is unreachable
             case FILE:
-                // TODO: YAML getting code
+                
                 return null;
             // break; Apparently this is unreachable
         }
@@ -678,4 +701,23 @@ public class Jail {
     public Cuboid getCuboid() {
         return new Cuboid(new Location(Bukkit.getWorld(this.world), this.x1, this.y1, this.z1), new Location(Bukkit.getWorld(this.world), this.x2, this.y2, this.z2));
     }
+    
+    public JailYAML getYamlConf() {
+        return new JailYAML(this);
+    }
+    
+    
+    public static Jail matchJailYAML(String name) {
+        File folder = FilePaths.getInstance().getJailsFolder();
+        for (File f : folder.listFiles()) {
+            YamlConfiguration c = YamlConfiguration.loadConfiguration(f);
+            if (c.getString("name").equalsIgnoreCase(name)) {
+                JailYAML jy = new JailYAML(f);
+                Jail xjail = new Jail(name, jy.getCuboid());
+                return xjail;
+            }
+        }
+        return null;
+    }
+    
 }

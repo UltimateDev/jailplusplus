@@ -13,6 +13,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
+import org.bukkit.plugin.PluginManager;
+import tk.ultimatedev.jailplusplus.handlers.JailStickHandler;
 
 public class JailPlugin extends JavaPlugin {
     private static JailPlugin plugin;
@@ -26,14 +28,10 @@ public class JailPlugin extends JavaPlugin {
         getDependencies();
         
         // - Start UpdateChecker - \\
-//        String stringurl = "http://dev.bukkit.org/server-mods/jailplusplus.rss";
-//        UpdateChecker uc = new UpdateChecker(this, stringurl);
-//        if (uc.updateNeeded()) {
-//            if (this.getConfig().getString("update.stream").equalsIgnoreCase("")) {
-//                Log.info("A new version is available: " + uc.getVersion());
-//                Log.info("Get it from: " + uc.getLink());
-//            }
-//        }
+//        checkForUpdates();
+        
+        // - Load Listeners - \\
+        this.loadListeners();
         
         // - Command - \\
         this.getCommand("jail").setExecutor(new CommandHandler(this));
@@ -122,4 +120,10 @@ public class JailPlugin extends JavaPlugin {
             }
         }
     }
+    
+    public void loadListeners() {
+        PluginManager pm = this.getServer().getPluginManager();
+        pm.registerEvents(new JailStickHandler(), this);
+    }
+    
 }

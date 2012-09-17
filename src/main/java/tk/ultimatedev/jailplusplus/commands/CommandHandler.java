@@ -34,6 +34,7 @@ public class CommandHandler implements CommandExecutor {
         // commands.put("list", new JailList());
         commands.put("wand", new Wand());
         commands.put("about", new About());
+        commands.put("jailstick", new JailStick());
 
         /* COMMENT THE FOLLOWING LINE OUT DURING RELEASE VERSIONS: */
         commands.put("test", new Test());
@@ -105,7 +106,8 @@ public class CommandHandler implements CommandExecutor {
     }
     
     public void help(CommandSender cs){
-        cs.sendMessage("/jail <command> <args>");
+        cs.sendMessage(ChatColor.GOLD + "Jail++ Help Menu");
+        cs.sendMessage(ChatColor.GOLD + "/jail <command> <args>");
         for(SubCommand v: commands.values()){
             if (cs.hasPermission(v.permission()) || cs.hasPermission(v.kitPermission()) || cs.hasPermission("jpp.*")) {
                 cs.sendMessage(ChatColor.AQUA + v.help(cs));
