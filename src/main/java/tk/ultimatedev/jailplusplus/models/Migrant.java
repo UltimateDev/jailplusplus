@@ -1,6 +1,7 @@
 package tk.ultimatedev.jailplusplus.models;
 
 import org.bukkit.Bukkit;
+import tk.ultimatedev.jailplusplus.ExceptionHandler;
 import tk.ultimatedev.jailplusplus.JailPlugin;
 import tk.ultimatedev.jailplusplus.util.Log;
 
@@ -19,6 +20,8 @@ public class Migrant {
     Statement st;
     ResultSet rs;
     DatabaseMetaData meta;
+
+    ExceptionHandler exceptionHandler = new ExceptionHandler(JailPlugin.getPlugin());
 
     public enum DatabaseEngine {
         H2, MYSQL //, FILE
@@ -107,9 +110,8 @@ public class Migrant {
                     }
 
                     Log.info("[Database] Done!");
-                } catch (SQLException e) {
-                    Log.severe("I was unable to complete the database migration! Here's the error info:");
-                    e.printStackTrace();
+                } catch (SQLException ex) {
+                    exceptionHandler.logException(ex);
                     Log.info("Disabling...");
                     Bukkit.getPluginManager().disablePlugin(JailPlugin.getPlugin());
                 } finally {
@@ -124,9 +126,8 @@ public class Migrant {
                             conn.close();
                         }
 
-                    } catch (SQLException e) {
-                        Log.severe("I was unable to complete the database migration! Here's the error info:");
-                        e.printStackTrace();
+                    } catch (SQLException ex) {
+                        exceptionHandler.logException(ex);
                         Log.info("Disabling...");
                         Bukkit.getPluginManager().disablePlugin(JailPlugin.getPlugin());
                     }
@@ -194,9 +195,8 @@ public class Migrant {
                     }
 
                     Log.info("[Database] Done!");
-                } catch (SQLException e) {
-                    Log.severe("I was unable to complete the database migration! Here's the error info:");
-                    e.printStackTrace();
+                } catch (SQLException ex) {
+                    exceptionHandler.logException(ex);
                     Log.info("Disabling...");
                     Bukkit.getPluginManager().disablePlugin(JailPlugin.getPlugin());
                 } finally {
@@ -211,9 +211,8 @@ public class Migrant {
                             conn.close();
                         }
 
-                    } catch (SQLException e) {
-                        Log.severe("I was unable to complete the database migration! Here's the error info:");
-                        e.printStackTrace();
+                    } catch (SQLException ex) {
+                        exceptionHandler.logException(ex);
                         Log.info("Disabling...");
                         Bukkit.getPluginManager().disablePlugin(JailPlugin.getPlugin());
                     }
@@ -231,7 +230,8 @@ public class Migrant {
                     Class.forName("org.h2.Driver");
 
                     return DriverManager.getConnection("jdbc:h2:" + JailPlugin.getPlugin().getDataFolder().getAbsolutePath() + "data.h2", "jpp", "");
-                } catch (ClassNotFoundException e) {
+                } catch (ClassNotFoundException ex) {
+                    exceptionHandler.logException(ex);
                     Log.severe("You specified the database engine 'h2', but I couldn't find the driver \"org.h2.Driver\"! Disabling plugin...");
                     Bukkit.getPluginManager().disablePlugin(JailPlugin.getPlugin());
                     return null;
@@ -241,7 +241,8 @@ public class Migrant {
                     Class.forName("com.mysql.jdbc.Driver");
 
                     return DriverManager.getConnection("jdbc:mysql://" + this.host + ":" + this.port + "/" + this.database);
-                } catch (ClassNotFoundException e) {
+                } catch (ClassNotFoundException ex) {
+                    exceptionHandler.logException(ex);
                     Log.severe("You specified the database engine 'mysql', but I couldn't find the driver \"com.mysql.jdbc.Driver\"! Disabling plugin...");
                     Bukkit.getPluginManager().disablePlugin(JailPlugin.getPlugin());
                     return null;
