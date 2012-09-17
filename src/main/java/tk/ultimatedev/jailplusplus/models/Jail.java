@@ -307,7 +307,6 @@ public class Jail {
     public static Jail getJail(String name) {
 
         ExceptionHandler exceptionHandler = new ExceptionHandler(JailPlugin.getPlugin());
-        List<Jail> jails = new ArrayList<Jail>();
         Migrant.DatabaseEngine engine = Migrant.getDatabaseEngine();
 
         Connection conn = null;
@@ -404,7 +403,6 @@ public class Jail {
 
     public static Jail getJail(int id) {
         ExceptionHandler exceptionHandler = new ExceptionHandler(JailPlugin.getPlugin());
-        List<Jail> jails = new ArrayList<Jail>();
         Migrant.DatabaseEngine engine = Migrant.getDatabaseEngine();
 
         Connection conn = null;
@@ -589,7 +587,6 @@ public class Jail {
 
     public static Jail removeJail(int id) {
         ExceptionHandler exceptionHandler = new ExceptionHandler(JailPlugin.getPlugin());
-        List<Jail> jails = new ArrayList<Jail>();
         Migrant.DatabaseEngine engine = Migrant.getDatabaseEngine();
 
         Connection conn = null;
@@ -727,12 +724,13 @@ public class Jail {
 
     public static Jail matchJailYAML(String name) {
         File folder = FilePaths.getInstance().getJailsFolder();
+
+        // TODO: Don't dereference this
         for (File f : folder.listFiles()) {
             YamlConfiguration c = YamlConfiguration.loadConfiguration(f);
             if (c.getString("name").equalsIgnoreCase(name)) {
                 JailYAML jy = new JailYAML(f);
-                Jail xjail = new Jail(name, jy.getCuboid());
-                return xjail;
+                return new Jail(name, jy.getCuboid());
             }
         }
         return null;

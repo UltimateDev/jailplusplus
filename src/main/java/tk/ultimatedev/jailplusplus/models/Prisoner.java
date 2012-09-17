@@ -1,11 +1,11 @@
 package tk.ultimatedev.jailplusplus.models;
 
-import java.io.File;
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import tk.ultimatedev.jailplusplus.models.file.UserdataYAML;
 import tk.ultimatedev.jailplusplus.util.FilePaths;
+
+import java.io.File;
 
 public class Prisoner {
     Migrant.DatabaseEngine engine;
@@ -31,13 +31,11 @@ public class Prisoner {
         if (!userdatafile.exists()) {
             return null;
         }
-        Prisoner prisoner = new Prisoner(player);
-        return prisoner;
+        return new Prisoner(player);
     }
     
     public UserdataYAML getPrisonerYAML() {
-        UserdataYAML data = new UserdataYAML(player);
-        return data;
+        return new UserdataYAML(player);
     }
 
 }
