@@ -21,7 +21,7 @@ public class Migrant {
     DatabaseMetaData meta;
 
     public enum DatabaseEngine {
-        H2, MYSQL, FILE
+        H2, MYSQL //, FILE
     }
     
     public Migrant() {
