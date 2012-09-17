@@ -6,4 +6,6 @@ public class Prisoner {
     public Prisoner() {
         this.engine = Migrant.getDatabaseEngine();
     }
+
+
 }
