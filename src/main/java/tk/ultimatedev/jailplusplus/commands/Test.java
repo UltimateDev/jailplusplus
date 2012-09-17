@@ -34,6 +34,8 @@ public class Test implements SubCommand {
             } else {
                 Log.info(args[2]);
             }
+        } else {
+            Log.info(args[1]);
         }
 
         if (args[1].equalsIgnoreCase("delete")) {
