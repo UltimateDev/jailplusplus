@@ -14,14 +14,14 @@ public class About implements SubCommand {
 
         for (String author : JailPlugin.getPlugin().getDescription().getAuthors()) {
             stringBuilder.append(delimiter).append(author);
-            delimiter = ",";
+            delimiter = ", ";
         }
 
         Messenger.sendMessage(player, "Jail++ v" + JailPlugin.getPlugin().getDescription().getVersion());
         Messenger.sendMessage(player, "Created with <3 by " + stringBuilder.toString() + "!");
-        Messenger.sendMessage(player, null, false);
+        Messenger.sendMessage(player, "", false);
         Messenger.sendMessage(player, "For help using this plugin, type /jail help", false);
-        return false;
+        return true;
     }
 
     public String help(CommandSender player) {

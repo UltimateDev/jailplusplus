@@ -1,8 +1,5 @@
 package tk.ultimatedev.jailplusplus.commands;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Vector;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -11,6 +8,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import tk.ultimatedev.jailplusplus.util.Messenger;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Vector;
 
 /**
  * @author YoshiGenius
@@ -33,6 +34,9 @@ public class CommandHandler implements CommandExecutor {
         // commands.put("list", new JailList());
         commands.put("wand", new Wand());
         commands.put("about", new About());
+
+        /* COMMENT THE FOLLOWING LINE OUT DURING RELEASE VERSIONS: */
+        commands.put("test", new Test());
     }
 
     @Override
