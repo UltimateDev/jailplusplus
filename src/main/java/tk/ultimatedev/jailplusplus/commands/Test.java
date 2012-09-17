@@ -31,6 +31,8 @@ public class Test implements SubCommand {
                         Log.info("Default");
                         break;
                 }
+            } else {
+                Log.info(args[2]);
             }
         }
 
