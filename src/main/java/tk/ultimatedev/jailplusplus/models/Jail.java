@@ -14,6 +14,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Sushi
+ */
 public class Jail {
     DBCommon dbCommon;
     Migrant.DatabaseEngine engine;
@@ -37,7 +40,7 @@ public class Jail {
         this.dbCommon = new DBCommon();
         this.engine = Migrant.getDatabaseEngine();
         this.tableName = this.dbCommon.getPrefix() + "jails";
-        this.saved = false;
+        this.saved = true;
 
         this.id = id;
         this.name = name;
@@ -83,7 +86,7 @@ public class Jail {
         this.dbCommon = new DBCommon();
         this.engine = Migrant.getDatabaseEngine();
         this.tableName = dbCommon.getPrefix() + "jails";
-        this.saved = false;
+        this.saved = true;
 
         this.id = id;
         this.name = name;
@@ -132,7 +135,7 @@ public class Jail {
 
     public DBCommon.DBResponse save() throws NullPointerException {
         if (!this.saved) {
-            if (this.name != null && this.x1 != 0 && this.x2 != 0 && this.y1 != 0 && this.y2 != 0 && this.z1 != 0 && this.z2 != 0) {
+            if (this.name != null && this.x1 != 0 && this.x2 != 0 && this.y1 != 0 && this.y2 != 0 && this.z1 != 0 && this.z2 != 0 && this.world != null) {
                 DBCommon common = new DBCommon();
                 Connection conn = null;
                 PreparedStatement pst = null;
@@ -723,7 +726,6 @@ public class Jail {
                     }
                 }
 
-                // break; Apparently this is unreachable
             case FILE:
                 File folder = FilePaths.getInstance().getJailsFolder();
                 for (File f : folder.listFiles()) {
@@ -736,7 +738,6 @@ public class Jail {
                     }
                 }
                 return false;
-            // break; Apparently this is unreachable
         }
         return true;
     }

@@ -8,6 +8,9 @@ import tk.ultimatedev.jailplusplus.util.Log;
 import java.io.File;
 import java.sql.*;
 
+/**
+ * @author Sushi
+ */
 public class Migrant {
     DatabaseEngine engine;
     String host;

@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
+/**
+ * @author Sushi
+ */
 public class Prisoner {
     DBCommon dbCommon;
     Migrant.DatabaseEngine engine;
@@ -32,7 +36,7 @@ public class Prisoner {
         this.dbCommon = new DBCommon();
         this.engine = Migrant.getDatabaseEngine();
         this.tableName = this.dbCommon.getPrefix() + "prisoners";
-        this.saved = false;
+        this.saved = true;
 
         this.id = id;
         this.player = player;
