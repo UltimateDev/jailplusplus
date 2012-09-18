@@ -11,6 +11,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import tk.ultimatedev.jailplusplus.models.file.UserdataYAML;
 
 
 /**
@@ -209,7 +210,11 @@ public class Prisoner {
                             }
                         }
                     case FILE:
-                        // TODO: Add YAML adding code
+                        String player = this.player;
+                        String jailer = this.jailer;
+                        String inventory = this.inventory;
+                        UserdataYAML data = new UserdataYAML(player);
+                        
                         break;
                 }
             } else {

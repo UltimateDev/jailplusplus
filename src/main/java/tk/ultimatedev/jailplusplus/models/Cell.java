@@ -513,11 +513,11 @@ public class Cell {
         return true;
     }
 
-    public int getId() {
+    public int getID() {
         return this.id;
     }
 
-    public int getJailId() {
+    public int getJailID() {
         return this.jail;
     }
 

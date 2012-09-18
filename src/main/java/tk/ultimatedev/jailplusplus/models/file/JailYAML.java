@@ -1,12 +1,11 @@
 package tk.ultimatedev.jailplusplus.models.file;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.MemorySection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import tk.ultimatedev.jailplusplus.models.Jail;
@@ -57,7 +56,13 @@ public class JailYAML {
     }
 
     public List<Prisoner> getPrisoners() {
-        // use this.name
+        YamlConfiguration pYAML = FilePaths.getInstance().getPrisonersFileConf();
+        List<String> sPrisoners = pYAML.getStringList("prisoners");
+        List<Prisoner> prisoners = new ArrayList<Prisoner>();
+        for (String s : sPrisoners) {
+            Prisoner p = Prisoner.getPrisoner(s);
+            prisoners.add(p);
+        }
         return null;
     }
 

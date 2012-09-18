@@ -47,6 +47,10 @@ public class FilePaths {
     public String getCellPath(String jailname, String cellname) {
         return jailname + "." + cellname + ".";
     }
+    
+    public String getCellPath(int jid, int cid) {
+        return jid + "." + cid + ".";
+    }
 
     public YamlConfiguration getPrisonersFileConf() {
         File file = this.getPrisonersFile();
