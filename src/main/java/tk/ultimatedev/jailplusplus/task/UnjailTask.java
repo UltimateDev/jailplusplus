@@ -1,16 +1,11 @@
 package tk.ultimatedev.jailplusplus.task;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import tk.ultimatedev.jailplusplus.models.Cell;
-import tk.ultimatedev.jailplusplus.models.Prisoner;
-import tk.ultimatedev.jailplusplus.util.Messenger;
-
-import java.util.List;
-
 public class UnjailTask implements Runnable {
     @Override
     public void run() {
+        // TODO: Update this task
+
+        /*
         List<Prisoner> prisoners = Prisoner.getAllPrisoners();
 
         for (Prisoner prisoner : prisoners) {
@@ -28,6 +23,7 @@ public class UnjailTask implements Runnable {
                 }
             }
         }
+        */
 
     }
 }
