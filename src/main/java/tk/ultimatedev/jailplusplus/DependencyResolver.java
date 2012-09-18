@@ -1,5 +1,3 @@
 package tk.ultimatedev.jailplusplus;
 
-public class DependencyResolver {
-
-}
+public class DependencyResolver {}

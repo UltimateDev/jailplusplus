@@ -1,13 +1,15 @@
 package tk.ultimatedev.jailplusplus.commands;
 
+//~--- non-JDK imports --------------------------------------------------------
+
 import org.bukkit.command.CommandSender;
+
 import tk.ultimatedev.jailplusplus.JailPlugin;
 
 /**
  * @author YoshiGenius
  */
 public interface SubCommand {
-
     JailPlugin jp = new JailPlugin();
 
     /**
@@ -17,7 +19,6 @@ public interface SubCommand {
      * @param args The arguments that were involved in the command.
      * @return boolean Whether execution was successful or not.
      */
-
     public boolean onCommand(CommandSender cs, String[] args);
 
     /**
@@ -26,7 +27,6 @@ public interface SubCommand {
      * @param cs CommandSender to send the message to.
      * @return String The help text.
      */
-
     public String help(CommandSender cs);
 
     /**
@@ -34,7 +34,6 @@ public interface SubCommand {
      *
      * @return String Permission required to use command.
      */
-
     public String permission();
 
     /**
@@ -42,7 +41,6 @@ public interface SubCommand {
      *
      * @return String Kit permission optionally for command.
      */
-
     public String kitPermission();
 
     /**
@@ -50,7 +48,8 @@ public interface SubCommand {
      *
      * @return boolean Can only a player use the command?
      */
-
     public boolean playerOnly();
-
 }
+
+
+//~ Formatted by Jindent --- http://www.jindent.com

@@ -1,7 +1,12 @@
 package tk.ultimatedev.jailplusplus.util;
 
+//~--- non-JDK imports --------------------------------------------------------
+
 import org.bukkit.Bukkit;
+
 import tk.ultimatedev.jailplusplus.JailPlugin;
+
+//~--- JDK imports ------------------------------------------------------------
 
 import java.util.logging.Logger;
 
@@ -11,7 +16,7 @@ import java.util.logging.Logger;
  * @author Sushi
  */
 public class Log {
-    private static Logger log = Bukkit.getLogger();
+    private static Logger log        = Bukkit.getLogger();
     private static String pluginName = JailPlugin.getPlugin().getDescription().getName();
 
     /**
@@ -91,3 +96,6 @@ public class Log {
         log.finest("[" + pluginName + "] " + message);
     }
 }
+
+
+//~ Formatted by Jindent --- http://www.jindent.com

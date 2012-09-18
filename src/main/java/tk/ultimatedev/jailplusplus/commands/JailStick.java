@@ -1,16 +1,19 @@
 package tk.ultimatedev.jailplusplus.commands;
 
+//~--- non-JDK imports --------------------------------------------------------
+
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
 import tk.ultimatedev.jailplusplus.handlers.JailStickHandler;
 
 /**
  * @author YoshiGenius
  */
 public class JailStick implements SubCommand {
-
     public boolean onCommand(CommandSender cs, String[] args) {
         Player p = (Player) cs;
+
         if (args.length == 1) {
             JailStickHandler.toggleEnabled(p);
         } else {
@@ -20,6 +23,7 @@ public class JailStick implements SubCommand {
                 JailStickHandler.setEnabled(p, false);
             }
         }
+
         return true;
     }
 
@@ -38,6 +42,7 @@ public class JailStick implements SubCommand {
     public boolean playerOnly() {
         return true;
     }
-
-
 }
+
+
+//~ Formatted by Jindent --- http://www.jindent.com

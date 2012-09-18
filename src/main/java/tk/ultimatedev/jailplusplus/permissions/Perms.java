@@ -1,8 +1,11 @@
+
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+* To change this template, choose Tools | Templates
+* and open the template in the editor.
  */
 package tk.ultimatedev.jailplusplus.permissions;
+
+//~--- non-JDK imports --------------------------------------------------------
 
 import org.bukkit.entity.Player;
 
@@ -10,7 +13,6 @@ import org.bukkit.entity.Player;
  * @author YoshiGenius
  */
 public class Perms {
-
     private static Player player;
 
     public Perms(Player player) {
@@ -24,5 +26,7 @@ public class Perms {
             return false;
         }
     }
-
 }
+
+
+//~ Formatted by Jindent --- http://www.jindent.com

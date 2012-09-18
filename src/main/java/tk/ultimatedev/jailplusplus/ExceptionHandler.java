@@ -1,6 +1,9 @@
 package tk.ultimatedev.jailplusplus;
 
+//~--- non-JDK imports --------------------------------------------------------
+
 import org.bukkit.plugin.Plugin;
+
 import tk.ultimatedev.jailplusplus.util.Log;
 
 /**
@@ -22,5 +25,7 @@ public class ExceptionHandler {
         Log.info("---STACK TRACE FINISH---");
         Log.info("ERROR: Post all of this on the " + plugin.getName() + " Bukkit Dev page in a ticket or a comment.");
     }
-
 }
+
+
+//~ Formatted by Jindent --- http://www.jindent.com

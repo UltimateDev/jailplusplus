@@ -1,12 +1,17 @@
 package tk.ultimatedev.jailplusplus.listener;
 
+//~--- non-JDK imports --------------------------------------------------------
+
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+
 import tk.ultimatedev.jailplusplus.JailPlugin;
 import tk.ultimatedev.jailplusplus.util.Cuboid;
+
+//~--- JDK imports ------------------------------------------------------------
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,11 +31,13 @@ public class Wand implements Listener {
 
             if (itemUsed.getTypeId() == JailPlugin.getPlugin().getConfig().getInt("wand-id")) {
                 switch (event.getAction()) {
-                    case LEFT_CLICK_BLOCK:
-                    case RIGHT_CLICK_BLOCK:
+                case LEFT_CLICK_BLOCK :
+                case RIGHT_CLICK_BLOCK :
                 }
             }
         }
     }
-
 }
+
+
+//~ Formatted by Jindent --- http://www.jindent.com

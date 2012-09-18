@@ -1,19 +1,26 @@
 package tk.ultimatedev.jailplusplus;
 
+//~--- non-JDK imports --------------------------------------------------------
+
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+
 import tk.ultimatedev.jailplusplus.commands.CommandHandler;
 import tk.ultimatedev.jailplusplus.handlers.JailStickHandler;
 import tk.ultimatedev.jailplusplus.models.Migrant;
 import tk.ultimatedev.jailplusplus.task.TaskScheduler;
 import tk.ultimatedev.jailplusplus.util.Log;
 
+//~--- JDK imports ------------------------------------------------------------
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
 import java.net.MalformedURLException;
 import java.net.URL;
+
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 
@@ -22,6 +29,7 @@ public class JailPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
+
         // - Assign plugin - \\
         JailPlugin.plugin = this;
 
@@ -29,42 +37,44 @@ public class JailPlugin extends JavaPlugin {
         getDependencies();
 
         // - Start UpdateChecker - \\
-//        checkForUpdates();
-
+//      checkForUpdates();
         // - Load Listeners - \\
         this.loadListeners();
 
-//        String stringurl = "http://dev.bukkit.org/server-mods/jailplusplus.rss";
-//        UpdateChecker uc = new UpdateChecker(this, stringurl);
-//        if (uc.updateNeeded()) {
-//            if (this.getConfig().getString("update.stream").equalsIgnoreCase("")) {
-//                Log.info("A new version is available: " + uc.getVersion());
-//                Log.info("Get it from: " + uc.getLink());
-//            }
-//        }
-
+//      String stringurl = "http://dev.bukkit.org/server-mods/jailplusplus.rss";
+//      UpdateChecker uc = new UpdateChecker(this, stringurl);
+//      if (uc.updateNeeded()) {
+//          if (this.getConfig().getString("update.stream").equalsIgnoreCase("")) {
+//              Log.info("A new version is available: " + uc.getVersion());
+//              Log.info("Get it from: " + uc.getLink());
+//          }
+//      }
         // - Command - \\
         this.getCommand("jail").setExecutor(new CommandHandler(this));
 
         // - Setting up config - \\
         File f = new File(this.getDataFolder(), "config.yml");
+
         if (!f.exists()) {
             this.saveDefaultConfig();
         }
-        this.reloadConfig();
 
+        this.reloadConfig();
 
         // - Databases - \\
         Migrant migrant = new Migrant();
+
         migrant.migrate();
 
         // - Tasks - \\
         TaskScheduler scheduler = new TaskScheduler();
+
         scheduler.schedule();
 
         // - Plugin Metrics - \\
         try {
             Metrics metrics = new Metrics(this);
+
             metrics.start();
         } catch (IOException e) {
             Log.severe("I was unable to submit plugin metrics info! :(");
@@ -85,6 +95,7 @@ public class JailPlugin extends JavaPlugin {
         if (!libFolder.exists()) {
             if (!libFolder.mkdirs()) {
                 Log.severe("I couldn't create the JailPlusPlus libraries folder!");
+
                 return;
             }
         }
@@ -98,9 +109,10 @@ public class JailPlugin extends JavaPlugin {
             Log.info("==========[ DOWNLOADING H2 DATABASE ]==========");
 
             try {
-                URL h2Url = new URL("http://search.maven.org/remotecontent?filepath=com/h2database/h2/1.3.168/h2-1.3.168.jar");
+                URL h2Url =
+                    new URL("http://search.maven.org/remotecontent?filepath=com/h2database/h2/1.3.168/h2-1.3.168.jar");
                 ReadableByteChannel readableByteChannel = Channels.newChannel(h2Url.openStream());
-                FileOutputStream fileOutputStream = new FileOutputStream("lib/h2-1.3.168.jar");
+                FileOutputStream    fileOutputStream    = new FileOutputStream("lib/h2-1.3.168.jar");
 
                 fileOutputStream.getChannel().transferFrom(readableByteChannel, 0, 1 << 24);
             } catch (MalformedURLException ex) {
@@ -120,19 +132,26 @@ public class JailPlugin extends JavaPlugin {
     }
 
     public void checkForUpdates() {
-        String stringurl = "http://dev.bukkit.org/server-mods/jailplusplus.rss";
-        UpdateChecker uc = new UpdateChecker(this, stringurl);
+        String        stringurl = "http://dev.bukkit.org/server-mods/jailplusplus.rss";
+        UpdateChecker uc        = new UpdateChecker(this, stringurl);
+
         if (uc.updateNeeded()) {
-            if (this.getConfig().getString("update.stream").equalsIgnoreCase("release") && uc.getVersion().startsWith("r")) {
+            if (this.getConfig().getString("update.stream").equalsIgnoreCase("release")
+                    && uc.getVersion().startsWith("r")) {
                 Log.info("A new version is available: " + uc.getVersion());
                 Log.info("Get it from: " + uc.getLink());
-            } else if (this.getConfig().getString("update.stream").equalsIgnoreCase("beta") && (uc.getVersion().startsWith("b") || uc.getVersion().startsWith("r"))) {
+            } else if (this.getConfig().getString("update.stream").equalsIgnoreCase("beta")
+                       && (uc.getVersion().startsWith("b") || uc.getVersion().startsWith("r"))) {
                 Log.info("A new version is available: " + uc.getVersion());
                 Log.info("Get it from: " + uc.getLink());
-            } else if (this.getConfig().getString("update.stream").equalsIgnoreCase("alpha") && (uc.getVersion().startsWith("b") || uc.getVersion().startsWith("r") || uc.getVersion().startsWith("a"))) {
+            } else if (this.getConfig().getString("update.stream").equalsIgnoreCase("alpha")
+                       && (uc.getVersion().startsWith("b") || uc.getVersion().startsWith("r")
+                           || uc.getVersion().startsWith("a"))) {
                 Log.info("A new version is available: " + uc.getVersion());
                 Log.info("Get it from: " + uc.getLink());
-            } else if (this.getConfig().getString("update.stream").equalsIgnoreCase("dev") && (uc.getVersion().startsWith("b") || uc.getVersion().startsWith("r") || uc.getVersion().startsWith("a") || uc.getVersion().startsWith("d"))) {
+            } else if (this.getConfig().getString("update.stream").equalsIgnoreCase("dev")
+                       && (uc.getVersion().startsWith("b") || uc.getVersion().startsWith("r")
+                           || uc.getVersion().startsWith("a") || uc.getVersion().startsWith("d"))) {
                 Log.info("A new version is available: " + uc.getVersion());
                 Log.info("Get it from: " + uc.getLink());
             } else {
@@ -145,7 +164,7 @@ public class JailPlugin extends JavaPlugin {
 
     public void loadListeners() {
         PluginManager pm = this.getServer().getPluginManager();
+        
         pm.registerEvents(new JailStickHandler(), this);
     }
-
 }

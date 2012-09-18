@@ -1,9 +1,12 @@
 package tk.ultimatedev.jailplusplus.commands;
 
+//~--- non-JDK imports --------------------------------------------------------
+
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+
 import tk.ultimatedev.jailplusplus.JailPlugin;
 import tk.ultimatedev.jailplusplus.util.Messenger;
 
@@ -13,13 +16,19 @@ import tk.ultimatedev.jailplusplus.util.Messenger;
 public class Wand implements SubCommand {
     public boolean onCommand(CommandSender cs, String[] args) {
         Player player = (Player) cs;
+
         if (player.hasPermission("jpp.wand")) {
-            Messenger.sendMessage(player, "You are receiving a Jail++ wand (#" + JailPlugin.getPlugin().getConfig().getInt("wand-id") + ").");
-            player.getInventory().addItem(new ItemStack(Material.getMaterial(JailPlugin.getPlugin().getConfig().getInt("wand-id")), 1));
+            Messenger.sendMessage(player,
+                                  "You are receiving a Jail++ wand (#"
+                                  + JailPlugin.getPlugin().getConfig().getInt("wand-id") + ").");
+            player.getInventory().addItem(
+                new ItemStack(Material.getMaterial(JailPlugin.getPlugin().getConfig().getInt("wand-id")), 1));
+
             return true;
         } else {
             Messenger.sendNoPermissionError(player);
         }
+
         return false;
     }
 
@@ -39,3 +48,6 @@ public class Wand implements SubCommand {
         return true;
     }
 }
+
+
+//~ Formatted by Jindent --- http://www.jindent.com

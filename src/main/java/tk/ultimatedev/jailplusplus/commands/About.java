@@ -1,6 +1,9 @@
 package tk.ultimatedev.jailplusplus.commands;
 
+//~--- non-JDK imports --------------------------------------------------------
+
 import org.bukkit.command.CommandSender;
+
 import tk.ultimatedev.jailplusplus.JailPlugin;
 import tk.ultimatedev.jailplusplus.util.Messenger;
 
@@ -9,7 +12,7 @@ import tk.ultimatedev.jailplusplus.util.Messenger;
  */
 public class About implements SubCommand {
     public boolean onCommand(CommandSender player, String[] args) {
-        String delimiter = "";
+        String        delimiter     = "";
         StringBuilder stringBuilder = new StringBuilder();
 
         for (String author : JailPlugin.getPlugin().getDescription().getAuthors()) {
@@ -21,6 +24,7 @@ public class About implements SubCommand {
         Messenger.sendMessage(player, "Created with <3 by " + stringBuilder.toString() + "!");
         Messenger.sendMessage(player, "", false);
         Messenger.sendMessage(player, "For help using this plugin, type /jail help", false);
+
         return true;
     }
 

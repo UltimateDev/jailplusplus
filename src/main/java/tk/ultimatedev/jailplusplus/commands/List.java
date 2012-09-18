@@ -1,12 +1,13 @@
 package tk.ultimatedev.jailplusplus.commands;
 
+//~--- non-JDK imports --------------------------------------------------------
+
 import org.bukkit.command.CommandSender;
 
 /**
  * @author YoshiGenius
  */
 public class List implements SubCommand {
-
     public String help(CommandSender player) {
         return "/jail list - Lists jails.";
     }
@@ -20,7 +21,6 @@ public class List implements SubCommand {
     }
 
     public boolean onCommand(CommandSender cs, String[] args) {
-
         return false;
     }
 
@@ -28,3 +28,6 @@ public class List implements SubCommand {
         return false;
     }
 }
+
+
+//~ Formatted by Jindent --- http://www.jindent.com

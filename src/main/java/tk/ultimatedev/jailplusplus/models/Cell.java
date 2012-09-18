@@ -1,12 +1,11 @@
 package tk.ultimatedev.jailplusplus.models;
 
-import tk.ultimatedev.jailplusplus.ExceptionHandler;
-import tk.ultimatedev.jailplusplus.JailPlugin;
-import tk.ultimatedev.jailplusplus.util.Cuboid;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import tk.ultimatedev.jailplusplus.ExceptionHandler;
+import tk.ultimatedev.jailplusplus.JailPlugin;
+import tk.ultimatedev.jailplusplus.util.Cuboid;
 
 /**
  * @author Sushi
@@ -107,7 +106,7 @@ public class Cell {
         this.saved = false;
 
         this.id = -1;
-        this.jail = jail.getId();
+        this.jail = jail.getID();
         this.x1 = x1;
         this.x2 = x2;
         this.y1 = y1;
@@ -125,7 +124,7 @@ public class Cell {
         this.saved = true;
 
         this.id = id;
-        this.jail = jail.getId();
+        this.jail = jail.getID();
         this.x1 = x1;
         this.x2 = x2;
         this.y1 = y1;
@@ -143,7 +142,7 @@ public class Cell {
         this.saved = false;
 
         this.id = -1;
-        this.jail = jail.getId();
+        this.jail = jail.getID();
         this.x1 = area.getMinX();
         this.x2 = area.getMaxX();
         this.y1 = area.getMinY();
@@ -161,7 +160,7 @@ public class Cell {
         this.saved = true;
 
         this.id = id;
-        this.jail = jail.getId();
+        this.jail = jail.getID();
         this.x1 = area.getMinX();
         this.x2 = area.getMaxX();
         this.y1 = area.getMinY();

@@ -1,5 +1,7 @@
 package tk.ultimatedev.jailplusplus.util;
 
+//~--- non-JDK imports --------------------------------------------------------
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -13,7 +15,8 @@ import org.bukkit.entity.Player;
  * @author Sushi
  */
 public class Messenger {
-    private static String chatPrefix = ChatColor.GRAY + "[" + ChatColor.GOLD + "Jail++" + ChatColor.GRAY + "] " + ChatColor.RESET;
+    private static String chatPrefix = ChatColor.GRAY + "[" + ChatColor.GOLD + "Jail++" + ChatColor.GRAY + "] "
+                                       + ChatColor.RESET;
 
     /**
      * Send a message to a CommandSender (can be
@@ -130,7 +133,6 @@ public class Messenger {
      *
      * @param sender The CommandSender to send the message to.
      */
-
     public static void sendNoPermissionError(CommandSender sender) {
         sendError(sender, "You don't have enough permission to do this!");
     }
@@ -159,3 +161,6 @@ public class Messenger {
         broadcastMessage(message, true);
     }
 }
+
+
+//~ Formatted by Jindent --- http://www.jindent.com

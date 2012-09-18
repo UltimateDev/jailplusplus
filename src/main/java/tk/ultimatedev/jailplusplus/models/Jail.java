@@ -13,6 +13,8 @@ import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import org.bukkit.World;
+import tk.ultimatedev.jailplusplus.util.YamlGetters;
 
 /**
  * @author Sushi
@@ -240,8 +242,16 @@ public class Jail {
                         // break; Apparently this is unreachable
                     case FILE:
                         try {
-                            YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(this.file);
-                            yamlConfiguration.save(this.file);
+                            JailYAML data = this.getYamlConf();
+                            data.setID(this.id);
+                            data.setName(this.name);
+                            World w = Bukkit.getWorld(this.world);
+                            if (w == null) return DBCommon.DBResponse.FAILURE;
+                            Location one = new Location(w, this.x1, this.y1, this.z1);
+                            Location two = new Location(w, this.x2, this.y2, this.z2);
+                            Cuboid cuboid = new Cuboid(one, two);
+                            data.setCuboid(cuboid);
+                            YamlGetters.getInstance().saveJailsFile();
                             return DBCommon.DBResponse.SUCCESS;
                         } catch (Exception e) {
                             exceptionHandler.logException(e);
@@ -339,21 +349,16 @@ public class Jail {
 
                 // break; Apparently this is unreachable
             case FILE:
-                File folder = FilePaths.getInstance().getJailsFolder();
-                for (File f : folder.listFiles()) {
-                    String name = f.getName();
-                    if (name.endsWith(".yml")) {
-                        name = name.replace(".yml", "");
-                    }
-                    JailYAML jailconf = new JailYAML(name);
-                    Location min = new Location(jailconf.getWorld(), jailconf.getMinX(), jailconf.getMinY(), jailconf.getMinZ());
-                    Location max = new Location(jailconf.getWorld(), jailconf.getMaxX(), jailconf.getMaxY(), jailconf.getMaxZ());
-                    Cuboid cuboid = new Cuboid(min, max);
-                    Jail jail = new Jail(name, cuboid);
+                File jailfile = FilePaths.getInstance().getJailsFile();
+                YamlConfiguration jailconf = YamlConfiguration.loadConfiguration(jailfile);
+                List<String> alljails = jailconf.getStringList("jails");
+                for (String jname : alljails) {
+                    JailYAML jaildata = new JailYAML(jname);
+                    Cuboid cuboid = jaildata.getCuboid();
+                    Jail jail = new Jail(jname, cuboid);
                     jails.add(jail);
                 }
                 return jails;
-            // TODO: YAML getting code
             // break; Apparently this is unreachable
         }
         return null;
@@ -444,13 +449,9 @@ public class Jail {
 
                 // break; Apparently this is unreachable
             case FILE:
-                for (Jail jail : Jail.getAllJails()) {
-                    JailYAML jailconf = new JailYAML(jail);
-                    if (jailconf.getName().equalsIgnoreCase(name)) {
-                        return jail;
-                    }
-                }
-                return null;
+                JailYAML data = new JailYAML(name);
+                Cuboid cuboid = data.getCuboid();
+                return new Jail(name, cuboid);
             // break; Apparently this is unreachable
         }
         return null;
@@ -541,12 +542,11 @@ public class Jail {
                 // break; Apparently this is unreachable
             case FILE:
                 for (Jail jail : Jail.getAllJails()) {
-                    JailYAML jailconf = new JailYAML(jail);
-                    if (jailconf.getID() == id) {
+                    JailYAML data = jail.getYamlConf();
+                    if (data.getID() == id) {
                         return jail;
                     }
                 }
-                // TODO: YAML getting code
                 return null;
             // break; Apparently this is unreachable
         }
@@ -637,8 +637,11 @@ public class Jail {
 
                 // break; Apparently this is unreachable
             case FILE:
-
-                return false;
+                Jail jail = Jail.getJail(name);
+                if (jail == null) return false;
+                JailYAML data = jail.getYamlConf();
+                data.removeJail();
+                return true;
             // break; Apparently this is unreachable
         }
         return true;
@@ -727,14 +730,12 @@ public class Jail {
                 }
 
             case FILE:
-                File folder = FilePaths.getInstance().getJailsFolder();
-                for (File f : folder.listFiles()) {
-                    YamlConfiguration c = YamlConfiguration.loadConfiguration(f);
-                    int jailid = c.getInt("id");
-                    if (jailid == id) {
-                        if (!f.delete()) {
-                            f.deleteOnExit();
-                        }
+                for (Jail j : Jail.getAllJails()) {
+                    JailYAML jaildata = j.getYamlConf();
+                    String jname = j.getName();
+                    int maybeid = YamlGetters.getInstance().getJailInt(jname, "id");
+                    if (maybeid == id) {
+                        jaildata.removeJail();
                     }
                 }
                 return false;
@@ -742,7 +743,7 @@ public class Jail {
         return true;
     }
 
-    public int getId() {
+    public int getID() {
         return this.id;
     }
 
@@ -782,19 +783,30 @@ public class Jail {
         return new JailYAML(this);
     }
 
-    public static Jail matchJailYAML(String name) {
-        File folder = FilePaths.getInstance().getJailsFolder();
+    public static Jail matchJailEntry(String name) {
         // TODO: Don't dereference this
-        for (File f : folder.listFiles()) {
-            String filename = f.getName();
-            if (filename.endsWith(".yml")) {
-                filename = filename.replaceAll(".yml", "");
-                if (filename.equalsIgnoreCase(name)) {
-                    
-                }
-            }
+        YamlGetters getter = new YamlGetters();
+        String jailname = getter.getJailString(name, "name");
+        String sworld = getter.getJailString(name, "loc.world");
+        World world = Bukkit.getServer().getWorld(sworld);
+        if (world == null) {
+            return null;
         }
-        return null;
+        String strmin = getter.getPrisonersString(name, "loc.min");
+        String strmax = getter.getPrisonersString(name, "loc.max");
+        String[] mins = strmin.split(",");
+        String[] maxs = strmax.split(",");
+        int minx = Integer.parseInt(mins[0]);
+        int miny = Integer.parseInt(mins[1]);
+        int minz = Integer.parseInt(mins[2]);
+        int maxx = Integer.parseInt(maxs[0]);
+        int maxy = Integer.parseInt(maxs[1]);
+        int maxz = Integer.parseInt(maxs[2]);
+        Location min = new Location(world, minx, miny, minz);
+        Location max = new Location(world, maxx, maxy, maxz);
+        Cuboid cuboid = new Cuboid(min, max);
+        Jail jail = new Jail(jailname, cuboid);
+        return jail;
     }
 
 }

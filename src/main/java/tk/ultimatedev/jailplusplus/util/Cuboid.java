@@ -1,5 +1,7 @@
 package tk.ultimatedev.jailplusplus.util;
 
+//~--- non-JDK imports --------------------------------------------------------
+
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -131,10 +133,9 @@ public class Cuboid {
      * @return The center of the cuboid.
      */
     public Location getCenter() {
-        return new Location(this.a.getWorld(),
-                (this.a.getBlockX() + this.b.getBlockX()) / 2D,
-                (this.a.getBlockY() + this.b.getBlockY()) / 2D,
-                (this.a.getBlockZ() + this.b.getBlockZ()) / 2D);
+        return new Location(this.a.getWorld(), (this.a.getBlockX() + this.b.getBlockX()) / 2D,
+                            (this.a.getBlockY() + this.b.getBlockY()) / 2D,
+                            (this.a.getBlockZ() + this.b.getBlockZ()) / 2D);
     }
 
     /**
@@ -157,13 +158,10 @@ public class Cuboid {
      *         is not inside the cuboid.
      */
     public boolean isInCuboid(Location location) {
-        return location.getWorld() == this.getWorld()
-                && location.getBlockX() >= this.getMinX()
-                && location.getBlockX() <= this.getMaxX()
-                && location.getBlockY() >= this.getMinY()
-                && location.getBlockY() <= this.getMaxY()
-                && location.getBlockZ() >= this.getMinZ()
-                && location.getBlockZ() <= this.getMaxZ();
+        return (location.getWorld() == this.getWorld()) && (location.getBlockX() >= this.getMinX())
+               && (location.getBlockX() <= this.getMaxX()) && (location.getBlockY() >= this.getMinY())
+               && (location.getBlockY() <= this.getMaxY()) && (location.getBlockZ() >= this.getMinZ())
+               && (location.getBlockZ() <= this.getMaxZ());
     }
 
     /**
@@ -176,13 +174,12 @@ public class Cuboid {
      *         is not inside the cuboid.
      */
     public boolean isInCuboid(Player player) {
-        return player.getWorld() == this.getWorld()
-                && player.getLocation().getBlockX() >= this.getMinX()
-                && player.getLocation().getBlockX() <= this.getMaxX()
-                && player.getLocation().getBlockY() >= this.getMinY()
-                && player.getLocation().getBlockY() <= this.getMaxY()
-                && player.getLocation().getBlockZ() >= this.getMinZ()
-                && player.getLocation().getBlockZ() <= this.getMaxZ();
+        return (player.getWorld() == this.getWorld()) && (player.getLocation().getBlockX() >= this.getMinX())
+               && (player.getLocation().getBlockX() <= this.getMaxX())
+               && (player.getLocation().getBlockY() >= this.getMinY())
+               && (player.getLocation().getBlockY() <= this.getMaxY())
+               && (player.getLocation().getBlockZ() >= this.getMinZ())
+               && (player.getLocation().getBlockZ() <= this.getMaxZ());
     }
 
     /**
@@ -195,13 +192,12 @@ public class Cuboid {
      *         is not inside the cuboid.
      */
     public boolean isInCuboid(Entity entity) {
-        return entity.getWorld() == this.getWorld()
-                && entity.getLocation().getBlockX() >= this.getMinX()
-                && entity.getLocation().getBlockX() <= this.getMaxX()
-                && entity.getLocation().getBlockY() >= this.getMinY()
-                && entity.getLocation().getBlockY() <= this.getMaxY()
-                && entity.getLocation().getBlockZ() >= this.getMinZ()
-                && entity.getLocation().getBlockZ() <= this.getMaxZ();
+        return (entity.getWorld() == this.getWorld()) && (entity.getLocation().getBlockX() >= this.getMinX())
+               && (entity.getLocation().getBlockX() <= this.getMaxX())
+               && (entity.getLocation().getBlockY() >= this.getMinY())
+               && (entity.getLocation().getBlockY() <= this.getMaxY())
+               && (entity.getLocation().getBlockZ() >= this.getMinZ())
+               && (entity.getLocation().getBlockZ() <= this.getMaxZ());
     }
 
     /**
@@ -214,13 +210,11 @@ public class Cuboid {
      *         is not inside the cuboid.
      */
     public boolean isInCuboid(Block block) {
-        return block.getWorld() == this.getWorld()
-                && block.getLocation().getBlockX() >= this.getMinX()
-                && block.getLocation().getBlockX() <= this.getMaxX()
-                && block.getLocation().getBlockY() >= this.getMinY()
-                && block.getLocation().getBlockY() <= this.getMaxY()
-                && block.getLocation().getBlockZ() >= this.getMinZ()
-                && block.getLocation().getBlockZ() <= this.getMaxZ();
+        return (block.getWorld() == this.getWorld()) && (block.getLocation().getBlockX() >= this.getMinX())
+               && (block.getLocation().getBlockX() <= this.getMaxX())
+               && (block.getLocation().getBlockY() >= this.getMinY())
+               && (block.getLocation().getBlockY() <= this.getMaxY())
+               && (block.getLocation().getBlockZ() >= this.getMinZ())
+               && (block.getLocation().getBlockZ() <= this.getMaxZ());
     }
 }
-
