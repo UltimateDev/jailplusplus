@@ -20,7 +20,7 @@ public class JailStick implements Listener {
             Player clicked = (Player) eclicked;
             if (clicker.hasPermission("jpp.jailstick.use") && clicked.hasPermission("jpp.jailstick.canbe")) {
                 if (JailStickHandler.hasEnabled(clicker)) {
-                    
+
                 }
             }
         }

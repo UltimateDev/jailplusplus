@@ -5,6 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import tk.ultimatedev.jailplusplus.commands.CommandHandler;
 import tk.ultimatedev.jailplusplus.handlers.JailStickHandler;
 import tk.ultimatedev.jailplusplus.models.Migrant;
+import tk.ultimatedev.jailplusplus.task.TaskScheduler;
 import tk.ultimatedev.jailplusplus.util.Log;
 
 import java.io.File;
@@ -29,10 +30,10 @@ public class JailPlugin extends JavaPlugin {
 
         // - Start UpdateChecker - \\
 //        checkForUpdates();
-        
+
         // - Load Listeners - \\
         this.loadListeners();
-        
+
 //        String stringurl = "http://dev.bukkit.org/server-mods/jailplusplus.rss";
 //        UpdateChecker uc = new UpdateChecker(this, stringurl);
 //        if (uc.updateNeeded()) {
@@ -57,7 +58,11 @@ public class JailPlugin extends JavaPlugin {
         Migrant migrant = new Migrant();
         migrant.migrate();
 
-        // - MCSTATS - \\
+        // - Tasks - \\
+        TaskScheduler scheduler = new TaskScheduler();
+        scheduler.schedule();
+
+        // - Plugin Metrics - \\
         try {
             Metrics metrics = new Metrics(this);
             metrics.start();
@@ -137,10 +142,10 @@ public class JailPlugin extends JavaPlugin {
             }
         }
     }
-    
+
     public void loadListeners() {
         PluginManager pm = this.getServer().getPluginManager();
         pm.registerEvents(new JailStickHandler(), this);
     }
-    
+
 }

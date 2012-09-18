@@ -9,6 +9,9 @@ import java.io.File;
 import java.sql.*;
 import tk.ultimatedev.jailplusplus.SettingsManager;
 
+/**
+ * @author Sushi
+ */
 public class Migrant {
     DatabaseEngine engine;
     String host;
@@ -121,7 +124,11 @@ public class Migrant {
                                         "expires BIGINT," +
                                         "reason VARCHAR(150)," +
                                         "jailer VARCHAR(20)," +
-                                        "inv CLOB" +
+                                        "inv CLOB," +
+                                        "x INT," +
+                                        "y INT," +
+                                        "z INT," +
+                                        "world INT" +
                                         ")"
                         );
                     }
@@ -197,17 +204,20 @@ public class Migrant {
 
                         st = conn.createStatement();
                         st.executeUpdate(
-                                "CREATE TABLE IF NOT EXISTS " + this.prefix + "jails" +
+                                "CREATE TABLE IF NOT EXISTS " + this.prefix + "prisoners" +
                                         "(" +
                                         "id INT NOT NULL AUTO_INCREMENT PRIMARY KEY," +
                                         "name VARCHAR(32) NOT NULL UNIQUE," +
-                                        "x1 INT NOT NULL," +
-                                        "x2 INT NOT NULL," +
-                                        "y1 INT NOT NULL," +
-                                        "y2 INT NOT NULL," +
-                                        "z1 INT NOT NULL," +
-                                        "z2 INT NOT NULL," +
-                                        "world VARCHAR(50)" +
+                                        "cell INT NOT NULL," +
+                                        "created BIGINT," +
+                                        "expires BIGINT," +
+                                        "reason VARCHAR(150)," +
+                                        "jailer VARCHAR(20)," +
+                                        "inv CLOB," +
+                                        "x INT," +
+                                        "y INT," +
+                                        "z INT," +
+                                        "world INT" +
                                         ")"
                         );
 

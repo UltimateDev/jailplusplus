@@ -7,16 +7,17 @@ import tk.ultimatedev.jailplusplus.ExceptionHandler;
 import tk.ultimatedev.jailplusplus.JailPlugin;
 
 import java.util.HashMap;
+
 import tk.ultimatedev.jailplusplus.models.file.UserdataYAML;
 
 /**
  * @author YoshiGenius
  */
 public class Time {
-    
+
     private int id;
     private HashMap<Player, Integer> countdowntask = new HashMap<Player, Integer>();
-    
+
     public int toTicks(String time) {
         try {
             int seconds = 0;
@@ -54,7 +55,7 @@ public class Time {
             return 0;
         }
     }
-    
+
     public int toSeconds(String time) {
         try {
             int seconds = 0;
@@ -91,7 +92,7 @@ public class Time {
             return 0;
         }
     }
-    
+
     public void startCountdownToEndJailTime(final String playername) {
         UserdataYAML data = new UserdataYAML(playername);
         data.getJailStickTime();
@@ -100,7 +101,7 @@ public class Time {
         this.countdowntask.put(p, id);
         Bukkit.getServer().getScheduler().scheduleAsyncRepeatingTask(JailPlugin.getPlugin(), new Runnable() {
             public void run() {
-                
+
             }
         }, 200, 20);
     }

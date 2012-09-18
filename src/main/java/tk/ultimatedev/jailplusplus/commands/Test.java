@@ -61,7 +61,7 @@ public class Test implements SubCommand {
         } else if (args[1].equalsIgnoreCase("getjails")) {
             List<Jail> jails = Jail.getAllJails();
 
-            for (Jail jail: jails) {
+            for (Jail jail : jails) {
                 Log.info(jail.toString());
             }
         }

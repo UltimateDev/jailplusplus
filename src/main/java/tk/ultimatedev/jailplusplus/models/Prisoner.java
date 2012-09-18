@@ -1,6 +1,7 @@
 package tk.ultimatedev.jailplusplus.models;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import tk.ultimatedev.jailplusplus.ExceptionHandler;
 import tk.ultimatedev.jailplusplus.JailPlugin;
@@ -11,6 +12,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
+/**
+ * @author Sushi
+ */
 public class Prisoner {
     DBCommon dbCommon;
     Migrant.DatabaseEngine engine;
@@ -25,14 +30,18 @@ public class Prisoner {
     String reason;
     String jailer;
     String inventory;
+    int x;
+    int y;
+    int z;
+    String world;
 
     ExceptionHandler exceptionHandler;
 
-    private Prisoner(int id, String player, int cell, int created, int expires, String reason, String jailer) {
+    private Prisoner(int id, String player, int cell, int created, int expires, String reason, String jailer, String inv, int x, int y, int z, String world) {
         this.dbCommon = new DBCommon();
         this.engine = Migrant.getDatabaseEngine();
         this.tableName = this.dbCommon.getPrefix() + "prisoners";
-        this.saved = false;
+        this.saved = true;
 
         this.id = id;
         this.player = player;
@@ -41,11 +50,11 @@ public class Prisoner {
         this.expires = expires;
         this.reason = reason;
         this.jailer = jailer;
-        if (Bukkit.getPlayer(player) != null) {
-            this.inventory = InventorySerializer.getString(Bukkit.getPlayer(player).getInventory());
-        } else {
-            this.inventory = "";
-        }
+        this.inventory = inv;
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.world = world;
 
         this.exceptionHandler = new ExceptionHandler(JailPlugin.getPlugin());
     }
@@ -63,10 +72,20 @@ public class Prisoner {
         this.expires = expires;
         this.reason = reason;
         this.jailer = jailer;
-        if (Bukkit.getPlayer(player) != null) {
+        if (Bukkit.getPlayer(this.player) != null) {
+            Player playerObject = Bukkit.getPlayer(this.player);
             this.inventory = InventorySerializer.getString(Bukkit.getPlayer(player).getInventory());
+
+            this.x = (int) playerObject.getLocation().getX();
+            this.y = (int) playerObject.getLocation().getY();
+            this.z = (int) playerObject.getLocation().getZ();
         } else {
             this.inventory = "";
+
+            this.x = -1;
+            this.y = -1;
+            this.z = -1;
+            this.world = "";
         }
 
         this.exceptionHandler = new ExceptionHandler(JailPlugin.getPlugin());
@@ -79,7 +98,7 @@ public class Prisoner {
 
     public DBCommon.DBResponse save() throws NullPointerException {
         if (!this.saved) {
-            if (this.player != null && this.created != 0 && this.expires != 0 && this.reason != null && this.jailer != null) {
+            if (this.player != null && this.created != 0 && this.expires != 0 && this.reason != null && this.jailer != null && this.x != 0 && this.y != 0 && this.z != 0 && this.world != null) {
                 DBCommon common = new DBCommon();
                 Connection conn = null;
                 PreparedStatement pst = null;
@@ -98,7 +117,7 @@ public class Prisoner {
                             if (rs.next()) {
                                 return DBCommon.DBResponse.ALREADY_EXISTS;
                             } else {
-                                pst = conn.prepareStatement("INSERT INTO " + this.tableName + " (name, cell, created, expires, reason, jailer, inv) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                                pst = conn.prepareStatement("INSERT INTO " + this.tableName + " (name, cell, created, expires, reason, jailer, inv, x, y, z, world) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
                                 pst.setString(1, this.player);
                                 pst.setInt(2, this.cell);
                                 pst.setInt(3, this.created);
@@ -106,6 +125,10 @@ public class Prisoner {
                                 pst.setString(5, this.reason);
                                 pst.setString(6, this.jailer);
                                 pst.setString(7, this.inventory);
+                                pst.setInt(8, this.x);
+                                pst.setInt(9, this.y);
+                                pst.setInt(10, this.z);
+                                pst.setString(11, this.world);
 
                                 pst.executeUpdate();
 
@@ -143,7 +166,7 @@ public class Prisoner {
                             if (rs.next()) {
                                 return DBCommon.DBResponse.ALREADY_EXISTS;
                             } else {
-                                pst = conn.prepareStatement("INSERT INTO " + this.tableName + " (name, cell, created, expires, reason, jailer, inv) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                                pst = conn.prepareStatement("INSERT INTO " + this.tableName + " (name, cell, created, expires, reason, jailer, inv, x, y, z, world) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
                                 pst.setString(1, this.player);
                                 pst.setInt(2, this.cell);
                                 pst.setInt(3, this.created);
@@ -151,6 +174,10 @@ public class Prisoner {
                                 pst.setString(5, this.reason);
                                 pst.setString(6, this.jailer);
                                 pst.setString(7, this.inventory);
+                                pst.setInt(8, this.x);
+                                pst.setInt(9, this.y);
+                                pst.setInt(10, this.z);
+                                pst.setString(11, this.world);
 
                                 pst.executeUpdate();
 
@@ -210,7 +237,7 @@ public class Prisoner {
                     rs = st.executeQuery("SELECT * FROM " + tableName);
 
                     while (rs.next()) {
-                        prisoners.add(new Prisoner(rs.getInt("id"), rs.getString("name"), rs.getInt("cell"), rs.getInt("created"), rs.getInt("expires"), rs.getString("reason"), rs.getString("jailer")));
+                        prisoners.add(new Prisoner(rs.getInt("id"), rs.getString("name"), rs.getInt("cell"), rs.getInt("created"), rs.getInt("expires"), rs.getString("reason"), rs.getString("jailer"), rs.getString("inv"), rs.getInt("x"), rs.getInt("x"), rs.getInt("x"), rs.getString("world")));
                     }
 
                     return prisoners;
@@ -242,7 +269,7 @@ public class Prisoner {
                     rs = st.executeQuery("SELECT * FROM " + tableName);
 
                     while (rs.next()) {
-                        prisoners.add(new Prisoner(rs.getInt("id"), rs.getString("name"), rs.getInt("cell"), rs.getInt("created"), rs.getInt("expires"), rs.getString("reason"), rs.getString("jailer")));
+                        prisoners.add(new Prisoner(rs.getInt("id"), rs.getString("name"), rs.getInt("cell"), rs.getInt("created"), rs.getInt("expires"), rs.getString("reason"), rs.getString("jailer"), rs.getString("inv"), rs.getInt("x"), rs.getInt("x"), rs.getInt("x"), rs.getString("world")));
                     }
 
                     return prisoners;
@@ -294,7 +321,7 @@ public class Prisoner {
                     rs = pst.executeQuery();
 
                     if (rs.next()) {
-                        return new Prisoner(rs.getInt("id"), rs.getString("name"), rs.getInt("cell"), rs.getInt("created"), rs.getInt("expires"), rs.getString("reason"), rs.getString("jailer"));
+                        return new Prisoner(rs.getInt("id"), rs.getString("name"), rs.getInt("cell"), rs.getInt("created"), rs.getInt("expires"), rs.getString("reason"), rs.getString("jailer"), rs.getString("inv"), rs.getInt("x"), rs.getInt("x"), rs.getInt("x"), rs.getString("world"));
                     } else {
                         return null;
                     }
@@ -320,38 +347,38 @@ public class Prisoner {
                 }
             case MYSQL:
                 try {
-                conn = DBCommon.getConnection();
+                    conn = DBCommon.getConnection();
 
-                pst = conn.prepareStatement("SELECT * FROM " + tableName + " WHERE name=?");
-                pst.setString(1, name);
+                    pst = conn.prepareStatement("SELECT * FROM " + tableName + " WHERE name=?");
+                    pst.setString(1, name);
 
-                rs = pst.executeQuery();
+                    rs = pst.executeQuery();
 
-                if (rs.next()) {
-                    return new Prisoner(rs.getInt("id"), rs.getString("name"), rs.getInt("cell"), rs.getInt("created"), rs.getInt("expires"), rs.getString("reason"), rs.getString("jailer"));
-                } else {
+                    if (rs.next()) {
+                        return new Prisoner(rs.getInt("id"), rs.getString("name"), rs.getInt("cell"), rs.getInt("created"), rs.getInt("expires"), rs.getString("reason"), rs.getString("jailer"), rs.getString("inv"), rs.getInt("x"), rs.getInt("x"), rs.getInt("x"), rs.getString("world"));
+                    } else {
+                        return null;
+                    }
+                } catch (SQLException ex) {
+                    exceptionHandler.logException(ex);
                     return null;
+                } finally {
+                    try {
+                        if (rs != null) {
+                            rs.close();
+                        }
+
+                        if (pst != null) {
+                            pst.close();
+                        }
+
+                        if (conn != null) {
+                            conn.close();
+                        }
+                    } catch (SQLException ignored) {
+
+                    }
                 }
-            } catch (SQLException ex) {
-                exceptionHandler.logException(ex);
-                return null;
-            } finally {
-                try {
-                    if (rs != null) {
-                        rs.close();
-                    }
-
-                    if (pst != null) {
-                        pst.close();
-                    }
-
-                    if (conn != null) {
-                        conn.close();
-                    }
-                } catch (SQLException ignored) {
-
-                }
-            }
             case FILE:
                 // TODO: YAML getting code
         }
@@ -379,7 +406,7 @@ public class Prisoner {
                     rs = pst.executeQuery();
 
                     if (rs.next()) {
-                        return new Prisoner(rs.getInt("id"), rs.getString("name"), rs.getInt("cell"), rs.getInt("created"), rs.getInt("expires"), rs.getString("reason"), rs.getString("jailer"));
+                        return new Prisoner(rs.getInt("id"), rs.getString("name"), rs.getInt("cell"), rs.getInt("created"), rs.getInt("expires"), rs.getString("reason"), rs.getString("jailer"), rs.getString("inv"), rs.getInt("x"), rs.getInt("x"), rs.getInt("x"), rs.getString("world"));
                     } else {
                         return null;
                     }
@@ -413,7 +440,7 @@ public class Prisoner {
                     rs = pst.executeQuery();
 
                     if (rs.next()) {
-                        return new Prisoner(rs.getInt("id"), rs.getString("name"), rs.getInt("cell"), rs.getInt("created"), rs.getInt("expires"), rs.getString("reason"), rs.getString("jailer"));
+                        return new Prisoner(rs.getInt("id"), rs.getString("name"), rs.getInt("cell"), rs.getInt("created"), rs.getInt("expires"), rs.getString("reason"), rs.getString("jailer"), rs.getString("inv"), rs.getInt("x"), rs.getInt("x"), rs.getInt("x"), rs.getString("world"));
                     } else {
                         return null;
                     }
@@ -645,5 +672,21 @@ public class Prisoner {
 
     public Inventory getInventory() {
         return InventorySerializer.getInventory(this.inventory);
+    }
+
+    public int getX() {
+        return this.x;
+    }
+
+    public int getY() {
+        return this.y;
+    }
+
+    public int getZ() {
+        return this.z;
+    }
+
+    public String getWorld() {
+        return this.world;
     }
 }
