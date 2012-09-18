@@ -29,10 +29,10 @@ public class JailPlugin extends JavaPlugin {
 
         // - Start UpdateChecker - \\
 //        checkForUpdates();
-        
+
         // - Load Listeners - \\
         this.loadListeners();
-        
+
 //        String stringurl = "http://dev.bukkit.org/server-mods/jailplusplus.rss";
 //        UpdateChecker uc = new UpdateChecker(this, stringurl);
 //        if (uc.updateNeeded()) {
@@ -137,10 +137,10 @@ public class JailPlugin extends JavaPlugin {
             }
         }
     }
-    
+
     public void loadListeners() {
         PluginManager pm = this.getServer().getPluginManager();
         pm.registerEvents(new JailStickHandler(), this);
     }
-    
+
 }

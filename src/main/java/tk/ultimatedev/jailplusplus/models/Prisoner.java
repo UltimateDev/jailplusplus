@@ -324,38 +324,38 @@ public class Prisoner {
                 }
             case MYSQL:
                 try {
-                conn = DBCommon.getConnection();
+                    conn = DBCommon.getConnection();
 
-                pst = conn.prepareStatement("SELECT * FROM " + tableName + " WHERE name=?");
-                pst.setString(1, name);
+                    pst = conn.prepareStatement("SELECT * FROM " + tableName + " WHERE name=?");
+                    pst.setString(1, name);
 
-                rs = pst.executeQuery();
+                    rs = pst.executeQuery();
 
-                if (rs.next()) {
-                    return new Prisoner(rs.getInt("id"), rs.getString("name"), rs.getInt("cell"), rs.getInt("created"), rs.getInt("expires"), rs.getString("reason"), rs.getString("jailer"));
-                } else {
+                    if (rs.next()) {
+                        return new Prisoner(rs.getInt("id"), rs.getString("name"), rs.getInt("cell"), rs.getInt("created"), rs.getInt("expires"), rs.getString("reason"), rs.getString("jailer"));
+                    } else {
+                        return null;
+                    }
+                } catch (SQLException ex) {
+                    exceptionHandler.logException(ex);
                     return null;
+                } finally {
+                    try {
+                        if (rs != null) {
+                            rs.close();
+                        }
+
+                        if (pst != null) {
+                            pst.close();
+                        }
+
+                        if (conn != null) {
+                            conn.close();
+                        }
+                    } catch (SQLException ignored) {
+
+                    }
                 }
-            } catch (SQLException ex) {
-                exceptionHandler.logException(ex);
-                return null;
-            } finally {
-                try {
-                    if (rs != null) {
-                        rs.close();
-                    }
-
-                    if (pst != null) {
-                        pst.close();
-                    }
-
-                    if (conn != null) {
-                        conn.close();
-                    }
-                } catch (SQLException ignored) {
-
-                }
-            }
             case FILE:
                 // TODO: YAML getting code
         }

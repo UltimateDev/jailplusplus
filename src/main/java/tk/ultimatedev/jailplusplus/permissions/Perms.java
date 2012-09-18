@@ -7,17 +7,16 @@ package tk.ultimatedev.jailplusplus.permissions;
 import org.bukkit.entity.Player;
 
 /**
- *
  * @author YoshiGenius
  */
 public class Perms {
-    
+
     private static Player player;
-    
+
     public Perms(Player player) {
         Perms.player = player;
     }
-    
+
     public boolean gotPermz(String permission) {
         if (player.hasPermission("jpp." + permission)) {
             return true;
@@ -25,5 +24,5 @@ public class Perms {
             return false;
         }
     }
-    
+
 }

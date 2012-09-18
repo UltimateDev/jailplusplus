@@ -38,7 +38,6 @@ public class JailStick implements SubCommand {
     public boolean playerOnly() {
         return true;
     }
-    
-    
+
 
 }

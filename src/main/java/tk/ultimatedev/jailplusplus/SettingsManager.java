@@ -32,7 +32,7 @@ public class SettingsManager {
     public File getJailFile(String name) {
         return FilePaths.getInstance().getJailYAMLFile(name);
     }
-    
+
     public File getUserdataDir() {
         return FilePaths.getInstance().getUserdataFolder();
     }

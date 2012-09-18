@@ -173,7 +173,6 @@ public class Cell {
     }
 
 
-
     @Override
     public String toString() {
         return "#" + this.jail + ":" + this.x1 + ":" + this.x2 + ":" + this.y1 + ":" + this.y2 + ":" + this.z1 + ":" + this.z2;
@@ -274,7 +273,7 @@ public class Cell {
 
         String tableName = (new DBCommon()).getPrefix() + "cells";
 
-        switch(engine) {
+        switch (engine) {
             case H2:
                 try {
                     conn = DBCommon.getConnection();
@@ -355,7 +354,7 @@ public class Cell {
 
         String tableName = (new DBCommon()).getPrefix() + "cells";
 
-        switch(engine) {
+        switch (engine) {
             case H2:
                 try {
                     conn = DBCommon.getConnection();
