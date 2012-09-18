@@ -29,6 +29,10 @@ public class Prisoner {
     String reason;
     String jailer;
     String inventory;
+    int x;
+    int y;
+    int z;
+    String world;
 
     ExceptionHandler exceptionHandler;
 

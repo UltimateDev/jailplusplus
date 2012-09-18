@@ -5,6 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import tk.ultimatedev.jailplusplus.commands.CommandHandler;
 import tk.ultimatedev.jailplusplus.handlers.JailStickHandler;
 import tk.ultimatedev.jailplusplus.models.Migrant;
+import tk.ultimatedev.jailplusplus.task.TaskScheduler;
 import tk.ultimatedev.jailplusplus.util.Log;
 
 import java.io.File;
@@ -57,7 +58,11 @@ public class JailPlugin extends JavaPlugin {
         Migrant migrant = new Migrant();
         migrant.migrate();
 
-        // - MCSTATS - \\
+        // - Tasks - \\
+        TaskScheduler scheduler = new TaskScheduler();
+        scheduler.schedule();
+
+        // - Plugin Metrics - \\
         try {
             Metrics metrics = new Metrics(this);
             metrics.start();
