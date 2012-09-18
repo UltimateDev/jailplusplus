@@ -11,30 +11,43 @@ import tk.ultimatedev.jailplusplus.JailPlugin;
 import tk.ultimatedev.jailplusplus.models.Jail;
 import tk.ultimatedev.jailplusplus.util.Cuboid;
 import tk.ultimatedev.jailplusplus.util.FilePaths;
+import tk.ultimatedev.jailplusplus.util.YamlGetters;
 
 /**
  * @author YoshiGenius
  */
 public class UserdataYAML {
-    
+
     private static String string;
-    
+
     public UserdataYAML(Player player) {
         UserdataYAML.string = player.getName();
     }
-    
+
     public UserdataYAML(String string) {
         UserdataYAML.string = string;
     }
+
+    public String getUserdataString(String subpath) {
+        return YamlGetters.getInstance().getPrisonersString(string, subpath);
+    }
+    
+    public int getUserdataInt(String subpath) {
+        return YamlGetters.getInstance().getPrisonersInt(string, subpath);
+    }
+    
+    public boolean getUserdataBool(String subpath) {
+        return YamlGetters.getInstance().getPrisonersBool(string, subpath);
+    }
     
     public File getUserdataFile() {
-        return FilePaths.getInstance().getUserYAMLFile(string);
+        return FilePaths.getInstance().getPrisonersFile();
     }
-    
+
     public YamlConfiguration getUserdataConf() {
-        return FilePaths.getInstance().getUserYAMLConf(string);
+        return FilePaths.getInstance().getPrisonersFileConf();
     }
-    
+
     public void saveUserdataConf() {
         try {
             this.getUserdataConf().save(this.getUserdataFile());
@@ -42,11 +55,11 @@ public class UserdataYAML {
             this.exception(e);
         }
     }
-    
+
     public boolean isJailed() {
-        return getUserdataConf().getBoolean("jailed");
+        return this.getUserdataBool("jailed");
     }
-    
+
     public void setJailed(boolean jailed) {
         try {
             this.getUserdataConf().set("jailed", jailed);
@@ -55,7 +68,7 @@ public class UserdataYAML {
             this.exception(e);
         }
     }
-    
+
     public Jail getJail() {
         String s = getUserdataConf().getString("jail");
         if (s.equalsIgnoreCase("")) {
@@ -67,7 +80,7 @@ public class UserdataYAML {
         }
         return jail;
     }
-    
+
     public Jail getJailStickJail() {
         String name = this.getUserdataConf().getString("jailstick.jail.name");
         String worldname = this.getUserdataConf().getString("jailstick.jail.world");
@@ -86,17 +99,17 @@ public class UserdataYAML {
         Jail jail = new Jail(name, cuboid);
         return jail;
     }
-    
+
     public String getJailStickTime() {
         String time = this.getUserdataConf().getString("jailstick.time");
         return time;
     }
-    
+
     public String getJailStickReason() {
         String reason = this.getUserdataConf().getString("jailstick.reason");
         return reason;
     }
-    
+
     public int getJailTimeSeconds() {
         int timeleft = this.getUserdataConf().getInt("time");
         return timeleft;
@@ -129,17 +142,17 @@ public class UserdataYAML {
         this.getUserdataConf().set("jailstick.jail.minloc", cuboid.getMinX() + "," + cuboid.getMinY() + "," + cuboid.getMinZ());
         this.saveUserdataConf();
     }
-    
+
     public void setJailStickTime(String time) {
         this.getUserdataConf().set("jailstick.time", time);
         this.saveUserdataConf();
     }
-    
+
     public void setJailStickReason(String reason) {
         this.getUserdataConf().set("jailstick.reason", reason);
         this.saveUserdataConf();
     }
-    
+
     public void setJailTimeSeconds(int seconds) {
         try {
             this.getUserdataConf().set("time", seconds);
@@ -148,12 +161,12 @@ public class UserdataYAML {
         }
         this.saveUserdataConf();
     }
-    
+
     public void setJailer(String jailer) {
         this.getUserdataConf().set("jailer", jailer);
         this.saveUserdataConf();
     }
-    
+
     public void exception(Exception e) {
         ExceptionHandler eh = new ExceptionHandler(JailPlugin.getPlugin());
         eh.logException(e);

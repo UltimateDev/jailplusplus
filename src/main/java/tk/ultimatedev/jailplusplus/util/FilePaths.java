@@ -14,38 +14,43 @@ public class FilePaths {
     public String getFolderPath() {
         return "plugins/" + JailPlugin.getPlugin().getDescription().getName() + "/";
     }
-
-    public String getUserdataFolderPath() {
-        return (getFolderPath() + "userdata/");
+    
+    public File getJailsFile() {
+        return new File(getFolderPath() + "jails.yml");
+    }
+    
+    public File getCellsFile() {
+        return new File(getFolderPath() + "cells.yml");
+    }
+    
+    public File getPrisonersFile() {
+        return new File(getFolderPath() + "prisoners.yml");
     }
 
-    public String getJailsFolderPath() {
-        return (getFolderPath() + "jails/");
+    public String getPrisonersPath(String playername) {
+        return playername + ".";
     }
 
-    public File getUserdataFolder() {
-        return new File(getUserdataFolderPath());
+    public String getJailPath(String jailname) {
+        return jailname + ".";
+    }
+    
+    public String getCellPath(String jailname, String cellname) {
+        return jailname + "." + cellname + ".";
     }
 
-    public File getJailsFolder() {
-        return new File(getJailsFolderPath());
-    }
-
-    public File getUserYAMLFile(String playername) {
-        return new File(getUserdataFolderPath() + playername + ".yml");
-    }
-
-    public File getJailYAMLFile(String jailname) {
-        return new File(getJailsFolderPath() + jailname + ".yml");
-    }
-
-    public YamlConfiguration getUserYAMLConf(String playername) {
-        File file = new File(getUserdataFolderPath() + playername + ".yml");
+    public YamlConfiguration getPrisonersFileConf() {
+        File file = this.getPrisonersFile();
         return YamlConfiguration.loadConfiguration(file);
     }
 
-    public YamlConfiguration getJailYAMLConf(String jailname) {
-        File file = new File(getJailsFolderPath() + jailname + ".yml");
+    public YamlConfiguration getJailFileConf() {
+        File file = this.getJailsFile();
+        return YamlConfiguration.loadConfiguration(file);
+    }
+    
+    public YamlConfiguration getCellFileConf() {
+        File file = this.getCellsFile();
         return YamlConfiguration.loadConfiguration(file);
     }
 
