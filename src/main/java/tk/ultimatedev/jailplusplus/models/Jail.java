@@ -43,7 +43,7 @@ public class Jail {
         this.saved = true;
 
         this.id = id;
-        this.name = name;
+        this.name = name.toLowerCase();
         this.x1 = x1;
         this.x2 = x2;
         this.y1 = y1;
@@ -66,7 +66,7 @@ public class Jail {
         this.saved = false;
 
         this.id = -1;
-        this.name = name;
+        this.name = name.toLowerCase();
         this.x1 = x1;
         this.x2 = x2;
         this.y1 = y1;
@@ -89,7 +89,7 @@ public class Jail {
         this.saved = true;
 
         this.id = id;
-        this.name = name;
+        this.name = name.toLowerCase();
         this.x1 = area.getMinX();
         this.x2 = area.getMaxX();
         this.y1 = area.getMinY();
@@ -112,7 +112,7 @@ public class Jail {
         this.saved = false;
 
         this.id = -1;
-        this.name = name;
+        this.name = name.toLowerCase();
         this.x1 = area.getMinX();
         this.x2 = area.getMaxX();
         this.y1 = area.getMinY();

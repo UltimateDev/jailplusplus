@@ -3,11 +3,10 @@ package tk.ultimatedev.jailplusplus.models;
 import org.bukkit.Bukkit;
 import tk.ultimatedev.jailplusplus.ExceptionHandler;
 import tk.ultimatedev.jailplusplus.JailPlugin;
+import tk.ultimatedev.jailplusplus.SettingsManager;
 import tk.ultimatedev.jailplusplus.util.Log;
 
-import java.io.File;
 import java.sql.*;
-import tk.ultimatedev.jailplusplus.SettingsManager;
 
 /**
  * @author Sushi
@@ -210,7 +209,8 @@ public class Migrant {
                                         "name VARCHAR(32) NOT NULL UNIQUE," +
                                         "cell INT NOT NULL," +
                                         "created BIGINT," +
-                                        "expires BIGINT," +
+                                        "sentence BIGINT," +
+                                        "served BIGINT," +
                                         "reason VARCHAR(150)," +
                                         "jailer VARCHAR(20)," +
                                         "inv CLOB," +
