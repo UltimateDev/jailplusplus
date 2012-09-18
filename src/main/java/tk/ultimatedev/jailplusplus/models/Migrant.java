@@ -7,6 +7,7 @@ import tk.ultimatedev.jailplusplus.util.Log;
 
 import java.io.File;
 import java.sql.*;
+import tk.ultimatedev.jailplusplus.SettingsManager;
 
 public class Migrant {
     DatabaseEngine engine;
@@ -293,20 +294,9 @@ public class Migrant {
                 break;
             case FILE:
                 Log.info("So you chose FlatFile, eh? Very well then.");
-                String folderpath = "plugins/JailPlusPlus/";
-                File folder = new File(folderpath + "jails/");
-
-                if (!folder.exists()) {
-                    if (folder.mkdir()) {
-
-                    }
-                }
-                if (!folder.isDirectory()) {
-                    return;
-                }
+                SettingsManager settings = new SettingsManager(JailPlugin.getPlugin());
+                settings.firstRun();
                 // File f = new File(folderpath + "jails/Steve.yml");
-
-
                 break;
             default:
                 Log.severe("You specified the database engine '" + JailPlugin.getPlugin().getConfig().getString("database.driver") + "', but the only supported databases are 'h2', 'mysql', and 'file'! Disabling plugin...");

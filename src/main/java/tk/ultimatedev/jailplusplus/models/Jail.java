@@ -781,16 +781,16 @@ public class Jail {
         return new JailYAML(this);
     }
 
-
     public static Jail matchJailYAML(String name) {
         File folder = FilePaths.getInstance().getJailsFolder();
-
         // TODO: Don't dereference this
         for (File f : folder.listFiles()) {
-            YamlConfiguration c = YamlConfiguration.loadConfiguration(f);
-            if (c.getString("name").equalsIgnoreCase(name)) {
-                JailYAML jy = new JailYAML(f);
-                return new Jail(name, jy.getCuboid());
+            String filename = f.getName();
+            if (filename.endsWith(".yml")) {
+                filename = filename.replaceAll(".yml", "");
+                if (filename.equalsIgnoreCase(name)) {
+                    
+                }
             }
         }
         return null;

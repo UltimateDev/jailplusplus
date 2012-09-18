@@ -41,14 +41,19 @@ public class SettingsManager {
         return FilePaths.getInstance().getUserYAMLFile(name);
     }
 
-    public void firstRun() {
+    public boolean firstRun() {
         JailPlugin.getPlugin().saveDefaultConfig();
         if (!this.getJailsDir().exists()) {
-            this.getJailsDir().mkdir();
+            if (this.getJailsDir().mkdir()) {
+                return false;
+            }
         }
         if (!this.getUserdataDir().exists()) {
-            this.getUserdataDir().mkdir();
+            if (this.getUserdataDir().mkdir()) {
+                return false;
+            }
         }
+        return true;
     }
 
     public YamlConfiguration getConfig() {
