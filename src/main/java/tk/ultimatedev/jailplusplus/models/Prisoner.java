@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import tk.ultimatedev.jailplusplus.models.file.UserdataYAML;
+import tk.ultimatedev.jailplusplus.util.FilePaths;
+import tk.ultimatedev.jailplusplus.util.YamlGetters;
 
 
 /**
@@ -210,11 +212,20 @@ public class Prisoner {
                             }
                         }
                     case FILE:
-                        String player = this.player;
-                        String jailer = this.jailer;
-                        String inventory = this.inventory;
                         UserdataYAML data = new UserdataYAML(player);
-                        
+                        data.setCreatedTime(this.created);
+                        data.setInventory(this.inventory);
+                        data.setReason(this.reason);
+                        data.setJailer(this.jailer);
+                        data.setLastLocX(this.x);
+                        data.setLastLocY(this.y);
+                        data.setLastLocZ(this.z);
+                        if (Bukkit.getServer().getWorld(this.world) == null) return DBCommon.DBResponse.FAILURE; 
+                        data.setLastLocW(Bukkit.getServer().getWorld(this.world));
+                        data.setJailedIn(Cell.getCell(this.cell));
+                        data.setSentence(this.sentence);
+                        data.setServed(this.served);
+                        YamlGetters.getInstance().savePrisonersFile();
                         break;
                 }
             } else {
@@ -304,7 +315,12 @@ public class Prisoner {
                     }
                 }
             case FILE:
-                // TODO: YAML getting code
+                List<String> strings = FilePaths.getInstance().getPrisonersFileConf().getStringList("prisoners");
+                for (String s : strings) {
+                    Prisoner p = Prisoner.getPrisoner(s);
+                    prisoners.add(p);
+                }
+                return prisoners;
         }
 
         return null;
@@ -331,7 +347,7 @@ public class Prisoner {
                     rs = pst.executeQuery();
 
                     if (rs.next()) {
-                        return new Prisoner(rs.getInt("id"), rs.getString("name"), rs.getInt("cell"), rs.getInt("created"), rs.getInt("sentence"), rs.getInt("served"), rs.getString("reason"), rs.getString("jailer"), rs.getString("inv"), rs.getInt("x"), rs.getInt("x"), rs.getInt("x"), rs.getString("world"));
+                        return new Prisoner(rs.getInt("id"), rs.getString("name"), rs.getInt("cell"), rs.getInt("created"), rs.getInt("sentence"), rs.getInt("served"), rs.getString("reason"), rs.getString("jailer"), rs.getString("inv"), rs.getInt("x"), rs.getInt("y"), rs.getInt("z"), rs.getString("world"));
                     } else {
                         return null;
                     }
@@ -365,7 +381,7 @@ public class Prisoner {
                     rs = pst.executeQuery();
 
                     if (rs.next()) {
-                        return new Prisoner(rs.getInt("id"), rs.getString("name"), rs.getInt("cell"), rs.getInt("created"), rs.getInt("sentence"), rs.getInt("served"), rs.getString("reason"), rs.getString("jailer"), rs.getString("inv"), rs.getInt("x"), rs.getInt("x"), rs.getInt("x"), rs.getString("world"));
+                        return new Prisoner(rs.getInt("id"), rs.getString("name"), rs.getInt("cell"), rs.getInt("created"), rs.getInt("sentence"), rs.getInt("served"), rs.getString("reason"), rs.getString("jailer"), rs.getString("inv"), rs.getInt("x"), rs.getInt("y"), rs.getInt("z"), rs.getString("world"));
                     } else {
                         return null;
                     }
@@ -390,7 +406,22 @@ public class Prisoner {
                     }
                 }
             case FILE:
-                // TODO: YAML getting code
+                UserdataYAML data = new UserdataYAML(name);
+                int pID = data.getID();
+                String pname = data.getName();
+                int pcell = data.getCell().getID();
+                int pcreated = data.getCreatedTime();
+                int psentence = data.getSentence();
+                int pserved = data.getServed();
+                String pjailer = data.getJailer();
+                String preason = data.getReason();
+                String pinventory = data.getInventory();
+                int px = data.getLastLocX();
+                int py = data.getLastLocY();
+                int pz = data.getLastLocZ();
+                String pworldname = data.getLastLocW().getName();
+                Prisoner prisoner = new Prisoner(pID, pname, pcell, pcreated, psentence, pserved, preason, pjailer, pinventory, px, py, pz, pworldname);
+                return prisoner;
         }
         return null;
     }
@@ -475,7 +506,22 @@ public class Prisoner {
                     }
                 }
             case FILE:
-                // TODO: YAML getting code
+                UserdataYAML data = new UserdataYAML(id);
+                int pID = data.getID();
+                String pname = data.getName();
+                int pcell = data.getCell().getID();
+                int pcreated = data.getCreatedTime();
+                int psentence = data.getSentence();
+                int pserved = data.getServed();
+                String pjailer = data.getJailer();
+                String preason = data.getReason();
+                String pinventory = data.getInventory();
+                int px = data.getLastLocX();
+                int py = data.getLastLocY();
+                int pz = data.getLastLocZ();
+                String pworldname = data.getLastLocW().getName();
+                Prisoner prisoner = new Prisoner(pID, pname, pcell, pcreated, psentence, pserved, preason, pjailer, pinventory, px, py, pz, pworldname);
+                return prisoner;
         }
         return null;
     }
@@ -560,8 +606,9 @@ public class Prisoner {
                     }
                 }
             case FILE:
-                // TODO: File deletion code
-                return false;
+                UserdataYAML data = new UserdataYAML(name);
+                data.removePrisoner();
+                return true;
         }
         return true;
     }
@@ -646,8 +693,9 @@ public class Prisoner {
                     }
                 }
             case FILE:
-                // TODO: File deletion code
-                return false;
+                UserdataYAML data = new UserdataYAML(Prisoner.getPrisoner(id));
+                data.removePrisoner();
+                return true;
         }
         return true;
     }

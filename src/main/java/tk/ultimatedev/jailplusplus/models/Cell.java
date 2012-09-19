@@ -1,11 +1,16 @@
 package tk.ultimatedev.jailplusplus.models;
 
+import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import org.bukkit.configuration.file.YamlConfiguration;
 import tk.ultimatedev.jailplusplus.ExceptionHandler;
 import tk.ultimatedev.jailplusplus.JailPlugin;
+import tk.ultimatedev.jailplusplus.models.file.CellYAML;
+import tk.ultimatedev.jailplusplus.models.file.JailYAML;
 import tk.ultimatedev.jailplusplus.util.Cuboid;
+import tk.ultimatedev.jailplusplus.util.FilePaths;
 
 /**
  * @author Sushi
@@ -338,7 +343,18 @@ public class Cell {
                     }
                 }
             case FILE:
-                // TODO: YAML getting code
+                YamlConfiguration cellconf = FilePaths.getInstance().getCellFileConf();
+                List<String> allcells = cellconf.getStringList("cells");
+                for (String jname : allcells) {
+                    String[] jailcell = jname.split(";");
+                    String jailname = jailcell[0];
+                    int cellid = Integer.valueOf(jailcell[1]);
+                    CellYAML data = new CellYAML(jailname, cellid);
+                    data.getCuboid();
+                    Cell cell = new Cell(cellid, data.getJail(), data.getCuboid());
+                    cells.add(cell);
+                }
+                return cells;
         }
         return null;
     }

@@ -4,11 +4,14 @@ import java.io.File;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.configuration.MemorySection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import tk.ultimatedev.jailplusplus.ExceptionHandler;
 import tk.ultimatedev.jailplusplus.JailPlugin;
+import tk.ultimatedev.jailplusplus.models.Cell;
 import tk.ultimatedev.jailplusplus.models.Jail;
+import tk.ultimatedev.jailplusplus.models.Prisoner;
 import tk.ultimatedev.jailplusplus.util.Cuboid;
 import tk.ultimatedev.jailplusplus.util.FilePaths;
 import tk.ultimatedev.jailplusplus.util.YamlGetters;
@@ -18,6 +21,10 @@ import tk.ultimatedev.jailplusplus.util.YamlGetters;
  */
 public class UserdataYAML {
     private String pname;
+    
+    public UserdataYAML(Prisoner prisoner) {
+        this.pname = prisoner.getPlayer();
+    }
 
     public UserdataYAML(Player player) {
         this.pname = player.getName();
@@ -26,16 +33,38 @@ public class UserdataYAML {
     public UserdataYAML(String string) {
         this.pname = string;
     }
+    
+    public UserdataYAML(int id) {
+        String string = null;
+        for (Prisoner p : Prisoner.getAllPrisoners()) {
+            if (p.getId() == id) {
+                string = p.getPlayer();
+            }
+        }
+        this.pname = string;
+    }
+    
+    public void removePrisoner() {
+        MemorySection cs = this.getUserdataConf();
+        Prisoner prisoner = Prisoner.getPrisoner(pname);
+        String ipath = FilePaths.getInstance().getPrisonersPath(pname);
+        String cpath = "";
+        if (ipath.endsWith(pname + ".")) {
+            cpath = ipath.replace(pname + ".", pname + "");
+        }
+        cs.set(cpath, null);
+        YamlGetters.getInstance().savePrisonersFile();
+    }
 
-    private String getUserdataString(String subpath) {
+    public String getUserdataString(String subpath) {
         return YamlGetters.getInstance().getPrisonersString(pname, subpath);
     }
 
-    private int getUserdataInt(String subpath) {
+    public int getUserdataInt(String subpath) {
         return YamlGetters.getInstance().getPrisonersInt(pname, subpath);
     }
 
-    private boolean getUserdataBool(String subpath) {
+    public boolean getUserdataBool(String subpath) {
         return YamlGetters.getInstance().getPrisonersBool(pname, subpath);
     }
     
@@ -59,6 +88,36 @@ public class UserdataYAML {
     public void setJailed(boolean jailed) {
         this.setUserdataEntry("jailed", jailed);
     }
+    
+    // getters
+    
+    public String getName() {
+        return this.getUserdataString("name");
+    }
+    
+    public int getID() {
+        return this.getUserdataInt("id");
+    }
+    
+    public int getCreatedTime() {
+        return this.getUserdataInt("created");
+    }
+    
+    public int getSentence() {
+        return this.getUserdataInt("sentence");
+    }
+    
+    public int getServed() {
+        return this.getUserdataInt("served");
+    }
+    
+    public String getReason() {
+        return this.getUserdataString("reason");
+    }
+    
+    public String getInventory() {
+        return this.getUserdataString("inventory");
+    }
 
     public Jail getJail() {
         String s = getUserdataString("jail");
@@ -68,6 +127,41 @@ public class UserdataYAML {
         if (jail == null) return null;
         return jail;
     }
+    
+    public Cell getCell() {
+        int cid = this.getUserdataInt("cell.id");
+        Cell cell = Cell.getCell(cid);
+        return cell;
+    }
+    
+    public World getLastLocW() {
+        World world = Bukkit.getServer().getWorld(this.getUserdataString("loc.world"));
+        if (world == null) return null;
+        return world;
+    }
+    
+    public int getLastLocX() {
+        return this.getUserdataInt("loc.x");
+    }
+    
+    public int getLastLocY() {
+        return this.getUserdataInt("loc.y");
+    }
+    
+    public int getLastLocZ() {
+        return this.getUserdataInt("loc.z");
+    }
+    
+    public Location getLastLoc() {
+        int x = this.getLastLocX();
+        int y = this.getLastLocY();
+        int z = this.getLastLocZ();
+        World world = this.getLastLocW();
+        Location loc = new Location(world, x, y, z);
+        return loc;
+    }
+    
+    // jailstick
 
     public Jail getJailStickJail() {
         String name = this.getUserdataConf().getString("jailstick.jail.name");
@@ -107,6 +201,28 @@ public class UserdataYAML {
         String jailer = this.getUserdataString("jailer");
         return jailer;
     }
+    
+    // setters
+    
+    public void setCreatedTime(int time) {
+        this.setUserdataEntry("created", time);
+    }
+    
+    public void setSentence(int sentence) {
+        this.setUserdataEntry("sentence", sentence);
+    }
+    
+    public void setServed(int served) {
+        this.setUserdataEntry("served", served);
+    }
+    
+    public void setReason(String reason) {
+        this.setUserdataEntry("reason", reason);
+    }
+    
+    public void setInventory(String inventory) {
+        this.setUserdataEntry("inventory", inventory);
+    }
 
     public void setJailStickJail(Jail jail) {
         this.setUserdataEntry("jailstick.jail.name", jail.getName());
@@ -142,6 +258,52 @@ public class UserdataYAML {
 
     public void setJailer(String jailer) {
         this.setUserdataEntry("jailer", jailer);
+    }
+    
+    public void setJailedIn(Cell cell) {
+        this.setUserdataEntry("cell.id", cell.getID());
+        this.setUserdataEntry("cell.min.x", cell.getX1());
+        this.setUserdataEntry("cell.min.y", cell.getY1());
+        this.setUserdataEntry("cell.min.z", cell.getZ1());
+        this.setUserdataEntry("cell.max.x", cell.getX2());
+        this.setUserdataEntry("cell.max.y", cell.getY2());
+        this.setUserdataEntry("cell.max.z", cell.getZ2());
+        Jail jail = cell.getJail();
+        JailYAML data = jail.getYamlConf();
+        this.setUserdataEntry("jail.id", data.getID());
+        this.setUserdataEntry("jail.name", data.getName());
+        Cuboid cuboid = data.getCuboid();
+        Location min = cuboid.getA();
+        Location max = cuboid.getB();
+        this.setUserdataEntry("jail.min.x", min.getX());
+        this.setUserdataEntry("jail.min.y", min.getY());
+        this.setUserdataEntry("jail.min.z", min.getZ());
+        this.setUserdataEntry("jail.max.x", max.getX());
+        this.setUserdataEntry("jail.max.y", max.getY());
+        this.setUserdataEntry("jail.max.z", max.getZ());
+    }
+    
+    public void setLastLoc(Location loc) {
+        this.setLastLocW(loc.getWorld());
+        this.setLastLocX(loc.getBlockX());
+        this.setLastLocY(loc.getBlockY());
+        this.setLastLocZ(loc.getBlockZ());
+    }
+    
+    public void setLastLocW(World w) {
+        this.setUserdataEntry("loc.world", w.getName());
+    }
+    
+    public void setLastLocX(int coord) {
+        this.setUserdataEntry("loc.x", coord);
+    }
+    
+    public void setLastLocY(int coord) {
+        this.setUserdataEntry("loc.y", coord);
+    }
+    
+    public void setLastLocZ(int coord) {
+        this.setUserdataEntry("loc.z", coord);
     }
 
     public void exception(Exception e) {

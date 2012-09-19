@@ -22,13 +22,20 @@ public class CellYAML {
     private int cellid;
     private int jailid;
 
-    public CellYAML(int JailID, int CellID) {
-        this.jailid = JailID;
+    public CellYAML(int jailID, int cellID) {
+        this.jailid = jailID;
+        this.cellid = cellID;
     }
     
     public CellYAML(Jail jail, Cell cell) {
         this.jailid = jail.getID();
         this.cellid = cell.getID();
+    }
+    
+    public CellYAML(String jailname, int cellid) {
+        Jail j = Jail.getJail(jailname);
+        this.jailid = j.getID();
+        this.cellid = cellid;
     }
     
     // remove methods
@@ -48,6 +55,10 @@ public class CellYAML {
     }
     
     // get methods
+    
+    public Jail getJail() {
+        return Jail.getJail(this.jailid);
+    }
 
     public YamlConfiguration getCellConf() {
         return FilePaths.getInstance().getCellFileConf();
