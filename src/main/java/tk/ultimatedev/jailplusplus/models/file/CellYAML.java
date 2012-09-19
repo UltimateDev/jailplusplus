@@ -56,6 +56,10 @@ public class CellYAML {
     
     // get methods
     
+    public List<Prisoner> getPrisoners() {
+        return Prisoner.getCellPrisonersYAML(this.cellid);
+    }
+    
     public Jail getJail() {
         return Jail.getJail(this.jailid);
     }
@@ -74,11 +78,6 @@ public class CellYAML {
 
     public int getID() {
         return YamlGetters.getInstance().getCellInt(this.jailid, this.cellid, "id");
-    }
-
-    public List<Prisoner> getPrisoners() {
-        // use this.name
-        return null;
     }
 
     public Cuboid getCuboid() {

@@ -1,19 +1,18 @@
 package tk.ultimatedev.jailplusplus.models;
 
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import tk.ultimatedev.jailplusplus.ExceptionHandler;
 import tk.ultimatedev.jailplusplus.JailPlugin;
-import tk.ultimatedev.jailplusplus.util.serialization.InventorySerializer;
-
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import tk.ultimatedev.jailplusplus.models.file.UserdataYAML;
 import tk.ultimatedev.jailplusplus.util.FilePaths;
 import tk.ultimatedev.jailplusplus.util.YamlGetters;
+import tk.ultimatedev.jailplusplus.util.serialization.InventorySerializer;
 
 
 /**
@@ -751,4 +750,53 @@ public class Prisoner {
     public String getWorld() {
         return this.world;
     }
+    
+    public static List<Prisoner> getJailPrisonersYAML(Jail jail) {
+        List<Prisoner> prisoners = new ArrayList<Prisoner>();
+        for (Prisoner p : Prisoner.getAllPrisoners()) {
+            UserdataYAML data = new UserdataYAML(p);
+            Jail j = data.getJail();
+            if (j == jail) {
+                prisoners.add(p);
+            }
+        }
+        return prisoners;
+    }
+    
+    public static List<Prisoner> getJailPrisonersYAML(int jailid) {
+        List<Prisoner> prisoners = new ArrayList<Prisoner>();
+        for (Prisoner p : Prisoner.getAllPrisoners()) {
+            UserdataYAML data = new UserdataYAML(p);
+            Jail j = data.getJail();
+            if (j.getID() == jailid) {
+                prisoners.add(p);
+            }
+        }
+        return prisoners;
+    }
+    
+    public static List<Prisoner> getCellPrisonersYAML(Cell cell) {
+        List<Prisoner> prisoners = new ArrayList<Prisoner>();
+        for (Prisoner p : Prisoner.getAllPrisoners()) {
+            UserdataYAML data = new UserdataYAML(p);
+            Cell c = data.getCell();
+            if (c == cell) {
+                prisoners.add(p);
+            }
+        }
+        return prisoners;
+    }
+    
+    public static List<Prisoner> getCellPrisonersYAML(int cellid) {
+        List<Prisoner> prisoners = new ArrayList<Prisoner>();
+        for (Prisoner p : Prisoner.getAllPrisoners()) {
+            UserdataYAML data = new UserdataYAML(p);
+            Cell cell = data.getCell();
+            if (cell.getID() == cellid) {
+                prisoners.add(p);
+            }
+        }
+        return prisoners;
+    }
+    
 }

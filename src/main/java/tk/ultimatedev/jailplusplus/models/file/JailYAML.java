@@ -38,6 +38,10 @@ public class JailYAML {
     }
     
     // get methods
+    
+    public List<Prisoner> getPrisoners() {
+        return Prisoner.getJailPrisonersYAML(Jail.getJail(name));
+    }
 
     public YamlConfiguration getJailConf() {
         return FilePaths.getInstance().getJailFileConf();
@@ -53,17 +57,6 @@ public class JailYAML {
 
     public int getID() {
         return YamlGetters.getInstance().getJailInt(this.name, "id");
-    }
-
-    public List<Prisoner> getPrisoners() {
-        YamlConfiguration pYAML = FilePaths.getInstance().getPrisonersFileConf();
-        List<String> sPrisoners = pYAML.getStringList("prisoners");
-        List<Prisoner> prisoners = new ArrayList<Prisoner>();
-        for (String s : sPrisoners) {
-            Prisoner p = Prisoner.getPrisoner(s);
-            prisoners.add(p);
-        }
-        return null;
     }
 
     public Cuboid getCuboid() {

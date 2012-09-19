@@ -4,6 +4,9 @@ import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
 import tk.ultimatedev.jailplusplus.ExceptionHandler;
 import tk.ultimatedev.jailplusplus.JailPlugin;
@@ -11,6 +14,7 @@ import tk.ultimatedev.jailplusplus.models.file.CellYAML;
 import tk.ultimatedev.jailplusplus.models.file.JailYAML;
 import tk.ultimatedev.jailplusplus.util.Cuboid;
 import tk.ultimatedev.jailplusplus.util.FilePaths;
+import tk.ultimatedev.jailplusplus.util.YamlGetters;
 
 /**
  * @author Sushi
@@ -255,7 +259,13 @@ public class Cell {
                             }
                         }
                     case FILE:
-                        // TODO: File saving code
+                        CellYAML data = new CellYAML(this.jail, this.id);
+                        data.setName(String.valueOf(this.jail) + String.valueOf(this.id));
+                        data.setID(this.id);
+                        World w = Bukkit.getServer().getWorld(Jail.getJail(this.jail).world);
+                        Cuboid cuboid = new Cuboid(new Location(w, this.x1, this.y1, this.z1), new Location(w, this.x2, this.y2, this.z2));
+                        data.setCuboid(cuboid);
+                        YamlGetters.getInstance().saveCellsFile();
                 }
             } else {
                 throw new NullPointerException("A database save of null data was attempted.");

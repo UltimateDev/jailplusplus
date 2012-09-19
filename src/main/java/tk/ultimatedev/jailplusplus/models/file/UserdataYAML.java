@@ -46,7 +46,6 @@ public class UserdataYAML {
     
     public void removePrisoner() {
         MemorySection cs = this.getUserdataConf();
-        Prisoner prisoner = Prisoner.getPrisoner(pname);
         String ipath = FilePaths.getInstance().getPrisonersPath(pname);
         String cpath = "";
         if (ipath.endsWith(pname + ".")) {
