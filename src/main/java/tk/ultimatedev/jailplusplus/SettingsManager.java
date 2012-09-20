@@ -31,10 +31,6 @@ public class SettingsManager {
         return f;
     }
 
-    public File getFolder() {
-        return FilePaths.getInstance().getFolder();
-    }
-
     public File getJailsFile() {
         return FilePaths.getInstance().getJailsFile();
     }
@@ -48,9 +44,8 @@ public class SettingsManager {
     }
 
     public boolean firstRun() {
-        this.plugin.saveDefaultConfig();
-        if (!this.getFolder().exists()) {
-            if (!this.getFolder().mkdir()) {
+        if (!plugin.getDataFolder().exists()) {
+            if (!plugin.getDataFolder().mkdir()) {
                 return false;
             }
         }
