@@ -21,7 +21,12 @@ public class CellYAML {
 
     private int cellid;
     private int jailid;
-
+    
+    public CellYAML(Cell cell) {
+        this.cellid = cell.getID();
+        this.jailid = cell.getJailID();
+    }
+    
     public CellYAML(int jailID, int cellID) {
         this.jailid = jailID;
         this.cellid = cellID;

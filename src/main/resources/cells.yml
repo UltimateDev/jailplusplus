@@ -1,0 +1,19 @@
+cells:
+- 0;1
+- 0;1
+
+jailname:
+  cellname:
+    id: 0
+    name: cellname
+    loc:
+      world: world
+      min:
+        x: 0
+        y: 65
+        z: 0
+      max:
+        x: 5
+        y: 70
+        z: 5
+

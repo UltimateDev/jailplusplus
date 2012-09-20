@@ -1,17 +1,11 @@
 package tk.ultimatedev.jailplusplus.models;
 
-//~--- non-JDK imports --------------------------------------------------------
-
+import java.sql.*;
 import org.bukkit.Bukkit;
-
 import tk.ultimatedev.jailplusplus.ExceptionHandler;
 import tk.ultimatedev.jailplusplus.JailPlugin;
 import tk.ultimatedev.jailplusplus.SettingsManager;
 import tk.ultimatedev.jailplusplus.util.Log;
-
-//~--- JDK imports ------------------------------------------------------------
-
-import java.sql.*;
 
 /**
  * @author Sushi
@@ -245,10 +239,7 @@ public class Migrant {
             Log.info("So you chose FlatFile, eh? Very well then.");
 
             SettingsManager settings = new SettingsManager(JailPlugin.getPlugin());
-
             settings.firstRun();
-
-            // File f = new File(folderpath + "jails/Steve.yml");
             break;
 
         default :

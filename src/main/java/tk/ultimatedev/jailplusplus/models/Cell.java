@@ -449,7 +449,12 @@ public class Cell {
                     }
                 }
             case FILE:
-                // TODO: YAML getting code
+                for (Cell cell : Cell.getAllCells()) {
+                    if (cell.getID() == id) {
+                        return cell;
+                    }
+                }
+                return null;
         }
         return null;
     }
@@ -534,7 +539,9 @@ public class Cell {
                     }
                 }
             case FILE:
-                // TODO: Add file deletion code
+                Cell cell = Cell.getCell(id);
+                CellYAML data = new CellYAML(cell);
+                data.removeCell();
         }
         return true;
     }

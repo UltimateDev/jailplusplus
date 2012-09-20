@@ -1,28 +1,19 @@
 package tk.ultimatedev.jailplusplus;
 
-//~--- non-JDK imports --------------------------------------------------------
-
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-
 import tk.ultimatedev.jailplusplus.commands.CommandHandler;
 import tk.ultimatedev.jailplusplus.handlers.JailStickHandler;
 import tk.ultimatedev.jailplusplus.models.Migrant;
 import tk.ultimatedev.jailplusplus.task.TaskScheduler;
+import tk.ultimatedev.jailplusplus.util.FilePaths;
 import tk.ultimatedev.jailplusplus.util.Log;
-
-//~--- JDK imports ------------------------------------------------------------
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
 
 public class JailPlugin extends JavaPlugin {
     private static JailPlugin plugin;
@@ -41,23 +32,17 @@ public class JailPlugin extends JavaPlugin {
         // - Load Listeners - \\
         this.loadListeners();
 
-//      String stringurl = "http://dev.bukkit.org/server-mods/jailplusplus.rss";
-//      UpdateChecker uc = new UpdateChecker(this, stringurl);
-//      if (uc.updateNeeded()) {
-//          if (this.getConfig().getString("update.stream").equalsIgnoreCase("")) {
-//              Log.info("A new version is available: " + uc.getVersion());
-//              Log.info("Get it from: " + uc.getLink());
-//          }
-//      }
+      String stringurl = "http://dev.bukkit.org/server-mods/jailplusplus.rss";
+      UpdateChecker uc = new UpdateChecker(this, stringurl);
+      if (uc.updateNeeded()) {
+          if (this.getConfig().getString("update.stream").equalsIgnoreCase("")) {
+              Log.info("A new version is available: " + uc.getVersion());
+              Log.info("Get it from: " + uc.getLink());
+          }
+      }
+        
         // - Command - \\
         this.getCommand("jail").setExecutor(new CommandHandler(this));
-
-        // - Setting up config - \\
-        File f = new File(this.getDataFolder(), "config.yml");
-
-        if (!f.exists()) {
-            this.saveDefaultConfig();
-        }
 
         this.reloadConfig();
 
@@ -166,5 +151,61 @@ public class JailPlugin extends JavaPlugin {
         PluginManager pm = this.getServer().getPluginManager();
         
         pm.registerEvents(new JailStickHandler(), this);
+    }
+    
+    private boolean reloadCellConfig() {
+        SettingsManager sm = new SettingsManager(this);
+        if (sm.cellFile == null) {
+            sm.cellFile = FilePaths.getInstance().getJailsFile();
+        }
+        sm.cellConf = FilePaths.getInstance().getJailFileConf();
+        
+        InputStream stream = this.getResource("cells.yml");
+        if (stream != null) {
+            YamlConfiguration yconf = YamlConfiguration.loadConfiguration(stream);
+            sm.cellConf.setDefaults(yconf);
+            return true;
+        }
+        return false;
+    }
+    
+    private boolean reloadPrisonerConfig() {
+        SettingsManager sm = new SettingsManager(this);
+        if (sm.prisonerFile == null) {
+            sm.prisonerFile = FilePaths.getInstance().getJailsFile();
+        }
+        sm.prisonerConf = FilePaths.getInstance().getJailFileConf();
+        
+        InputStream jailstream = this.getResource("prisoners.yml");
+        if (jailstream != null) {
+            YamlConfiguration yconf = YamlConfiguration.loadConfiguration(jailstream);
+            sm.prisonerConf.setDefaults(yconf);
+            return true;
+        }
+        return false;
+    }
+    
+    private boolean reloadJailConfig() {
+        SettingsManager sm = new SettingsManager(this);
+        if (sm.jailFile == null) {
+            sm.jailFile = FilePaths.getInstance().getJailsFile();
+        }
+        sm.jailConf = FilePaths.getInstance().getJailFileConf();
+        
+        InputStream stream = this.getResource("jails.yml");
+        if (stream != null) {
+            YamlConfiguration yconf = YamlConfiguration.loadConfiguration(stream);
+            sm.jailConf.setDefaults(yconf);
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean setupConfigs() {
+        if (this.reloadCellConfig() && this.reloadJailConfig() && this.reloadPrisonerConfig()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

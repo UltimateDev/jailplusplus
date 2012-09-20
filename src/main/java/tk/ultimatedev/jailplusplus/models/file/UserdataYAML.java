@@ -128,7 +128,7 @@ public class UserdataYAML {
     }
     
     public Cell getCell() {
-        int cid = this.getUserdataInt("cell.id");
+        int cid = this.getUserdataInt("cell");
         Cell cell = Cell.getCell(cid);
         return cell;
     }

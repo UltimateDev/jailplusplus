@@ -1,14 +1,8 @@
 package tk.ultimatedev.jailplusplus.util;
 
-//~--- non-JDK imports --------------------------------------------------------
-
-import org.bukkit.configuration.file.YamlConfiguration;
-
-import tk.ultimatedev.jailplusplus.JailPlugin;
-
-//~--- JDK imports ------------------------------------------------------------
-
 import java.io.File;
+import org.bukkit.configuration.file.YamlConfiguration;
+import tk.ultimatedev.jailplusplus.JailPlugin;
 
 /**
  * @author YoshiGenius

@@ -1,15 +1,14 @@
 package tk.ultimatedev.jailplusplus;
 
-//~--- non-JDK imports --------------------------------------------------------
-
+import java.io.File;
 import org.bukkit.plugin.Plugin;
-
 import tk.ultimatedev.jailplusplus.util.Log;
 
 /**
  * @author YoshiGenius
  */
 public class ExceptionHandler {
+    
     Plugin plugin;
 
     public ExceptionHandler(Plugin plugin) {
@@ -25,7 +24,19 @@ public class ExceptionHandler {
         Log.info("---STACK TRACE FINISH---");
         Log.info("ERROR: Post all of this on the " + plugin.getName() + " Bukkit Dev page in a ticket or a comment.");
     }
+    
+    public boolean makeFile(File f) {
+        if (!f.exists()) {
+            try {
+                f.createNewFile();
+                return true;
+            } catch (Exception e) {
+                this.logException(e);
+                return false;
+            }
+        } else {
+            return true;
+        }
+    }
+    
 }
-
-
-//~ Formatted by Jindent --- http://www.jindent.com

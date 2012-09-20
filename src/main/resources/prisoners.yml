@@ -1,0 +1,27 @@
+prisoners:
+- Notch
+
+YoshiGenius:
+  name: YoshiGenius
+  jailed: false
+  created: 0
+  served: 0
+  sentence: 1
+  reason: Awesomeness
+  jailer: Notch
+  inventory: ''
+  jail: ''
+  cell: 0
+  loc:
+    world: world
+    x: 0
+    y: 65
+    z: 0
+  jailstick:
+    jail:
+      name: jailname
+      world: world
+      minloc: 0,65,0
+      maxloc: 5,70,5
+    time: 500
+    reason: You have been JailStick'd!
