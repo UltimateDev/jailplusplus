@@ -1,6 +1,7 @@
 package tk.ultimatedev.jailplusplus.util;
 
 import java.io.File;
+
 import org.bukkit.configuration.file.YamlConfiguration;
 import tk.ultimatedev.jailplusplus.ExceptionHandler;
 import tk.ultimatedev.jailplusplus.JailPlugin;
@@ -14,9 +15,9 @@ public class YamlGetters {
     public static YamlGetters getInstance() {
         return YamlGetters.instance;
     }
-    
+
     // savers
-    
+
     public void savePrisonersFile() {
         File f = FilePaths.getInstance().getPrisonersFile();
         YamlConfiguration c = FilePaths.getInstance().getPrisonersFileConf();
@@ -50,7 +51,7 @@ public class YamlGetters {
             eh.logException(e);
         }
     }
-    
+
     // setters
 
     public void setPrisonersEntry(String playername, String subpath, Object newentry) {
@@ -66,16 +67,16 @@ public class YamlGetters {
         c.set(path, newentry);
         this.saveJailsFile();
     }
-    
+
     public void setCellsEntry(int jid, int cid, String subpath, Object newentry) {
         String path = FilePaths.getInstance().getCellPath(jid, cid);
         YamlConfiguration c = FilePaths.getInstance().getCellFileConf();
         c.set(path + subpath, newentry);
         this.saveCellsFile();
     }
-    
+
     // getters
-    
+
     // strings
 
     public String getPrisonersString(String playername, String subpath) {
@@ -85,11 +86,11 @@ public class YamlGetters {
     public String getJailString(String jailname, String subpath) {
         return FilePaths.getInstance().getPrisonersFileConf().getString(FilePaths.getInstance().getJailPath(jailname) + subpath);
     }
-    
+
     public String getCellString(int jid, int cid, String subpath) {
         return FilePaths.getInstance().getPrisonersFileConf().getString(FilePaths.getInstance().getCellPath(jid, cid) + subpath);
     }
-    
+
     // ints
 
     public int getPrisonersInt(String playername, String subpath) {
@@ -99,11 +100,11 @@ public class YamlGetters {
     public int getJailInt(String jailname, String subpath) {
         return FilePaths.getInstance().getPrisonersFileConf().getInt(FilePaths.getInstance().getJailPath(jailname) + subpath);
     }
-    
+
     public int getCellInt(int jid, int cid, String subpath) {
         return FilePaths.getInstance().getPrisonersFileConf().getInt(FilePaths.getInstance().getCellPath(jid, cid) + subpath);
     }
-    
+
     // booleans
 
     public boolean getPrisonersBool(String playername, String subpath) {
@@ -113,9 +114,9 @@ public class YamlGetters {
     public boolean getJailBool(String jailname, String subpath) {
         return FilePaths.getInstance().getPrisonersFileConf().getBoolean(FilePaths.getInstance().getJailPath(jailname) + subpath);
     }
-    
+
     public boolean getCellBool(int jid, int cid, String subpath) {
         return FilePaths.getInstance().getPrisonersFileConf().getBoolean(FilePaths.getInstance().getCellPath(jid, cid) + subpath);
     }
-    
+
 }

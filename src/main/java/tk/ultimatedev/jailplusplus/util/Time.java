@@ -19,48 +19,48 @@ import java.util.HashMap;
  */
 public class Time {
     private HashMap<Player, Integer> countdowntask = new HashMap<Player, Integer>();
-    private int                      id;
+    private int id;
 
     public int toTicks(String time) {
         try {
-            int      seconds = 0;
-            String[] t0      = time.split("y");
-            int      years   = Integer.parseInt(t0[0]);
+            int seconds = 0;
+            String[] t0 = time.split("y");
+            int years = Integer.parseInt(t0[0]);
 
             seconds = seconds + (years * 31449600);
 
-            String[] t1     = time.split("mo");
-            int      months = Integer.parseInt(t1[0]);
+            String[] t1 = time.split("mo");
+            int months = Integer.parseInt(t1[0]);
 
             seconds = seconds + (months * 2419200);
 
-            String   time1 = t1[1];
-            String[] t2    = time1.split("w");
-            int      weeks = Integer.parseInt(t2[0]);
+            String time1 = t1[1];
+            String[] t2 = time1.split("w");
+            int weeks = Integer.parseInt(t2[0]);
 
             seconds = seconds + (weeks * 604800);
 
-            String   time2 = t2[1];
-            String[] t3    = time2.split("d");
-            int      days  = Integer.parseInt(t3[0]);
+            String time2 = t2[1];
+            String[] t3 = time2.split("d");
+            int days = Integer.parseInt(t3[0]);
 
             seconds = seconds + (days * 86400);
 
-            String   time3 = t3[1];
-            String[] t4    = time3.split("h");
-            int      hours = Integer.parseInt(t4[0]);
+            String time3 = t3[1];
+            String[] t4 = time3.split("h");
+            int hours = Integer.parseInt(t4[0]);
 
             seconds = seconds + (hours * 3600);
 
-            String   time4   = t4[1];
-            String[] t5      = time4.split("m");
-            int      minutes = Integer.parseInt(t5[0]);
+            String time4 = t4[1];
+            String[] t5 = time4.split("m");
+            int minutes = Integer.parseInt(t5[0]);
 
             seconds = seconds + (minutes * 60);
 
-            String   time5    = t5[1];
-            String[] t6       = time5.split("s");
-            int      xseconds = Integer.parseInt(t6[0]);
+            String time5 = t5[1];
+            String[] t6 = time5.split("s");
+            int xseconds = Integer.parseInt(t6[0]);
 
             seconds = seconds + xseconds;
 
@@ -78,44 +78,44 @@ public class Time {
 
     public int toSeconds(String time) {
         try {
-            int      seconds = 0;
-            String[] t0      = time.split("y");
-            int      years   = Integer.parseInt(t0[0]);
+            int seconds = 0;
+            String[] t0 = time.split("y");
+            int years = Integer.parseInt(t0[0]);
 
             seconds = seconds + (years * 31449600);
 
-            String[] t1     = time.split("mo");
-            int      months = Integer.parseInt(t1[0]);
+            String[] t1 = time.split("mo");
+            int months = Integer.parseInt(t1[0]);
 
             seconds = seconds + (months * 2419200);
 
-            String   time1 = t1[1];
-            String[] t2    = time1.split("w");
-            int      weeks = Integer.parseInt(t2[0]);
+            String time1 = t1[1];
+            String[] t2 = time1.split("w");
+            int weeks = Integer.parseInt(t2[0]);
 
             seconds = seconds + (weeks * 604800);
 
-            String   time2 = t2[1];
-            String[] t3    = time2.split("d");
-            int      days  = Integer.parseInt(t3[0]);
+            String time2 = t2[1];
+            String[] t3 = time2.split("d");
+            int days = Integer.parseInt(t3[0]);
 
             seconds = seconds + (days * 86400);
 
-            String   time3 = t3[1];
-            String[] t4    = time3.split("h");
-            int      hours = Integer.parseInt(t4[0]);
+            String time3 = t3[1];
+            String[] t4 = time3.split("h");
+            int hours = Integer.parseInt(t4[0]);
 
             seconds = seconds + (hours * 3600);
 
-            String   time4   = t4[1];
-            String[] t5      = time4.split("m");
-            int      minutes = Integer.parseInt(t5[0]);
+            String time4 = t4[1];
+            String[] t5 = time4.split("m");
+            int minutes = Integer.parseInt(t5[0]);
 
             seconds = seconds + (minutes * 60);
 
-            String   time5    = t5[1];
-            String[] t6       = time5.split("s");
-            int      xseconds = Integer.parseInt(t6[0]);
+            String time5 = t5[1];
+            String[] t6 = time5.split("s");
+            int xseconds = Integer.parseInt(t6[0]);
 
             seconds = seconds + xseconds;
 
@@ -142,7 +142,8 @@ public class Time {
 
         this.countdowntask.put(p, id);
         Bukkit.getServer().getScheduler().scheduleAsyncRepeatingTask(JailPlugin.getPlugin(), new Runnable() {
-            public void run() {}
+            public void run() {
+            }
         }, 200, 20);
     }
 

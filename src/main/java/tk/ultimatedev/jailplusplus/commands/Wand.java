@@ -19,10 +19,10 @@ public class Wand implements SubCommand {
 
         if (player.hasPermission("jpp.wand")) {
             Messenger.sendMessage(player,
-                                  "You are receiving a Jail++ wand (#"
-                                  + JailPlugin.getPlugin().getConfig().getInt("wand-id") + ").");
+                    "You are receiving a Jail++ wand (#"
+                            + JailPlugin.getPlugin().getConfig().getInt("wand-id") + ").");
             player.getInventory().addItem(
-                new ItemStack(Material.getMaterial(JailPlugin.getPlugin().getConfig().getInt("wand-id")), 1));
+                    new ItemStack(Material.getMaterial(JailPlugin.getPlugin().getConfig().getInt("wand-id")), 1));
 
             return true;
         } else {

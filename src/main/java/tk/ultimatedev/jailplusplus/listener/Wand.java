@@ -31,8 +31,8 @@ public class Wand implements Listener {
 
             if (itemUsed.getTypeId() == JailPlugin.getPlugin().getConfig().getInt("wand-id")) {
                 switch (event.getAction()) {
-                case LEFT_CLICK_BLOCK :
-                case RIGHT_CLICK_BLOCK :
+                    case LEFT_CLICK_BLOCK:
+                    case RIGHT_CLICK_BLOCK:
                 }
             }
         }

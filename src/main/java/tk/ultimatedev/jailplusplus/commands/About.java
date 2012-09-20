@@ -12,7 +12,7 @@ import tk.ultimatedev.jailplusplus.util.Messenger;
  */
 public class About implements SubCommand {
     public boolean onCommand(CommandSender player, String[] args) {
-        String        delimiter     = "";
+        String delimiter = "";
         StringBuilder stringBuilder = new StringBuilder();
 
         for (String author : JailPlugin.getPlugin().getDescription().getAuthors()) {

@@ -3,11 +3,12 @@ package tk.ultimatedev.jailplusplus.util;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
+
 import org.bukkit.configuration.file.YamlConfiguration;
 import tk.ultimatedev.jailplusplus.JailPlugin;
 
 public class Config {
-    
+
     File f = new File(JailPlugin.getPlugin().getDataFolder(), "config.yml");
 
     public boolean updateConfig(int newversion, Map<String, Object> updates) throws IOException {

@@ -23,9 +23,9 @@ import java.util.HashMap;
  */
 public class JailStickHandler implements Listener {
     private static HashMap<Player, Boolean> jailstick = new HashMap<Player, Boolean>();
-    private static HashMap<Player, Jail>    jail      = new HashMap<Player, Jail>();
-    private static HashMap<Player, String>  time      = new HashMap<Player, String>();
-    private static HashMap<Player, String>  reason    = new HashMap<Player, String>();
+    private static HashMap<Player, Jail> jail = new HashMap<Player, Jail>();
+    private static HashMap<Player, String> time = new HashMap<Player, String>();
+    private static HashMap<Player, String> reason = new HashMap<Player, String>();
 
     public static boolean hasEnabled(Player player) {
         return JailStickHandler.jailstick.get(player);

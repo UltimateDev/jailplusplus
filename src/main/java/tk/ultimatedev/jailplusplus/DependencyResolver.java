@@ -51,7 +51,7 @@ public class DependencyResolver {
             System.out.println();
         }
 
-        for (Dependency dependency: dependencies) {
+        for (Dependency dependency : dependencies) {
             resolve(dependency);
         }
     }

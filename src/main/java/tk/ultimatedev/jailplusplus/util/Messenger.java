@@ -16,7 +16,7 @@ import org.bukkit.entity.Player;
  */
 public class Messenger {
     private static String chatPrefix = ChatColor.GRAY + "[" + ChatColor.GOLD + "Jail++" + ChatColor.GRAY + "] "
-                                       + ChatColor.RESET;
+            + ChatColor.RESET;
 
     /**
      * Send a message to a CommandSender (can be

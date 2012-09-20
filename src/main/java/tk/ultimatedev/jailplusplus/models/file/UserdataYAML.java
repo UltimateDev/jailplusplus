@@ -1,6 +1,7 @@
 package tk.ultimatedev.jailplusplus.models.file;
 
 import java.io.File;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -21,7 +22,7 @@ import tk.ultimatedev.jailplusplus.util.YamlGetters;
  */
 public class UserdataYAML {
     private String pname;
-    
+
     public UserdataYAML(Prisoner prisoner) {
         this.pname = prisoner.getPlayer();
     }
@@ -33,7 +34,7 @@ public class UserdataYAML {
     public UserdataYAML(String string) {
         this.pname = string;
     }
-    
+
     public UserdataYAML(int id) {
         String string = null;
         for (Prisoner p : Prisoner.getAllPrisoners()) {
@@ -43,7 +44,7 @@ public class UserdataYAML {
         }
         this.pname = string;
     }
-    
+
     public void removePrisoner() {
         MemorySection cs = this.getUserdataConf();
         String ipath = FilePaths.getInstance().getPrisonersPath(pname);
@@ -66,7 +67,7 @@ public class UserdataYAML {
     public boolean getUserdataBool(String subpath) {
         return YamlGetters.getInstance().getPrisonersBool(pname, subpath);
     }
-    
+
     public void setUserdataEntry(String subpath, Object obj) {
         YamlGetters.getInstance().setPrisonersEntry(pname, subpath, obj);
         YamlGetters.getInstance().savePrisonersFile();
@@ -87,33 +88,33 @@ public class UserdataYAML {
     public void setJailed(boolean jailed) {
         this.setUserdataEntry("jailed", jailed);
     }
-    
+
     // getters
-    
+
     public String getName() {
         return this.getUserdataString("name");
     }
-    
+
     public int getID() {
         return this.getUserdataInt("id");
     }
-    
+
     public int getCreatedTime() {
         return this.getUserdataInt("created");
     }
-    
+
     public int getSentence() {
         return this.getUserdataInt("sentence");
     }
-    
+
     public int getServed() {
         return this.getUserdataInt("served");
     }
-    
+
     public String getReason() {
         return this.getUserdataString("reason");
     }
-    
+
     public String getInventory() {
         return this.getUserdataString("inventory");
     }
@@ -126,31 +127,31 @@ public class UserdataYAML {
         if (jail == null) return null;
         return jail;
     }
-    
+
     public Cell getCell() {
         int cid = this.getUserdataInt("cell");
         Cell cell = Cell.getCell(cid);
         return cell;
     }
-    
+
     public World getLastLocW() {
         World world = Bukkit.getServer().getWorld(this.getUserdataString("loc.world"));
         if (world == null) return null;
         return world;
     }
-    
+
     public int getLastLocX() {
         return this.getUserdataInt("loc.x");
     }
-    
+
     public int getLastLocY() {
         return this.getUserdataInt("loc.y");
     }
-    
+
     public int getLastLocZ() {
         return this.getUserdataInt("loc.z");
     }
-    
+
     public Location getLastLoc() {
         int x = this.getLastLocX();
         int y = this.getLastLocY();
@@ -159,7 +160,7 @@ public class UserdataYAML {
         Location loc = new Location(world, x, y, z);
         return loc;
     }
-    
+
     // jailstick
 
     public Jail getJailStickJail() {
@@ -200,25 +201,25 @@ public class UserdataYAML {
         String jailer = this.getUserdataString("jailer");
         return jailer;
     }
-    
+
     // setters
-    
+
     public void setCreatedTime(int time) {
         this.setUserdataEntry("created", time);
     }
-    
+
     public void setSentence(int sentence) {
         this.setUserdataEntry("sentence", sentence);
     }
-    
+
     public void setServed(int served) {
         this.setUserdataEntry("served", served);
     }
-    
+
     public void setReason(String reason) {
         this.setUserdataEntry("reason", reason);
     }
-    
+
     public void setInventory(String inventory) {
         this.setUserdataEntry("inventory", inventory);
     }
@@ -250,7 +251,7 @@ public class UserdataYAML {
     public void setJailStickReason(String reason) {
         this.setUserdataEntry("jailstick.reason", reason);
     }
-    
+
     public void setJailTimeSeconds(int seconds) {
         this.setUserdataEntry("time", seconds);
     }
@@ -258,7 +259,7 @@ public class UserdataYAML {
     public void setJailer(String jailer) {
         this.setUserdataEntry("jailer", jailer);
     }
-    
+
     public void setJailedIn(Cell cell) {
         this.setUserdataEntry("cell.id", cell.getID());
         this.setUserdataEntry("cell.min.x", cell.getX1());
@@ -281,26 +282,26 @@ public class UserdataYAML {
         this.setUserdataEntry("jail.max.y", max.getY());
         this.setUserdataEntry("jail.max.z", max.getZ());
     }
-    
+
     public void setLastLoc(Location loc) {
         this.setLastLocW(loc.getWorld());
         this.setLastLocX(loc.getBlockX());
         this.setLastLocY(loc.getBlockY());
         this.setLastLocZ(loc.getBlockZ());
     }
-    
+
     public void setLastLocW(World w) {
         this.setUserdataEntry("loc.world", w.getName());
     }
-    
+
     public void setLastLocX(int coord) {
         this.setUserdataEntry("loc.x", coord);
     }
-    
+
     public void setLastLocY(int coord) {
         this.setUserdataEntry("loc.y", coord);
     }
-    
+
     public void setLastLocZ(int coord) {
         this.setUserdataEntry("loc.z", coord);
     }

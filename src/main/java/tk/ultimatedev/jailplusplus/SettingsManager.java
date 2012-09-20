@@ -1,6 +1,5 @@
 package tk.ultimatedev.jailplusplus;
 
-import java.io.File;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
@@ -8,12 +7,14 @@ import tk.ultimatedev.jailplusplus.models.Migrant;
 import tk.ultimatedev.jailplusplus.models.Migrant.DatabaseEngine;
 import tk.ultimatedev.jailplusplus.util.FilePaths;
 
+import java.io.File;
+
 
 /**
  * @author YoshiGenius
  */
 public class SettingsManager {
-    
+
     Plugin plugin;
     File jailFile = null;
     File cellFile = null;
@@ -34,11 +35,11 @@ public class SettingsManager {
     public File getJailsFile() {
         return FilePaths.getInstance().getJailsFile();
     }
-    
+
     public File getPrisonersFile() {
         return FilePaths.getInstance().getPrisonersFile();
     }
-    
+
     public File getCellsFile() {
         return FilePaths.getInstance().getCellsFile();
     }
@@ -87,7 +88,7 @@ public class SettingsManager {
             eh.logException(e);
         }
     }
-    
+
     public FileConfiguration getJailsConfig() {
         JailPlugin j = new JailPlugin();
         if (this.jailConf == null) {
@@ -95,7 +96,7 @@ public class SettingsManager {
         }
         return this.jailConf;
     }
-    
+
     public FileConfiguration getPrisonersConfig() {
         JailPlugin j = new JailPlugin();
         if (this.prisonerConf == null) {
@@ -103,7 +104,7 @@ public class SettingsManager {
         }
         return this.prisonerConf;
     }
-    
+
     public FileConfiguration getCellsConfig() {
         JailPlugin j = new JailPlugin();
         if (this.cellConf == null) {
@@ -111,5 +112,5 @@ public class SettingsManager {
         }
         return this.cellConf;
     }
-    
+
 }

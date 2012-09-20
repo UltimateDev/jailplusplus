@@ -16,14 +16,15 @@ import tk.ultimatedev.jailplusplus.handlers.JailStickHandler;
 public class JailStick implements Listener {
     @EventHandler
     public void onClick(PlayerInteractEntityEvent evt) {
-        Player clicker  = evt.getPlayer();
+        Player clicker = evt.getPlayer();
         Entity eclicked = evt.getRightClicked();
 
         if (eclicked instanceof Player) {
             Player clicked = (Player) eclicked;
 
             if (clicker.hasPermission("jpp.jailstick.use") && clicked.hasPermission("jpp.jailstick.canbe")) {
-                if (JailStickHandler.hasEnabled(clicker)) {}
+                if (JailStickHandler.hasEnabled(clicker)) {
+                }
             }
         }
 

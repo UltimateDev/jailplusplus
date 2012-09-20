@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  * @author Sushi
  */
 public class Log {
-    private static Logger log        = Bukkit.getLogger();
+    private static Logger log = Bukkit.getLogger();
     private static String pluginName = JailPlugin.getPlugin().getDescription().getName();
 
     /**

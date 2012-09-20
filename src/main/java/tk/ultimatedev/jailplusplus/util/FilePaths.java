@@ -1,6 +1,7 @@
 package tk.ultimatedev.jailplusplus.util;
 
 import java.io.File;
+
 import org.bukkit.configuration.file.YamlConfiguration;
 import tk.ultimatedev.jailplusplus.JailPlugin;
 
@@ -41,7 +42,7 @@ public class FilePaths {
     public String getCellPath(String jailname, String cellname) {
         return jailname + "." + cellname + ".";
     }
-    
+
     public String getCellPath(int jid, int cid) {
         return jid + "." + cid + ".";
     }

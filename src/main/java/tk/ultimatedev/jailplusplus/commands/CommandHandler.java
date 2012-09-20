@@ -24,13 +24,13 @@ import java.util.Vector;
  */
 public class CommandHandler implements CommandExecutor {
     private HashMap<String, SubCommand> commands;
-    private ExceptionHandler            exceptionHandler;
-    private Plugin                      plugin;
+    private ExceptionHandler exceptionHandler;
+    private Plugin plugin;
 
     public CommandHandler(Plugin plugin) {
-        this.plugin           = plugin;
+        this.plugin = plugin;
         this.exceptionHandler = new ExceptionHandler(this.plugin);
-        commands              = new HashMap<String, SubCommand>();
+        commands = new HashMap<String, SubCommand>();
         loadCommands();
     }
 
@@ -48,7 +48,7 @@ public class CommandHandler implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender cs, Command cmd1, String commandLabel, String[] args) {
-        String                cmd     = cmd1.getName();
+        String cmd = cmd1.getName();
         PluginDescriptionFile pdfFile = plugin.getDescription();
 
         if (cmd.equalsIgnoreCase("jail")) {
@@ -60,7 +60,7 @@ public class CommandHandler implements CommandExecutor {
 
             if ((args == null) || (args.length < 1)) {
                 cs.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "Jail++ " + ChatColor.RESET + ChatColor.YELLOW
-                               + " Version: " + pdfFile.getVersion());
+                        + " Version: " + pdfFile.getVersion());
                 cs.sendMessage(ChatColor.GOLD + "Type /jail help for help");
 
                 return true;

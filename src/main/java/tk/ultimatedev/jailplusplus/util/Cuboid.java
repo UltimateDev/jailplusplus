@@ -134,8 +134,8 @@ public class Cuboid {
      */
     public Location getCenter() {
         return new Location(this.a.getWorld(), (this.a.getBlockX() + this.b.getBlockX()) / 2D,
-                            (this.a.getBlockY() + this.b.getBlockY()) / 2D,
-                            (this.a.getBlockZ() + this.b.getBlockZ()) / 2D);
+                (this.a.getBlockY() + this.b.getBlockY()) / 2D,
+                (this.a.getBlockZ() + this.b.getBlockZ()) / 2D);
     }
 
     /**
@@ -159,9 +159,9 @@ public class Cuboid {
      */
     public boolean isInCuboid(Location location) {
         return (location.getWorld() == this.getWorld()) && (location.getBlockX() >= this.getMinX())
-               && (location.getBlockX() <= this.getMaxX()) && (location.getBlockY() >= this.getMinY())
-               && (location.getBlockY() <= this.getMaxY()) && (location.getBlockZ() >= this.getMinZ())
-               && (location.getBlockZ() <= this.getMaxZ());
+                && (location.getBlockX() <= this.getMaxX()) && (location.getBlockY() >= this.getMinY())
+                && (location.getBlockY() <= this.getMaxY()) && (location.getBlockZ() >= this.getMinZ())
+                && (location.getBlockZ() <= this.getMaxZ());
     }
 
     /**
@@ -175,11 +175,11 @@ public class Cuboid {
      */
     public boolean isInCuboid(Player player) {
         return (player.getWorld() == this.getWorld()) && (player.getLocation().getBlockX() >= this.getMinX())
-               && (player.getLocation().getBlockX() <= this.getMaxX())
-               && (player.getLocation().getBlockY() >= this.getMinY())
-               && (player.getLocation().getBlockY() <= this.getMaxY())
-               && (player.getLocation().getBlockZ() >= this.getMinZ())
-               && (player.getLocation().getBlockZ() <= this.getMaxZ());
+                && (player.getLocation().getBlockX() <= this.getMaxX())
+                && (player.getLocation().getBlockY() >= this.getMinY())
+                && (player.getLocation().getBlockY() <= this.getMaxY())
+                && (player.getLocation().getBlockZ() >= this.getMinZ())
+                && (player.getLocation().getBlockZ() <= this.getMaxZ());
     }
 
     /**
@@ -193,11 +193,11 @@ public class Cuboid {
      */
     public boolean isInCuboid(Entity entity) {
         return (entity.getWorld() == this.getWorld()) && (entity.getLocation().getBlockX() >= this.getMinX())
-               && (entity.getLocation().getBlockX() <= this.getMaxX())
-               && (entity.getLocation().getBlockY() >= this.getMinY())
-               && (entity.getLocation().getBlockY() <= this.getMaxY())
-               && (entity.getLocation().getBlockZ() >= this.getMinZ())
-               && (entity.getLocation().getBlockZ() <= this.getMaxZ());
+                && (entity.getLocation().getBlockX() <= this.getMaxX())
+                && (entity.getLocation().getBlockY() >= this.getMinY())
+                && (entity.getLocation().getBlockY() <= this.getMaxY())
+                && (entity.getLocation().getBlockZ() >= this.getMinZ())
+                && (entity.getLocation().getBlockZ() <= this.getMaxZ());
     }
 
     /**
@@ -211,10 +211,10 @@ public class Cuboid {
      */
     public boolean isInCuboid(Block block) {
         return (block.getWorld() == this.getWorld()) && (block.getLocation().getBlockX() >= this.getMinX())
-               && (block.getLocation().getBlockX() <= this.getMaxX())
-               && (block.getLocation().getBlockY() >= this.getMinY())
-               && (block.getLocation().getBlockY() <= this.getMaxY())
-               && (block.getLocation().getBlockZ() >= this.getMinZ())
-               && (block.getLocation().getBlockZ() <= this.getMaxZ());
+                && (block.getLocation().getBlockX() <= this.getMaxX())
+                && (block.getLocation().getBlockY() >= this.getMinY())
+                && (block.getLocation().getBlockY() <= this.getMaxY())
+                && (block.getLocation().getBlockZ() >= this.getMinZ())
+                && (block.getLocation().getBlockZ() <= this.getMaxZ());
     }
 }

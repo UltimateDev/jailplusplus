@@ -24,7 +24,7 @@ public class InventorySerializer {
 
             if (itemStack != null) {
                 String serializedItemStack = "";
-                String itemStackType       = String.valueOf(itemStack.getType().getId());
+                String itemStackType = String.valueOf(itemStack.getType().getId());
 
                 serializedItemStack += "t@" + itemStackType;
 
@@ -56,27 +56,27 @@ public class InventorySerializer {
     }
 
     public static Inventory getInventory(String toSerialize) {
-        String[]  serializedSlots       = toSerialize.split(";");
-        String    inventoryInfo         = serializedSlots[0];
+        String[] serializedSlots = toSerialize.split(";");
+        String inventoryInfo = serializedSlots[0];
         Inventory deSerializedInventory = Bukkit.getServer().createInventory(null, Integer.valueOf(inventoryInfo));
 
         for (int i = 1; i < serializedSlots.length; i++) {
             String[] serializedSlot = serializedSlots[i].split("#");
-            int      stackPosition  = Integer.valueOf(serializedSlot[0]);
+            int stackPosition = Integer.valueOf(serializedSlot[0]);
 
             if (stackPosition >= deSerializedInventory.getSize()) {
                 continue;
             }
 
-            ItemStack itemStack           = null;
-            boolean   createdItemStack    = false;
-            String[]  serializedItemStack = serializedSlot[1].split(":");
+            ItemStack itemStack = null;
+            boolean createdItemStack = false;
+            String[] serializedItemStack = serializedSlot[1].split(":");
 
             for (String itemInfo : serializedItemStack) {
                 String[] attribute = itemInfo.split("@");
 
                 if (attribute[0].equals("t")) {
-                    itemStack        = new ItemStack(Material.getMaterial(Integer.valueOf(attribute[1])));
+                    itemStack = new ItemStack(Material.getMaterial(Integer.valueOf(attribute[1])));
                     createdItemStack = true;
                 } else if (attribute[0].equals("d") && createdItemStack) {
                     itemStack.setDurability(Short.valueOf(attribute[1]));
@@ -84,7 +84,7 @@ public class InventorySerializer {
                     itemStack.setAmount(Integer.valueOf(attribute[1]));
                 } else if (attribute[0].equals("e") && createdItemStack) {
                     itemStack.addEnchantment(Enchantment.getById(Integer.valueOf(attribute[1])),
-                                             Integer.valueOf(attribute[2]));
+                            Integer.valueOf(attribute[2]));
                 }
             }
 

@@ -2,6 +2,7 @@ package tk.ultimatedev.jailplusplus.models.file;
 
 import java.io.File;
 import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -17,27 +18,27 @@ import tk.ultimatedev.jailplusplus.util.YamlGetters;
  * @author YoshiGenius
  */
 public class JailYAML {
-    
+
     private String name;
 
     public JailYAML(String jname) {
         name = jname;
     }
-    
+
     public JailYAML(Jail jail) {
         name = jail.getName();
     }
-    
+
     // remove methods
-    
+
     public void removeJail() {
         MemorySection cs = this.getJailConf();
         cs.set(name, null);
         YamlGetters.getInstance().saveJailsFile();
     }
-    
+
     // get methods
-    
+
     public List<Prisoner> getPrisoners() {
         return Prisoner.getJailPrisonersYAML(Jail.getJail(name));
     }
@@ -49,7 +50,7 @@ public class JailYAML {
     public File getJailFile() {
         return FilePaths.getInstance().getJailsFile();
     }
-    
+
     public String getName() {
         return YamlGetters.getInstance().getJailString(this.name, "name");
     }
@@ -101,44 +102,44 @@ public class JailYAML {
     public int getMaxZ() {
         return YamlGetters.getInstance().getJailInt(this.name, "loc.max.z");
     }
-    
+
     // set methods
-    
+
     public void setName(String name) {
         YamlGetters.getInstance().setJailsEntry(this.name, "name", name);
     }
-    
+
     public void setID(int id) {
         YamlGetters.getInstance().setJailsEntry(this.name, "id", id);
         YamlGetters.getInstance().saveJailsFile();
     }
-    
+
     public void setCuboid(Cuboid cuboid) {
         Location min = cuboid.getA();
         Location max = cuboid.getB();
         this.setMaxLoc(max);
         this.setMinLoc(min);
     }
-    
+
     public void setMinLoc(Location location) {
         this.setWorld(location.getWorld());
         this.setMinX(location.getBlockX());
         this.setMinY(location.getBlockY());
         this.setMinZ(location.getBlockZ());
     }
-    
+
     public void setMaxLoc(Location location) {
         this.setWorld(location.getWorld());
         this.setMaxX(location.getBlockX());
         this.setMaxY(location.getBlockY());
         this.setMaxZ(location.getBlockZ());
     }
-    
+
     public void setWorld(World world) {
         YamlGetters.getInstance().setJailsEntry(this.name, "loc.world", world.getName());
         YamlGetters.getInstance().saveJailsFile();
     }
-    
+
     public void setWorld(String wname) {
         YamlGetters.getInstance().setJailsEntry(this.name, "loc.world", wname);
         YamlGetters.getInstance().saveJailsFile();
@@ -173,5 +174,5 @@ public class JailYAML {
         YamlGetters.getInstance().setJailsEntry(this.name, "loc.max.z", coord);
         YamlGetters.getInstance().saveJailsFile();
     }
-    
+
 }

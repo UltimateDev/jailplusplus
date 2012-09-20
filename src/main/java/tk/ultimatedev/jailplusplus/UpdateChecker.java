@@ -19,10 +19,10 @@ import java.net.URL;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 public class UpdateChecker {
-    private URL        filesFeed;
-    private String     link;
+    private URL filesFeed;
+    private String link;
     private JailPlugin plugin;
-    private String     version;
+    private String version;
 
     public UpdateChecker(JailPlugin plugin, String url) {
         this.plugin = plugin;
@@ -36,13 +36,13 @@ public class UpdateChecker {
 
     public boolean updateNeeded() {
         try {
-            InputStream input      = this.filesFeed.openConnection().getInputStream();
-            Document    document   = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(input);
-            Node        latestFile = document.getElementsByTagName("item").item(0);
-            NodeList    children   = latestFile.getChildNodes();
+            InputStream input = this.filesFeed.openConnection().getInputStream();
+            Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(input);
+            Node latestFile = document.getElementsByTagName("item").item(0);
+            NodeList children = latestFile.getChildNodes();
 
             this.version = children.item(1).getTextContent().replaceAll("[-a-zA-Z ]", "");
-            this.link    = children.item(3).getTextContent();
+            this.link = children.item(3).getTextContent();
 
             if (!plugin.getDescription().getVersion().equals(this.version)) {
                 return true;

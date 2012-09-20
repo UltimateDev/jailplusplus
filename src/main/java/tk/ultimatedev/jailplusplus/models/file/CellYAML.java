@@ -2,6 +2,7 @@ package tk.ultimatedev.jailplusplus.models.file;
 
 import java.io.File;
 import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -21,30 +22,30 @@ public class CellYAML {
 
     private int cellid;
     private int jailid;
-    
+
     public CellYAML(Cell cell) {
         this.cellid = cell.getID();
         this.jailid = cell.getJailID();
     }
-    
+
     public CellYAML(int jailID, int cellID) {
         this.jailid = jailID;
         this.cellid = cellID;
     }
-    
+
     public CellYAML(Jail jail, Cell cell) {
         this.jailid = jail.getID();
         this.cellid = cell.getID();
     }
-    
+
     public CellYAML(String jailname, int cellid) {
         Jail j = Jail.getJail(jailname);
         this.jailid = j.getID();
         this.cellid = cellid;
     }
-    
+
     // remove methods
-    
+
     public void removeCell() {
         MemorySection cs = this.getCellConf();
         Cell cell = Cell.getCell(cellid);
@@ -58,13 +59,13 @@ public class CellYAML {
         cs.set(cpath, null);
         YamlGetters.getInstance().saveCellsFile();
     }
-    
+
     // get methods
-    
+
     public List<Prisoner> getPrisoners() {
         return Prisoner.getCellPrisonersYAML(this.cellid);
     }
-    
+
     public Jail getJail() {
         return Jail.getJail(this.jailid);
     }
@@ -76,7 +77,7 @@ public class CellYAML {
     public File getCellFile() {
         return FilePaths.getInstance().getCellsFile();
     }
-    
+
     public String getName() {
         return YamlGetters.getInstance().getCellString(this.jailid, this.cellid, "name");
     }
@@ -128,44 +129,44 @@ public class CellYAML {
     public int getMaxZ() {
         return YamlGetters.getInstance().getCellInt(this.jailid, this.cellid, "loc.max.z");
     }
-    
+
     // set methods
-    
+
     public void setName(String name) {
         YamlGetters.getInstance().setCellsEntry(this.jailid, this.cellid, "name", name);
     }
-    
+
     public void setID(int id) {
         YamlGetters.getInstance().setCellsEntry(this.jailid, this.cellid, "id", id);
         YamlGetters.getInstance().saveCellsFile();
     }
-    
+
     public void setCuboid(Cuboid cuboid) {
         Location min = cuboid.getA();
         Location max = cuboid.getB();
         this.setMaxLoc(max);
         this.setMinLoc(min);
     }
-    
+
     public void setMinLoc(Location location) {
         this.setWorld(location.getWorld());
         this.setMinX(location.getBlockX());
         this.setMinY(location.getBlockY());
         this.setMinZ(location.getBlockZ());
     }
-    
+
     public void setMaxLoc(Location location) {
         this.setWorld(location.getWorld());
         this.setMaxX(location.getBlockX());
         this.setMaxY(location.getBlockY());
         this.setMaxZ(location.getBlockZ());
     }
-    
+
     public void setWorld(World world) {
         YamlGetters.getInstance().setCellsEntry(this.jailid, this.cellid, "loc.world", world.getName());
         YamlGetters.getInstance().saveCellsFile();
     }
-    
+
     public void setWorld(String wname) {
         YamlGetters.getInstance().setCellsEntry(this.jailid, this.cellid, "loc.world", wname);
         YamlGetters.getInstance().saveCellsFile();
