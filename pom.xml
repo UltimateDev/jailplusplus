@@ -48,6 +48,7 @@
                 <configuration>
                     <archive>
                         <manifest>
+                            <mainClass>tk.ultimatedev.jailplusplus.mover.Mover</mainClass>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>../lib/</classpathPrefix>
                         </manifest>
@@ -62,7 +63,12 @@
                 </includes>
                 <directory>${basedir}/src/main/resources</directory>
             </resource>
+            <resource>
+                <directory>.</directory>
+                <includes>
+                    <include>lib/**/*.*</include>
+                </includes>
+            </resource>
         </resources>
-
     </build>
 </project>
