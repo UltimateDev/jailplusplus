@@ -4,19 +4,25 @@
 # Here you can configure your database. You can use H2 embedded or MySQL!
 # If you don't have a MySQL database, I would stick with the default settings (h2), which uses an embedded database.
 database:
-  # Choose 'h2', 'mysql', or 'file' (h2 is recommended over file due to better performance, security, and stability)
+  # Choose 'h2' or 'mysql'
+
+  # h2 is an embedded database that is fast, secure, and stable.
+  # you don't have to do anything to use it, just set the driver to 'h2'
+
+  # mysql is a database server that is also fast, secure, and stable.
+  # with mysql it's easier to access plugin data from other sources, but you need an external server to use it.
   driver: h2
-  # Not used for h2 or file. The hostname of the MySQL server.
+  # Not used for h2. The hostname of the MySQL server.
   host: localhost
-  # Not used for h2 or file. If you don't know what your port is for mysql, it's probably 3306.
+  # Not used for h2. If you don't know what your port is for mysql, it's probably 3306.
   port: 3306
-  # Not used for h2 or file. The user Jail++ will use to connect to the database.
+  # Not used for h2. The user Jail++ will use to connect to the database.
   user: jailplusplus
-  # Not used for h2 or file. The password of the user set above.
+  # Not used for h2. The password of the user set above.
   password: example
-  # Not used for h2 or file. The name of the mysql database to use.
+  # Not used for h2. The name of the mysql database to use.
   database: minecraft
-  # Not used for file. You can leave this as default if you don't know what it means.
+  # You can leave this as default if you don't know what it means.
   prefix: jpp_
 
 # Choose the item ID that you want the wand to be (blaze rod by default)
