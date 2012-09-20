@@ -11,23 +11,23 @@ public class FilePaths {
     private static FilePaths instance;
 
     public String getFolderPath() {
-        return "plugins/" + JailPlugin.getPlugin().getDescription().getName() + "/";
+        return this.getFolder().getPath();
     }
 
     public File getFolder() {
-        return new File(getFolderPath());
+        return JailPlugin.getPlugin().getDataFolder();
     }
 
     public File getJailsFile() {
-        return new File(getFolderPath() + "jails.yml");
+        return new File(this.getFolder(), "jails.yml");
     }
 
     public File getCellsFile() {
-        return new File(getFolderPath() + "cells.yml");
+        return new File(this.getFolder(), "cells.yml");
     }
 
     public File getPrisonersFile() {
-        return new File(getFolderPath() + "prisoners.yml");
+        return new File(this.getFolder(), "prisoners.yml");
     }
 
     public String getPrisonersPath(String playername) {
@@ -48,19 +48,16 @@ public class FilePaths {
 
     public YamlConfiguration getPrisonersFileConf() {
         File file = this.getPrisonersFile();
-
         return YamlConfiguration.loadConfiguration(file);
     }
 
     public YamlConfiguration getJailFileConf() {
         File file = this.getJailsFile();
-
         return YamlConfiguration.loadConfiguration(file);
     }
 
     public YamlConfiguration getCellFileConf() {
         File file = this.getCellsFile();
-
         return YamlConfiguration.loadConfiguration(file);
     }
 
@@ -72,6 +69,3 @@ public class FilePaths {
         return instance;
     }
 }
-
-
-//~ Formatted by Jindent --- http://www.jindent.com
