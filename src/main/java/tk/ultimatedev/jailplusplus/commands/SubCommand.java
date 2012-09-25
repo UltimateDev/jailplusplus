@@ -1,16 +1,13 @@
 package tk.ultimatedev.jailplusplus.commands;
 
-//~--- non-JDK imports --------------------------------------------------------
-
 import org.bukkit.command.CommandSender;
-
 import tk.ultimatedev.jailplusplus.JailPlugin;
 
 /**
  * @author YoshiGenius
  */
 public interface SubCommand {
-    JailPlugin jp = new JailPlugin();
+    public JailPlugin jp = new JailPlugin();
 
     /**
      * Executes a command.

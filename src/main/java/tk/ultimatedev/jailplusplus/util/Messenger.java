@@ -109,7 +109,7 @@ public class Messenger {
      *                 or not.
      */
     public static void sendError(CommandSender sender, String message, boolean prefixed) {
-        sendMessage(sender, ChatColor.RED + "Error: " + ChatColor.RESET + message, prefixed);
+        sendMessage(sender, ChatColor.RED + "ERROR: " + ChatColor.RESET + message, prefixed);
     }
 
     /**

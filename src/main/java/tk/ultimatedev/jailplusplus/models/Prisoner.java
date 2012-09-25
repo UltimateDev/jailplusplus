@@ -87,7 +87,6 @@ public class Prisoner {
             this.z = (int) playerObject.getLocation().getZ();
         } else {
             this.inventory = "";
-
             this.x = -1;
             this.y = -1;
             this.z = -1;
@@ -799,5 +798,15 @@ public class Prisoner {
         }
         return prisoners;
     }
+    
+//    public static int generateNewID() {
+//        boolean available = false;
+//        int i = 0;
+//        while (available == false) {
+//            Prisoner prisoner = Prisoner.getPrisoner(i++);
+//            available = (prisoner == null);
+//        }
+//        return i;
+//    }
 
 }
