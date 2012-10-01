@@ -8,7 +8,7 @@ verbose = false
 
 def make
   puts 'Building using maven...'
-  if system 'mvn package'
+  if system 'mvn package -source 5'
     exit 0
   else
     exit 1
