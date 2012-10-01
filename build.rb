@@ -4,6 +4,7 @@ include Sys
 
 # options
 travis = false
+verbose = false
 
 def make
   puts 'Building using maven...'
@@ -14,7 +15,7 @@ def make
   end
 end
 
-def install travis
+def install(travis, verbose)
   windows = Uname.sysname[0,9].downcase == 'microsoft'
 
   unless travis
@@ -26,29 +27,42 @@ def install travis
 
   puts
   puts 'Installing artifact dependencies...'
-  if windows
-    unless system 'mvn install:install-file -DgroupId=com.sk89q -DartifactId=worldedit -Dversion=5.4.2 -Dpackaging=jar -Dfile=lib/WorldEdit.jar >NUL'
+
+  if verbose
+    unless system 'mvn install:install-file -DgroupId=com.sk89q -DartifactId=worldedit -Dversion=5.4.2 -Dpackaging=jar -Dfile=lib/WorldEdit.jar'
+      abort 'build: artifact installation failed'
+    end
+
+    if system 'mvn install -DskipTests=true'
+      puts 'Installed dependencies.'
+    else
       abort 'build: artifact installation failed'
     end
   else
-    unless system 'mvn install:install-file -DgroupId=com.sk89q -DartifactId=worldedit -Dversion=5.4.2 -Dpackaging=jar -Dfile=lib/WorldEdit.jar >/dev/null'
-      abort 'build: artifact installation failed'
+    if windows
+      unless system 'mvn install:install-file -DgroupId=com.sk89q -DartifactId=worldedit -Dversion=5.4.2 -Dpackaging=jar -Dfile=lib/WorldEdit.jar >NUL'
+        abort 'build: artifact installation failed'
+      end
+
+      if system 'mvn install -DskipTests=true >NUL'
+        puts 'Installed dependencies.'
+      else
+        abort 'build: artifact installation failed'
+      end
+    else
+      unless system 'mvn install:install-file -DgroupId=com.sk89q -DartifactId=worldedit -Dversion=5.4.2 -Dpackaging=jar -Dfile=lib/WorldEdit.jar >/dev/null'
+        abort 'build: artifact installation failed'
+      end
+
+      if system 'mvn install -DskipTests=true >/dev/null'
+        puts 'Installed dependencies.'
+      else
+        abort 'build: artifact installation failed'
+      end
     end
   end
 
-  if windows
-    if system 'mvn install -DskipTests=true >NUL'
-      puts 'Installed dependencies.'
-    else
-      abort 'build: artifact installation failed'
-    end
-  else
-    if system 'mvn install -DskipTests=true >/dev/null'
-      puts 'Installed dependencies.'
-    else
-      abort 'build: artifact installation failed'
-    end
-  end
+
 end
 
 options = []
@@ -61,16 +75,18 @@ end
 options.each do |option|
   if option == '--travis'
     travis = true
+  elsif option == '-v' || option == '--verbose'
+    verbose = true
   end
 end
 
 if ARGV[0] == 'make'
   make
 elsif ARGV[0] == 'install'
-  install travis
+  install travis, verbose
   exit 0
 elsif ARGV[0] == 'all'
-  install travis
+  install travis, verbose
   make
 else
   puts 'build: Please choose a valid task (make, install, all)'

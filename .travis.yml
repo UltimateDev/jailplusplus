@@ -1,4 +1,4 @@
 language: java
 before_install: bundle install
-install: ruby build.rb install --travis
-script: ruby build.rb make --travis
+install: ruby build.rb install --travis --verbose
+script: ruby build.rb make --travis --verbose
