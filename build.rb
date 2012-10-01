@@ -11,12 +11,14 @@ def make
   end
 end
 
-def install
+def install travis
   windows = Uname.sysname[0,9].downcase == 'microsoft'
 
-  puts 'Installing gem dependencies...'
-  unless system 'bundle install'
-    abort 'gem dependencies installation failed'
+  unless travis
+    puts 'Installing gem dependencies...'
+    unless system 'bundle install'
+      abort 'gem dependencies installation failed'
+    end
   end
 
   puts
@@ -46,13 +48,28 @@ def install
   end
 end
 
+options = []
+ARGV.each do |arg|
+  if arg[0,1] == '-'
+    options << arg
+  end
+end
+
+options.each do |option|
+  if option == '--travis'
+    travis = true
+  else
+    travis = false
+  end
+end
+
 if ARGV[0] == 'make'
   make
 elsif ARGV[0] == 'install'
-  install
+  install travis
   exit 0
 elsif ARGV[0] == 'all'
-  install
+  install travis
   make
 else
   puts 'build: Please choose a valid task (make, install, all)'

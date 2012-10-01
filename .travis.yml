@@ -1,3 +1,4 @@
 language: java
+before_install: bundle install
 install: ruby build.rb install
 script: ruby build.rb make
