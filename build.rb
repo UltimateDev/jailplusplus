@@ -1,29 +1,59 @@
 #!/usr/bin/env ruby
+require 'sys/uname'
+include Sys
 
-if ARGV[0] == 'make'
-  puts
+def make
   puts 'Building using maven...'
   if system 'mvn package'
     exit 0
   else
     exit 1
   end
-elsif ARGV[0] == 'install'
-  puts
+end
+
+def install
+  windows = Uname.sysname[0,9].downcase == 'microsoft'
+
   puts 'Installing gem dependencies...'
-  if system 'bundle install'
-    puts '  installed gem dependencies'
-  else
+  unless system 'bundle install'
     abort 'gem dependencies installation failed'
   end
 
   puts
   puts 'Installing artifact dependencies...'
-  if system 'mvn install:install-file -DgroupId=com.sk89q -DartifactId=worldedit -Dversion=5.4.2 -Dpackaging=jar -Dfile=lib/WorldEdit.jar'
-    puts '  installed worldedit'
+  if windows
+    unless system 'mvn install:install-file -DgroupId=com.sk89q -DartifactId=worldedit -Dversion=5.4.2 -Dpackaging=jar -Dfile=lib/WorldEdit.jar >NUL'
+      abort 'build: artifact installation failed'
+    end
   else
-    abort 'worldedit artifact installation failed'
+    unless system 'mvn install:install-file -DgroupId=com.sk89q -DartifactId=worldedit -Dversion=5.4.2 -Dpackaging=jar -Dfile=lib/WorldEdit.jar >/dev/null'
+      abort 'build: artifact installation failed'
+    end
   end
 
+  if windows
+    if system 'mvn install -DskipTests=true >NUL'
+      puts 'Installed dependencies.'
+    else
+      abort 'build: artifact installation failed'
+    end
+  else
+    if system 'mvn install -DskipTests=true >/dev/null'
+      puts 'Installed dependencies.'
+    else
+      abort 'build: artifact installation failed'
+    end
+  end
+end
+
+if ARGV[0] == 'make'
+  make
+elsif ARGV[0] == 'install'
+  install
   exit 0
+elsif ARGV[0] == 'all'
+  install
+  make
+else
+  puts 'build: Please choose a valid task (make, install, all)'
 end
