@@ -2,6 +2,9 @@
 require 'sys/uname'
 include Sys
 
+# options
+travis = false
+
 def make
   puts 'Building using maven...'
   if system 'mvn package'
@@ -58,8 +61,6 @@ end
 options.each do |option|
   if option == '--travis'
     travis = true
-  else
-    travis = false
   end
 end
 
