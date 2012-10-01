@@ -28,8 +28,7 @@ public class SettingsManager {
     }
 
     public File getConfigFile() {
-        File f = new File("plugins/" + plugin.getName() + "/config.yml");
-        return f;
+        return new File("plugins/" + plugin.getName() + "/config.yml");
     }
 
     public File getJailsFile() {
