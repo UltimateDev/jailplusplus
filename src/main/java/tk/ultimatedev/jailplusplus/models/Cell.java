@@ -1,18 +1,18 @@
 package tk.ultimatedev.jailplusplus.models;
 
-import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.configuration.file.YamlConfiguration;
 import tk.ultimatedev.jailplusplus.ExceptionHandler;
 import tk.ultimatedev.jailplusplus.JailPlugin;
 import tk.ultimatedev.jailplusplus.models.file.CellYAML;
-import tk.ultimatedev.jailplusplus.models.file.JailYAML;
 import tk.ultimatedev.jailplusplus.util.Cuboid;
 import tk.ultimatedev.jailplusplus.util.FilePaths;
 import tk.ultimatedev.jailplusplus.util.YamlGetters;
@@ -558,6 +558,11 @@ public class Cell {
     public Jail getJail() {
         return Jail.getJail(this.id);
     }
+    
+    public World getWorld() {
+        World world = Bukkit.getServer().getWorld(this.getJail().world);
+        return world;
+    }
 
     public int getX1() {
         return this.x1;
@@ -582,4 +587,30 @@ public class Cell {
     public int getZ2() {
         return this.z2;
     }
+    
+    public Location getTeleportLocation() {
+        if (this.getWorld() == null) return null;
+        Cuboid cuboid = new Cuboid(new Location(this.getWorld(), this.getX1(), this.getY1(), this.getZ1()), new Location(this.getWorld(), this.getX2(), this.getY2(), this.getZ2()));
+        Location center = cuboid.getCenter();
+        int maxy = cuboid.getMaxY();
+        int addy = maxy - center.getBlockY();
+        Location topcenter = cuboid.getCenter().add(0, addy, 0);
+        int miny = cuboid.getMinY();
+        int suby = center.getBlockY() - miny;
+        Location bottomcenter = cuboid.getCenter().add(0, suby, 0);
+        Location tploc = topcenter;
+        boolean solid = true;
+        while (solid) {
+            if (tploc.getBlock().getLocation() == bottomcenter) {
+                break;
+            }
+            if (tploc.getBlock().getType() != Material.AIR) {
+                tploc.add(0, -1, 0);
+            } else {
+                break;
+            }
+        }
+        return tploc;
+    }
+    
 }
