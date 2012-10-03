@@ -1,11 +1,5 @@
 package tk.ultimatedev.jailplusplus;
 
-import java.io.*;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
-
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -16,12 +10,17 @@ import tk.ultimatedev.jailplusplus.task.TaskScheduler;
 import tk.ultimatedev.jailplusplus.util.FilePaths;
 import tk.ultimatedev.jailplusplus.util.Log;
 
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
+
 public class JailPlugin extends JavaPlugin {
     private static JailPlugin plugin;
 
     @Override
     public void onEnable() {
-
         // - Assign plugin - \\
         JailPlugin.plugin = this;
 
@@ -197,10 +196,6 @@ public class JailPlugin extends JavaPlugin {
     }
 
     public boolean setupConfigs() {
-        if (this.reloadCellConfig() && this.reloadJailConfig() && this.reloadPrisonerConfig()) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.reloadCellConfig() && this.reloadJailConfig() && this.reloadPrisonerConfig();
     }
 }
