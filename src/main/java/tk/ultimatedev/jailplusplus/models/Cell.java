@@ -558,7 +558,7 @@ public class Cell {
     public Jail getJail() {
         return Jail.getJail(this.id);
     }
-    
+
     public World getWorld() {
         World world = Bukkit.getServer().getWorld(this.getJail().world);
         return world;
@@ -587,7 +587,7 @@ public class Cell {
     public int getZ2() {
         return this.z2;
     }
-    
+
     public Location getTeleportLocation() {
         if (this.getWorld() == null) return null;
         Cuboid cuboid = new Cuboid(new Location(this.getWorld(), this.getX1(), this.getY1(), this.getZ1()), new Location(this.getWorld(), this.getX2(), this.getY2(), this.getZ2()));
@@ -612,5 +612,5 @@ public class Cell {
         }
         return tploc;
     }
-    
+
 }

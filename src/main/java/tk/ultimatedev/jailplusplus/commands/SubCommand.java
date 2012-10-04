@@ -47,6 +47,3 @@ public interface SubCommand {
      */
     public boolean playerOnly();
 }
-
-
-//~ Formatted by Jindent --- http://www.jindent.com

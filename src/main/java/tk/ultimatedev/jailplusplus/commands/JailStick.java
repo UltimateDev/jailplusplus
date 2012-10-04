@@ -5,7 +5,7 @@ package tk.ultimatedev.jailplusplus.commands;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import tk.ultimatedev.jailplusplus.handlers.JailStickHandler;
+import tk.ultimatedev.jailplusplus.listener.JailStickListener;
 
 /**
  * @author YoshiGenius
@@ -15,12 +15,12 @@ public class JailStick implements SubCommand {
         Player p = (Player) cs;
 
         if (args.length == 1) {
-            JailStickHandler.toggleEnabled(p);
+            JailStickListener.toggleEnabled(p);
         } else {
             if (args[1].equalsIgnoreCase("enable")) {
-                JailStickHandler.setEnabled(p, true);
+                JailStickListener.setEnabled(p, true);
             } else if (args[1].equalsIgnoreCase("disable")) {
-                JailStickHandler.setEnabled(p, false);
+                JailStickListener.setEnabled(p, false);
             }
         }
 

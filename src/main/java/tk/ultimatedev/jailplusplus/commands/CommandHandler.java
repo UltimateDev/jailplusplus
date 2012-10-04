@@ -11,6 +11,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 
 import tk.ultimatedev.jailplusplus.ExceptionHandler;
+import tk.ultimatedev.jailplusplus.JailPlugin;
 import tk.ultimatedev.jailplusplus.util.Messenger;
 
 //~--- JDK imports ------------------------------------------------------------
@@ -25,49 +26,44 @@ import java.util.Vector;
 public class CommandHandler implements CommandExecutor {
     private HashMap<String, SubCommand> commands;
     private ExceptionHandler exceptionHandler;
-    private Plugin plugin;
+    private JailPlugin plugin;
 
-    public CommandHandler(Plugin plugin) {
+    public CommandHandler(JailPlugin plugin) {
+        plugin.getCommand("jail").setExecutor(new JailCmd());
+
         this.plugin = plugin;
         this.exceptionHandler = new ExceptionHandler(this.plugin);
-        commands = new HashMap<String, SubCommand>();
+        this.commands = new HashMap<String, SubCommand>();
         loadCommands();
     }
 
     private void loadCommands() {
-
-        // help is automatically included.
-        // commands.put("list", new JailList());
         commands.put("wand", new Wand());
         commands.put("about", new About());
         commands.put("jailstick", new JailStick());
-
-        /* COMMENT THE FOLLOWING LINE OUT DURING RELEASE VERSIONS: */
-        commands.put("test", new Test());
     }
 
     @Override
-    public boolean onCommand(CommandSender cs, Command cmd1, String commandLabel, String[] args) {
+    public boolean onCommand(CommandSender sender, Command cmd1, String commandLabel, String[] args) {
         String cmd = cmd1.getName();
         PluginDescriptionFile pdfFile = plugin.getDescription();
 
-        if (cmd.equalsIgnoreCase("jail")) {
-            if (!cs.hasPermission("jpp.main")) {
-                cs.sendMessage("You don't have permission!");
+        if (cmd.equalsIgnoreCase("jpp")) {
+            if (!sender.hasPermission("jpp.main")) {
+                Messenger.sendNoPermissionError(sender);
 
                 return true;
             }
 
             if ((args == null) || (args.length < 1)) {
-                cs.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "Jail++ " + ChatColor.RESET + ChatColor.YELLOW
-                        + " Version: " + pdfFile.getVersion());
-                cs.sendMessage(ChatColor.GOLD + "Type /jail help for help");
+                Messenger.sendMessage(sender, "Jail++ v" + pdfFile.getVersion());
+                Messenger.sendMessage(sender, "Need help? Type /jail help for assistance.");
 
                 return true;
             }
 
             if (args[0].equalsIgnoreCase("help")) {
-                help(cs);
+                help(sender);
 
                 return true;
             }
@@ -75,7 +71,7 @@ public class CommandHandler implements CommandExecutor {
             String sub = args[0];
 
             if (!commands.containsKey(sub)) {
-                Messenger.sendMessage(cs, "That's not a valid command!", true);
+                Messenger.sendMessage(sender, "That's not a valid command!", true);
 
                 return true;
             }
@@ -87,13 +83,13 @@ public class CommandHandler implements CommandExecutor {
             args = l.toArray(new String[l.size()]);
 
             if (commands.get(sub).playerOnly()) {
-                if (!(cs instanceof Player)) {
-                    Messenger.sendError(cs, "This command is only allowed for players!", true);
+                if (!(sender instanceof Player)) {
+                    Messenger.sendError(sender, "This command is only allowed for players!", true);
 
                     return true;
                 }
 
-                Player player = (Player) cs;
+                Player player = (Player) sender;
 
                 try {
                     if (player.hasPermission(commands.get(sub).permission())
@@ -103,7 +99,7 @@ public class CommandHandler implements CommandExecutor {
 
                         return true;
                     } else {
-                        player.sendMessage(ChatColor.RED + "You don't have access to that command.");
+                        Messenger.sendNoPermissionError(sender);
 
                         return true;
                     }
@@ -112,13 +108,13 @@ public class CommandHandler implements CommandExecutor {
                 }
             } else {
                 try {
-                    if (cs.hasPermission(commands.get(sub).permission())
-                            || cs.hasPermission(commands.get(sub).kitPermission()) || cs.hasPermission("jpp.*")) {
-                        commands.get(sub).onCommand(cs, args);
+                    if (sender.hasPermission(commands.get(sub).permission())
+                            || sender.hasPermission(commands.get(sub).kitPermission()) || sender.hasPermission("jpp.*")) {
+                        commands.get(sub).onCommand(sender, args);
 
                         return true;
                     } else {
-                        Messenger.sendNoPermissionError(cs);
+                        Messenger.sendNoPermissionError(sender);
 
                         return true;
                     }
@@ -131,20 +127,20 @@ public class CommandHandler implements CommandExecutor {
         return false;
     }
 
-    public void help(CommandSender cs) {
-        Messenger.sendMessage(cs, "Jail++: Available Commands");
+    public void help(CommandSender sender) {
+        Messenger.sendMessage(sender, "Jail++: Available Commands");
 
-        if (cs instanceof Player) {
+        if (sender instanceof Player) {
             for (SubCommand command : commands.values()) {
-                if (cs.hasPermission(command.permission()) || cs.hasPermission(command.kitPermission())
-                        || cs.hasPermission("jpp.*")) {
-                    Messenger.sendMessage(cs, ChatColor.GRAY + "    - " + command.help(cs));
+                if (sender.hasPermission(command.permission()) || sender.hasPermission(command.kitPermission())
+                        || sender.hasPermission("jpp.*")) {
+                    Messenger.sendMessage(sender, ChatColor.GRAY + "    - " + command.help(sender));
                 }
             }
         } else {
             for (SubCommand command : commands.values()) {
                 if (!command.playerOnly()) {
-                    Messenger.sendMessage(cs, ChatColor.GRAY + "    - " + command.help(cs));
+                    Messenger.sendMessage(sender, ChatColor.GRAY + "    - " + command.help(sender));
                 }
             }
         }

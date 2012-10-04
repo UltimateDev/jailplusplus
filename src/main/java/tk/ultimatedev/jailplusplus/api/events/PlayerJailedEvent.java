@@ -10,8 +10,8 @@ import tk.ultimatedev.jailplusplus.models.Jail;
 /**
  * @author YoshiGenius
  */
-public class PlayerGetJailedEvent extends PlayerEvent implements Cancellable {
-    
+public class PlayerJailedEvent extends PlayerEvent implements Cancellable {
+
     private static HandlerList handlers;
     private Jail jail;
     private Cell cell;
@@ -20,7 +20,7 @@ public class PlayerGetJailedEvent extends PlayerEvent implements Cancellable {
     private int created;
     private int sentence;
 
-    public PlayerGetJailedEvent(Player player, Cell cell, String jailer, String reason, int created, int sentence) {
+    public PlayerJailedEvent(Player player, Cell cell, String jailer, String reason, int created, int sentence) {
         super(player);
         this.cell = cell;
         this.jail = cell.getJail();
@@ -29,37 +29,37 @@ public class PlayerGetJailedEvent extends PlayerEvent implements Cancellable {
         this.created = created;
         this.sentence = sentence;
     }
-    
+
     public Cell getCell() {
         return this.cell;
     }
-    
+
     public Jail getJail() {
         return this.jail;
     }
-    
+
     public String getJailer() {
         return this.jailer;
     }
-    
+
     public String getReason() {
         return this.reason;
     }
-    
+
     public int getCreated() {
         return this.created;
     }
-    
+
     public int getSentence() {
         return this.sentence;
     }
-    
+
     public HandlerList getHandlers() {
-        return PlayerGetJailedEvent.handlers;
+        return PlayerJailedEvent.handlers;
     }
-    
+
     public static HandlerList getHandlerList() {
-        return PlayerGetJailedEvent.handlers;
+        return PlayerJailedEvent.handlers;
     }
 
     public boolean isCancelled() {

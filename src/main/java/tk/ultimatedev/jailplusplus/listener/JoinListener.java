@@ -9,14 +9,14 @@ import tk.ultimatedev.jailplusplus.models.Prisoner;
 /**
  * @author YoshiGenius
  */
-public class JoinEvent implements Listener {
-    
+public class JoinListener implements Listener {
+
     @EventHandler
     public void onJoin(PlayerJoinEvent evt) {
         Player player = evt.getPlayer();
         Prisoner prisoner = Prisoner.getPrisoner(player.getName());
         if (prisoner == null) return;
-        
+
     }
 
 }

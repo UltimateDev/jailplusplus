@@ -4,11 +4,15 @@ description: An advanced Jail plugin for Bukkit servers.
 authors: [goldblattster, tyzoid, yoshigenius]
 main: tk.ultimatedev.jailplusplus.JailPlugin
 commands:
+  jpp:
+    permission: jpp.main
+    usage: /jpp help
+    description: Main JailPlusPlus command.
+    aliases: [jailplusplus]
   jail:
     permission: jpp.main
     usage: /jail help
-    description: Main JailPlusPlus command.
-    aliases: [jailplusplus, jpp]
+    description: Jailing command.
 permissions:
   jpp.*:
     description: Gives access to all JailPlusPlus abilities
