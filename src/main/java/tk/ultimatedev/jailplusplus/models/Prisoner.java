@@ -1,10 +1,5 @@
 package tk.ultimatedev.jailplusplus.models;
 
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -14,6 +9,11 @@ import tk.ultimatedev.jailplusplus.models.file.UserdataYAML;
 import tk.ultimatedev.jailplusplus.util.FilePaths;
 import tk.ultimatedev.jailplusplus.util.YamlGetters;
 import tk.ultimatedev.jailplusplus.util.serialization.InventorySerializer;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 
 /**

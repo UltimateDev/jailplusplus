@@ -1,17 +1,12 @@
 package tk.ultimatedev.jailplusplus.listener;
 
-//~--- non-JDK imports --------------------------------------------------------
-
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-
 import tk.ultimatedev.jailplusplus.JailPlugin;
 import tk.ultimatedev.jailplusplus.util.Cuboid;
-
-//~--- JDK imports ------------------------------------------------------------
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,6 +33,3 @@ public class WandListener implements Listener {
         }
     }
 }
-
-
-//~ Formatted by Jindent --- http://www.jindent.com

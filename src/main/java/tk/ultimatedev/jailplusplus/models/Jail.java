@@ -1,10 +1,5 @@
 package tk.ultimatedev.jailplusplus.models;
 
-import java.io.File;
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -15,6 +10,11 @@ import tk.ultimatedev.jailplusplus.models.file.JailYAML;
 import tk.ultimatedev.jailplusplus.util.Cuboid;
 import tk.ultimatedev.jailplusplus.util.FilePaths;
 import tk.ultimatedev.jailplusplus.util.YamlGetters;
+
+import java.io.File;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Sushi

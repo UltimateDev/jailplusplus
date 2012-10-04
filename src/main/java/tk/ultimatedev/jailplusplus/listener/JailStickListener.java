@@ -1,19 +1,14 @@
 package tk.ultimatedev.jailplusplus.listener;
 
-//~--- non-JDK imports --------------------------------------------------------
-
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-
 import tk.ultimatedev.jailplusplus.models.Jail;
 import tk.ultimatedev.jailplusplus.models.file.UserdataYAML;
 import tk.ultimatedev.jailplusplus.util.Messenger;
-
-//~--- JDK imports ------------------------------------------------------------
 
 import java.util.HashMap;
 
@@ -92,6 +87,3 @@ public class JailStickListener implements Listener {
         this.removeOptions(p);
     }
 }
-
-
-//~ Formatted by Jindent --- http://www.jindent.com

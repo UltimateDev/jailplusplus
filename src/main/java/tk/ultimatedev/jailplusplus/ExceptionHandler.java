@@ -1,9 +1,9 @@
 package tk.ultimatedev.jailplusplus;
 
-import java.io.File;
-
 import org.bukkit.plugin.Plugin;
 import tk.ultimatedev.jailplusplus.util.Log;
+
+import java.io.File;
 
 /**
  * @author YoshiGenius

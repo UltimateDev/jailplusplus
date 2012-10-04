@@ -1,16 +1,10 @@
 package tk.ultimatedev.jailplusplus.util;
 
-//~--- non-JDK imports --------------------------------------------------------
-
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-
 import tk.ultimatedev.jailplusplus.ExceptionHandler;
 import tk.ultimatedev.jailplusplus.JailPlugin;
 import tk.ultimatedev.jailplusplus.models.file.UserdataYAML;
-
-//~--- JDK imports ------------------------------------------------------------
 
 import java.util.HashMap;
 
@@ -64,9 +58,7 @@ public class Time {
 
             seconds = seconds + xseconds;
 
-            int ticks = seconds * 20;
-
-            return ticks;
+            return seconds * 20;
         } catch (Exception e) {
             ExceptionHandler eh = new ExceptionHandler(JailPlugin.getPlugin());
 
@@ -176,6 +168,3 @@ public class Time {
      * }
      */
 }
-
-
-//~ Formatted by Jindent --- http://www.jindent.com

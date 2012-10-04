@@ -1,7 +1,5 @@
 package tk.ultimatedev.jailplusplus.models.file;
 
-import java.io.File;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -16,6 +14,8 @@ import tk.ultimatedev.jailplusplus.models.Prisoner;
 import tk.ultimatedev.jailplusplus.util.Cuboid;
 import tk.ultimatedev.jailplusplus.util.FilePaths;
 import tk.ultimatedev.jailplusplus.util.YamlGetters;
+
+import java.io.File;
 
 /**
  * @author YoshiGenius

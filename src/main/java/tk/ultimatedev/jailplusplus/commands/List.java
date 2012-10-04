@@ -1,7 +1,5 @@
 package tk.ultimatedev.jailplusplus.commands;
 
-//~--- non-JDK imports --------------------------------------------------------
-
 import org.bukkit.command.CommandSender;
 
 /**
@@ -29,5 +27,3 @@ public class List implements SubCommand {
     }
 }
 
-
-//~ Formatted by Jindent --- http://www.jindent.com

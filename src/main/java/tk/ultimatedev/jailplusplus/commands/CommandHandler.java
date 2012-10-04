@@ -1,20 +1,14 @@
 package tk.ultimatedev.jailplusplus.commands;
 
-//~--- non-JDK imports --------------------------------------------------------
-
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
-
 import tk.ultimatedev.jailplusplus.ExceptionHandler;
 import tk.ultimatedev.jailplusplus.JailPlugin;
 import tk.ultimatedev.jailplusplus.util.Messenger;
-
-//~--- JDK imports ------------------------------------------------------------
 
 import java.util.Arrays;
 import java.util.HashMap;

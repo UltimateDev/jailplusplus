@@ -1,12 +1,9 @@
 package tk.ultimatedev.jailplusplus.commands;
 
-//~--- non-JDK imports --------------------------------------------------------
-
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-
 import tk.ultimatedev.jailplusplus.JailPlugin;
 import tk.ultimatedev.jailplusplus.util.Messenger;
 
@@ -48,6 +45,3 @@ public class Wand implements SubCommand {
         return true;
     }
 }
-
-
-//~ Formatted by Jindent --- http://www.jindent.com

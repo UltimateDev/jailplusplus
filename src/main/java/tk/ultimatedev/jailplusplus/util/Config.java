@@ -1,11 +1,11 @@
 package tk.ultimatedev.jailplusplus.util;
 
+import org.bukkit.configuration.file.YamlConfiguration;
+import tk.ultimatedev.jailplusplus.JailPlugin;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
-
-import org.bukkit.configuration.file.YamlConfiguration;
-import tk.ultimatedev.jailplusplus.JailPlugin;
 
 public class Config {
 

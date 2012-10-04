@@ -1,9 +1,6 @@
 package tk.ultimatedev.jailplusplus.commands;
 
-//~--- non-JDK imports --------------------------------------------------------
-
 import org.bukkit.command.CommandSender;
-
 import tk.ultimatedev.jailplusplus.JailPlugin;
 import tk.ultimatedev.jailplusplus.util.Messenger;
 

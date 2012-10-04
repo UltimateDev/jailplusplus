@@ -7,7 +7,7 @@ import tk.ultimatedev.jailplusplus.models.Prisoner;
  * @author YoshiGenius
  */
 public class JailAPI {
-    
+
     public boolean isJailed(Player player) {
         Prisoner prisoner = Prisoner.getPrisoner(player.getName());
         if (prisoner == null) {
@@ -16,7 +16,7 @@ public class JailAPI {
             return true;
         }
     }
-    
+
     public void setJailed(Player player, boolean jailed) {
         Prisoner prisoner = Prisoner.getPrisoner(player.getName());
         if (isJailed(player) && jailed) {

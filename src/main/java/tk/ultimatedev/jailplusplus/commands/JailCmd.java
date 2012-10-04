@@ -1,18 +1,10 @@
 package tk.ultimatedev.jailplusplus.commands;
 
-import java.util.ArrayList;
-import java.util.Random;
-
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import tk.ultimatedev.jailplusplus.ExceptionHandler;
 import tk.ultimatedev.jailplusplus.JailPlugin;
-import tk.ultimatedev.jailplusplus.models.Cell;
-import tk.ultimatedev.jailplusplus.models.Jail;
-import tk.ultimatedev.jailplusplus.models.Prisoner;
-import tk.ultimatedev.jailplusplus.util.Messenger;
 
 /**
  * @author Sushi

@@ -1,7 +1,5 @@
 package tk.ultimatedev.jailplusplus.util;
 
-//~--- non-JDK imports --------------------------------------------------------
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -161,6 +159,3 @@ public class Messenger {
         broadcastMessage(message, true);
     }
 }
-
-
-//~ Formatted by Jindent --- http://www.jindent.com

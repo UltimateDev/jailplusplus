@@ -1,7 +1,6 @@
 package tk.ultimatedev.jailplusplus.models;
 
 import org.bukkit.Bukkit;
-
 import tk.ultimatedev.jailplusplus.ExceptionHandler;
 import tk.ultimatedev.jailplusplus.JailPlugin;
 import tk.ultimatedev.jailplusplus.util.Log;

@@ -4,8 +4,6 @@
 */
 package tk.ultimatedev.jailplusplus.permissions;
 
-//~--- non-JDK imports --------------------------------------------------------
-
 import org.bukkit.entity.Player;
 
 /**
@@ -19,13 +17,6 @@ public class Perms {
     }
 
     public boolean gotPermz(String permission) {
-        if (player.hasPermission("jpp." + permission)) {
-            return true;
-        } else {
-            return false;
-        }
+        return player.hasPermission("jpp." + permission);
     }
 }
-
-
-//~ Formatted by Jindent --- http://www.jindent.com

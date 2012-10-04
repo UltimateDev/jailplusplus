@@ -1,10 +1,7 @@
 package tk.ultimatedev.jailplusplus.commands;
 
-//~--- non-JDK imports --------------------------------------------------------
-
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
 import tk.ultimatedev.jailplusplus.listener.JailStickListener;
 
 /**
@@ -43,6 +40,3 @@ public class JailStick implements SubCommand {
         return true;
     }
 }
-
-
-//~ Formatted by Jindent --- http://www.jindent.com

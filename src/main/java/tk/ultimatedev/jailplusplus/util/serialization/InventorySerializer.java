@@ -1,14 +1,10 @@
 package tk.ultimatedev.jailplusplus.util.serialization;
 
-//~--- non-JDK imports --------------------------------------------------------
-
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-
-//~--- JDK imports ------------------------------------------------------------
 
 import java.util.Map;
 
@@ -94,6 +90,3 @@ public class InventorySerializer {
         return deSerializedInventory;
     }
 }
-
-
-//~ Formatted by Jindent --- http://www.jindent.com

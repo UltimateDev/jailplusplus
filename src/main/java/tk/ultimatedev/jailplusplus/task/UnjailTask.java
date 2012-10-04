@@ -27,6 +27,3 @@ public class UnjailTask implements Runnable {
          */
     }
 }
-
-
-//~ Formatted by Jindent --- http://www.jindent.com
