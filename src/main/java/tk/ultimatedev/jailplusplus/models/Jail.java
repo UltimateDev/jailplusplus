@@ -259,6 +259,9 @@ public class Jail {
                         }
                         // break; Apparently this is unreachable
                 }
+
+                Cell defaultCell = new Cell(this, this.x1, this.x2, this.y1, this.y2, this.z1, this.z2);
+                defaultCell.save();
             } else {
                 throw new NullPointerException("A database save of null data was attempted.");
             }
@@ -741,6 +744,20 @@ public class Jail {
                 return false;
         }
         return true;
+    }
+
+    public int getDefaultCell() {
+        List<Cell> cellsInThisBiznatch = Cell.getCellsInJail(this.id);
+
+        int lowest = 2147483647;
+
+        for (Cell cell: cellsInThisBiznatch) {
+            if (cell.getID() < lowest) {
+                lowest = cell.getID();
+            }
+        }
+
+        return lowest;
     }
 
     public int getID() {

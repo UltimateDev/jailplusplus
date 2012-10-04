@@ -369,6 +369,90 @@ public class Cell {
         return null;
     }
 
+    public static List<Cell> getCellsInJail(int jail) {
+        ExceptionHandler exceptionHandler = new ExceptionHandler(JailPlugin.getPlugin());
+        List<Cell> cells = new ArrayList<Cell>();
+        Migrant.DatabaseEngine engine = Migrant.getDatabaseEngine();
+
+        Connection conn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
+        String tableName = (new DBCommon()).getPrefix() + "cells";
+
+        switch (engine) {
+            case H2:
+                try {
+                    conn = DBCommon.getConnection();
+
+                    pst = conn.prepareStatement("SELECT * FROM " + tableName + " WHERE jail=?");
+                    pst.setInt(1, jail);
+
+                    rs = pst.executeQuery();
+
+                    while (rs.next()) {
+                        cells.add(new Cell(rs.getInt("id"), rs.getInt("x1"), rs.getInt("x2"), rs.getInt("y1"), rs.getInt("y2"), rs.getInt("z1"), rs.getInt("z2")));
+                    }
+
+                    return cells;
+                } catch (SQLException ex) {
+                    exceptionHandler.logException(ex);
+                    return null;
+                } finally {
+                    try {
+                        if (rs != null) {
+                            rs.close();
+                        }
+
+                        if (pst != null) {
+                            pst.close();
+                        }
+
+                        if (conn != null) {
+                            conn.close();
+                        }
+                    } catch (SQLException ignored) {
+
+                    }
+                }
+            case MYSQL:
+                try {
+                    conn = DBCommon.getConnection();
+
+                    pst = conn.prepareStatement("SELECT * FROM " + tableName + " WHERE jail=?");
+                    pst.setInt(1, jail);
+
+                    rs = pst.executeQuery();
+
+                    while (rs.next()) {
+                        cells.add(new Cell(rs.getInt("id"), rs.getInt("x1"), rs.getInt("x2"), rs.getInt("y1"), rs.getInt("y2"), rs.getInt("z1"), rs.getInt("z2")));
+                    }
+
+                    return cells;
+                } catch (SQLException ex) {
+                    exceptionHandler.logException(ex);
+                    return null;
+                } finally {
+                    try {
+                        if (rs != null) {
+                            rs.close();
+                        }
+
+                        if (pst != null) {
+                            pst.close();
+                        }
+
+                        if (conn != null) {
+                            conn.close();
+                        }
+                    } catch (SQLException ignored) {
+
+                    }
+                }
+        }
+        return null;
+    }
+
     public static Cell getCell(int id) {
         ExceptionHandler exceptionHandler = new ExceptionHandler(JailPlugin.getPlugin());
         Migrant.DatabaseEngine engine = Migrant.getDatabaseEngine();
@@ -559,8 +643,7 @@ public class Cell {
     }
 
     public World getWorld() {
-        World world = Bukkit.getServer().getWorld(this.getJail().world);
-        return world;
+        return Bukkit.getServer().getWorld(this.getJail().world);
     }
 
     public int getX1() {
