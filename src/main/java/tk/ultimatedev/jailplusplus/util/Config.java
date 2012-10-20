@@ -1,21 +1,19 @@
 package tk.ultimatedev.jailplusplus.util;
 
-import org.bukkit.configuration.file.YamlConfiguration;
-import tk.ultimatedev.jailplusplus.JailPlugin;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
+import org.bukkit.configuration.file.YamlConfiguration;
+import tk.ultimatedev.jailplusplus.JailPlugin;
 
 public class Config {
 
     File f = new File(JailPlugin.getPlugin().getDataFolder(), "config.yml");
 
-    public boolean updateConfig(int newversion, Map<String, Object> updates) throws IOException {
+    public boolean updateConfig(double newversion, Map<String, Object> updates) throws IOException {
         YamlConfiguration c = YamlConfiguration.loadConfiguration(this.f);
-        int oldversion = c.getInt("seriously-don't-touch-this");
-
-        if (oldversion == newversion) {
+        double oldversion = c.getDouble("seriously-don't-touch-this");
+        if (oldversion == newversion || oldversion > newversion) {
             return false;
         } else {
             for (String s : updates.keySet()) {

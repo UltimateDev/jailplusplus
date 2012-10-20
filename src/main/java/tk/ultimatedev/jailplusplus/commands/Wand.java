@@ -15,12 +15,13 @@ public class Wand implements SubCommand {
         Player player = (Player) cs;
 
         if (player.hasPermission("jpp.wand")) {
-            Messenger.sendMessage(player,
-                    "You are receiving a Jail++ wand (#"
-                            + JailPlugin.getPlugin().getConfig().getInt("wand-id") + ").");
-            player.getInventory().addItem(
-                    new ItemStack(Material.getMaterial(JailPlugin.getPlugin().getConfig().getInt("wand-id")), 1));
-
+            Material m = Material.getMaterial(JailPlugin.getPlugin().getConfig().getInt("wand-id"));
+            if (m == null) {
+                Messenger.sendError(cs, "The Jail++ wand's ID is not a real material!");
+                return true;
+            }
+            Messenger.sendMessage(player, "You are receiving a Jail++ wand (#" + JailPlugin.getPlugin().getConfig().getInt("wand-id") + ", " + m.name().toLowerCase().replaceAll("_", " ") + ").");
+            player.getInventory().addItem(new ItemStack(Material.getMaterial(JailPlugin.getPlugin().getConfig().getInt("wand-id")), 1));
             return true;
         } else {
             Messenger.sendNoPermissionError(player);
@@ -30,7 +31,7 @@ public class Wand implements SubCommand {
     }
 
     public String help(CommandSender player) {
-        return "/jail wand - Gives you a jail wand.";
+        return "/jpp wand - Gives you a jail wand.";
     }
 
     public String permission() {

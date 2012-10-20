@@ -15,6 +15,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
+import tk.ultimatedev.jailplusplus.commands.JailCmd;
 
 public class JailPlugin extends JavaPlugin {
     private static JailPlugin plugin;
@@ -34,6 +35,7 @@ public class JailPlugin extends JavaPlugin {
         this.loadListeners();
 
         // - Command - \\
+        this.getCommand("jail").setExecutor(new JailCmd());
         this.getCommand("jpp").setExecutor(new CommandHandler(this));
 
         this.reloadConfig();

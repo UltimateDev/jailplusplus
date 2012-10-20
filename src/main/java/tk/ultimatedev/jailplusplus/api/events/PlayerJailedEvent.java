@@ -13,6 +13,7 @@ import tk.ultimatedev.jailplusplus.models.Jail;
 public class PlayerJailedEvent extends PlayerEvent implements Cancellable {
 
     private static HandlerList handlers;
+    private static boolean cancel;
     private Jail jail;
     private Cell cell;
     private String jailer;
@@ -63,11 +64,11 @@ public class PlayerJailedEvent extends PlayerEvent implements Cancellable {
     }
 
     public boolean isCancelled() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return PlayerJailedEvent.cancel;
     }
 
-    public void setCancelled(boolean bln) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void setCancelled(boolean cancelled) {
+        PlayerJailedEvent.cancel = cancelled;
     }
 
 }

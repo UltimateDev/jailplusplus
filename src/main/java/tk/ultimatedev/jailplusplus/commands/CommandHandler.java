@@ -24,7 +24,6 @@ public class CommandHandler implements CommandExecutor {
 
     public CommandHandler(JailPlugin plugin) {
         plugin.getCommand("jail").setExecutor(new JailCmd());
-
         this.plugin = plugin;
         this.exceptionHandler = new ExceptionHandler(this.plugin);
         this.commands = new HashMap<String, SubCommand>();

@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
  */
 public class List implements SubCommand {
     public String help(CommandSender player) {
-        return "/jail list - Lists jails.";
+        return "/jpp list - Lists jails.";
     }
 
     public String permission() {

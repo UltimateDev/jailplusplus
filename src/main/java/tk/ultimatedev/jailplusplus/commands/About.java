@@ -26,7 +26,7 @@ public class About implements SubCommand {
     }
 
     public String help(CommandSender player) {
-        return "/jail about - See information about the plugin.";
+        return "/jpp about - See information about the plugin.";
     }
 
     public String permission() {

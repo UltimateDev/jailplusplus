@@ -20,12 +20,11 @@ public class JailStick implements SubCommand {
                 JailStickListener.setEnabled(p, false);
             }
         }
-
         return true;
     }
 
     public String help(CommandSender cs) {
-        return "/jail jailstick - Enable jailstick and get a jailstick.";
+        return "/jpp jailstick - Enable jailstick and get a jailstick.";
     }
 
     public String permission() {
